@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndHuber</string>
+    <string name="edt_login_username">UserName</string>
+    <string name="edt_login_password">Password</string>
+    <string name="ck_login_auto">自动登录</string>
+    <string name="btn_login_login">登录</string>
+    <string name="wait_to_login">等待登录</string>
+    <string name="authenticate">二步验证</string>
+    <string name="confirm">确认</string>
+    <string name="two_factor_hint">请输入两步验证码</string>
+</resources>

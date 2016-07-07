@@ -8,6 +8,7 @@ import joe.githubapi.model.ErrorInfo;
 import joe.githubapi.model.authentication.AuthenticationResult;
 import joe.githubapi.model.authentication.AuthorizationInfo;
 import joe.githubapi.model.user.UserInfo;
+import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.Headers;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -47,7 +48,6 @@ public class UserModel implements IUser {
                         callBack.loginSuccess();
                     }
 
-
                     @Override
                     public void onNext(AuthenticationResult authenticationResult) {
                         UserConfig.getInstance().setToken(authenticationResult.getToken());
@@ -60,15 +60,15 @@ public class UserModel implements IUser {
         GitHubApi.getUserApi().getNowUserInfo(token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<UserInfo>() {
+                .subscribe(new HttpSubscriber<UserInfo>() {
                     @Override
                     public void onCompleted() {
-
+                        callBack.getSuccessfully();
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
+                    public void onHttpError(ErrorInfo info) {
+                        callBack.getFailed(info);
                     }
 
                     @Override

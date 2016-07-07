@@ -1,10 +1,10 @@
 package joe.andhuber.login;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
@@ -13,10 +13,12 @@ import android.widget.EditText;
 import java.util.concurrent.TimeUnit;
 
 import joe.andhuber.R;
+import joe.andhuber.base.BaseActivity;
 import joe.andhuber.login.model.User;
 import joe.andhuber.login.presenter.LoginPresenter;
 import joe.andhuber.login.presenter.LoginPresenterImpl;
 import joe.andhuber.login.view.LoginView;
+import joe.andhuber.main.MainActivity;
 import joe.andhuber.utils.ToastUtil;
 import joe.andhuber.utils.rx.RxView;
 
@@ -24,7 +26,7 @@ import joe.andhuber.utils.rx.RxView;
  * Description
  * Created by chenqiao on 2016/6/30.
  */
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends BaseActivity implements LoginView {
 
     private ProgressDialog dialog;
     private AppCompatEditText edt_userName, edt_passWord;
@@ -110,6 +112,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void startToMain() {
         ToastUtil.show(this, "登录成功");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

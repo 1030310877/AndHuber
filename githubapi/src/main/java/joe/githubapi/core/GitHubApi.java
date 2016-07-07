@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import joe.githubapi.api.AuthenticateApi;
+import joe.githubapi.api.RepositoriesApi;
 import joe.githubapi.api.UserApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -61,5 +62,9 @@ public class GitHubApi {
 
     public static UserApi getUserApi() {
         return new UserApi();
+    }
+
+    public static RepositoriesApi getRepositoriesApi() {
+        return new RepositoriesApi();
     }
 }

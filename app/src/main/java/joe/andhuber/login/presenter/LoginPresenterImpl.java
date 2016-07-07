@@ -37,13 +37,12 @@ public class LoginPresenterImpl implements LoginPresenter {
         userModel.login(user, code, new IUser.LoginCallBack() {
             @Override
             public void loginSuccess() {
-                view.dismissWait();
-                view.startToMain();
                 if (UserConfig.getInstance().isRememberUser()) {
                     UserConfig.getInstance().setDefaultUser(user.getUserName(), user.getPassWord());
                 } else {
                     UserConfig.getInstance().clearDefaultUser();
                 }
+                getUserInfo(UserConfig.getInstance().getToken());
             }
 
             @Override
@@ -61,7 +60,19 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void getUserInfo(String token) {
+        userModel.getUserInfo(token, new IUser.GetUserInfoCallBack() {
+            @Override
+            public void getSuccessfully() {
+                view.dismissWait();
+                view.startToMain();
+            }
 
+            @Override
+            public void getFailed(ErrorInfo info) {
+                view.dismissWait();
+                view.showError(info.getMessage());
+            }
+        });
     }
 
     @Override

@@ -8,4 +8,8 @@
     <string name="authenticate">二步验证</string>
     <string name="confirm">确认</string>
     <string name="two_factor_hint">请输入两步验证码</string>
+    <string name="tab_1_repositories">Repositories</string>
+    <string name="tab_2_starred">Starred</string>
+    <string name="tab_3_messages">Messages</string>
+    <string name="getting_information">正在获取数据</string>
 </resources>

@@ -11,6 +11,24 @@ public class RepositoryParams {
     private String sort = "full_name";
     private String direction = "asc";
     private String access_token = "";
+    private String page = "1";
+    private String per_page = "10";
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
+    public String getPer_page() {
+        return per_page;
+    }
+
+    public void setPer_page(String paer_page) {
+        this.per_page = paer_page;
+    }
 
     public String getVisibility() {
         return visibility;

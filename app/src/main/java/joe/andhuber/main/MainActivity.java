@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
 import joe.andhuber.main.adapter.MainPagerAdapter;
+import joe.andhuber.main.fragment.EventsFragment;
 import joe.andhuber.main.fragment.RepositoryFragment;
 import joe.andhuber.main.fragment.StarFragment;
 import joe.andhuber.main.presenter.MainPresenter;
@@ -32,7 +34,11 @@ public class MainActivity extends BaseActivity implements MainView {
     private MainPresenter userPresenter;
     private ViewPager viewPager;
     private RepositoryFragment repositoryFragment;
+    private StarFragment starFragment;
+    private EventsFragment eventsFragment;
     private ProgressDialog dialog;
+    private FloatingActionButton refreshBtn;
+    private int nowIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +59,25 @@ public class MainActivity extends BaseActivity implements MainView {
         ArrayList<Fragment> fragments = new ArrayList<>();
         repositoryFragment = new RepositoryFragment();
         userPresenter.setRepositoryView(repositoryFragment);
+        starFragment = new StarFragment();
+        userPresenter.setStarView(starFragment);
+        eventsFragment = new EventsFragment();
+        userPresenter.setEventView(eventsFragment);
+
         fragments.add(repositoryFragment);
-        fragments.add(new StarFragment());
-        fragments.add(new RepositoryFragment());
+        fragments.add(starFragment);
+        fragments.add(eventsFragment);
         MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), this, fragments);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
         tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
         if (tabLayout != null) {
             tabLayout.setupWithViewPager(viewPager);
+        }
+
+        refreshBtn = (FloatingActionButton) findViewById(R.id.fab_main);
+        if (refreshBtn != null) {
+            refreshBtn.setOnClickListener(v -> userPresenter.refreshData(nowIndex));
         }
     }
 
@@ -71,6 +87,7 @@ public class MainActivity extends BaseActivity implements MainView {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                nowIndex = tab.getPosition();
             }
 
             @Override

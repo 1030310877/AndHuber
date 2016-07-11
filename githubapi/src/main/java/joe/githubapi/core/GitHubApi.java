@@ -3,6 +3,7 @@ package joe.githubapi.core;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import joe.githubapi.api.ActivityApi;
 import joe.githubapi.api.AuthenticateApi;
 import joe.githubapi.api.RepositoriesApi;
 import joe.githubapi.api.UserApi;
@@ -66,5 +67,9 @@ public class GitHubApi {
 
     public static RepositoriesApi getRepositoriesApi() {
         return new RepositoriesApi();
+    }
+
+    public static ActivityApi getActivityApi() {
+        return new ActivityApi();
     }
 }

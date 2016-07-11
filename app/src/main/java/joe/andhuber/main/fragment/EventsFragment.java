@@ -12,19 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import joe.andhuber.base.BaseFragment;
-import joe.andhuber.main.adapter.StarsAdapter;
-import joe.andhuber.main.view.StarView;
-import joe.githubapi.model.repositories.RepositoryInfo;
+import joe.andhuber.main.adapter.EventsAdapter;
+import joe.andhuber.main.view.EventView;
+import joe.githubapi.model.event.EventInfo;
 import joe.view.SpaceItemDecoration;
 
 /**
  * Description
- * Created by chenqiao on 2016/7/6.
+ * Created by chenqiao on 2016/7/11.
  */
-public class StarFragment extends BaseFragment implements StarView {
-    private List<RepositoryInfo> data;
+public class EventsFragment extends BaseFragment implements EventView {
+
+    private List<EventInfo> data;
     private RecyclerView recyclerView;
-    private StarsAdapter adapter;
+    private EventsAdapter adapter;
 
     @Nullable
     @Override
@@ -41,12 +42,10 @@ public class StarFragment extends BaseFragment implements StarView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         data = new ArrayList<>();
-        adapter = new StarsAdapter(mContext, data);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void showStars(List<RepositoryInfo> data) {
+    public void showEvents(List<EventInfo> data) {
         this.data = data;
         if (adapter != null) {
             adapter.setData(data);
@@ -55,7 +54,7 @@ public class StarFragment extends BaseFragment implements StarView {
     }
 
     @Override
-    public void clearStars() {
+    public void clearEvents() {
         this.data.clear();
         adapter.setData(this.data);
         adapter.notifyDataSetChanged();

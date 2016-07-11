@@ -12,7 +12,24 @@ public class RepositoryInfo {
      * id : 62620893
      * name : AndHuber
      * full_name : 1030310877/AndHuber
-     * owner : {"login":"1030310877","id":9456005,"avatar_url":"https://avatars.githubusercontent.com/u/9456005?v=3","gravatar_id":"","url":"https://api.github.com/users/1030310877","html_url":"https://github.com/1030310877","followers_url":"https://api.github.com/users/1030310877/followers","following_url":"https://api.github.com/users/1030310877/following{/other_user}","gists_url":"https://api.github.com/users/1030310877/gists{/gist_id}","starred_url":"https://api.github.com/users/1030310877/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/1030310877/subscriptions","organizations_url":"https://api.github.com/users/1030310877/orgs","repos_url":"https://api.github.com/users/1030310877/repos","events_url":"https://api.github.com/users/1030310877/events{/privacy}","received_events_url":"https://api.github.com/users/1030310877/received_events","type":"User","site_admin":false}
+     * owner : {
+     * "login":"1030310877",
+     * "id":9456005,
+     * "avatar_url":"https://avatars.githubusercontent.com/u/9456005?v=3",
+     * "gravatar_id":"","url":"https://api.github.com/users/1030310877",
+     * "html_url":"https://github.com/1030310877",
+     * "followers_url":"https://api.github.com/users/1030310877/followers",
+     * "following_url":"https://api.github.com/users/1030310877/following{/other_user}",
+     * "gists_url":"https://api.github.com/users/1030310877/gists{/gist_id}",
+     * "starred_url":"https://api.github.com/users/1030310877/starred{/owner}{/repo}",
+     * "subscriptions_url":"https://api.github.com/users/1030310877/subscriptions",
+     * "organizations_url":"https://api.github.com/users/1030310877/orgs",
+     * "repos_url":"https://api.github.com/users/1030310877/repos",
+     * "events_url":"https://api.github.com/users/1030310877/events{/privacy}",
+     * "received_events_url":"https://api.github.com/users/1030310877/received_events",
+     * "type":"User",
+     * "site_admin":false
+     * }
      * private : false
      * html_url : https://github.com/1030310877/AndHuber
      * description : Github Android Client
@@ -80,7 +97,7 @@ public class RepositoryInfo {
      * permissions : {"admin":true,"push":true,"pull":true}
      */
 
-    private int id;
+    private String id;
     private String name;
     private String full_name;
     /**
@@ -177,11 +194,11 @@ public class RepositoryInfo {
 
     private PermissionsBean permissions;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

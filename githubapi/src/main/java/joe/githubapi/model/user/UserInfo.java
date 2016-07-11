@@ -40,7 +40,7 @@ public class UserInfo {
      */
 
     private String login;
-    private int id;
+    private String id;
     private String avatar_url;
     private String gravatar_id;
     private String url;
@@ -78,11 +78,11 @@ public class UserInfo {
         this.login = login;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

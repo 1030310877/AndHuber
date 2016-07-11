@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
-    android:stateListAnimator="@drawable/touch_raise"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="2dp"
     app:contentPadding="8dp">
@@ -16,39 +15,39 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/img_item_repository_logo"
+            android:id="@+id/img_item_star_logo"
             android:layout_width="24dp"
             android:layout_marginTop="5dp"
             android:layout_height="24dp"
             app:srcCompat="@drawable/ic_receipt_black_24dp" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text_item_repository_name"
+            android:id="@+id/text_item_star_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/img_item_repository_logo"
+            android:layout_toRightOf="@+id/img_item_star_logo"
             android:ellipsize="end"
             android:lines="1"
-            android:maxWidth="@dimen/item_repository_name_max_width"
+            android:maxWidth="@dimen/item_star_name_max_width"
             android:textColor="@color/black"
-            android:textSize="@dimen/item_repository_name_text_size"
+            android:textSize="@dimen/item_star_name_text_size"
             tool:text="This is Name" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text_item_repository_description"
+            android:id="@+id/text_item_star_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_item_repository_name"
-            android:layout_toEndOf="@+id/img_item_repository_logo"
-            android:layout_toRightOf="@+id/img_item_repository_logo"
+            android:layout_below="@+id/text_item_star_name"
+            android:layout_toEndOf="@+id/img_item_star_logo"
+            android:layout_toRightOf="@+id/img_item_star_logo"
             android:ellipsize="end"
             android:lines="1"
-            android:maxWidth="@dimen/item_repository_name_max_width"
+            android:maxWidth="@dimen/item_star_name_max_width"
             tool:text="This is description" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text_item_repository_star"
-            android:layout_width="@dimen/item_repository_star_width"
+            android:id="@+id/text_item_star_star"
+            android:layout_width="@dimen/item_star_star_width"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -57,33 +56,33 @@
             tool:text="1222" />
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/img_item_repository_star"
+            android:id="@+id/img_item_star_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_item_repository_star"
-            android:layout_toLeftOf="@+id/text_item_repository_star"
-            android:layout_toStartOf="@+id/text_item_repository_star"
+            android:layout_alignBottom="@+id/text_item_star_star"
+            android:layout_toLeftOf="@+id/text_item_star_star"
+            android:layout_toStartOf="@+id/text_item_star_star"
             app:srcCompat="@drawable/ic_stars_black_18dp" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text_item_repository_fork"
-            android:layout_width="@dimen/item_repository_star_width"
+            android:id="@+id/text_item_star_fork"
+            android:layout_width="@dimen/item_star_star_width"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/text_item_repository_star"
+            android:layout_below="@+id/text_item_star_star"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:inputType="number"
             tool:text="1222" />
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/img_item_repository_fork"
+            android:id="@+id/img_item_star_fork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_item_repository_fork"
-            android:layout_toLeftOf="@+id/text_item_repository_fork"
-            android:layout_toStartOf="@+id/text_item_repository_fork"
+            android:layout_alignBottom="@+id/text_item_star_fork"
+            android:layout_toLeftOf="@+id/text_item_star_fork"
+            android:layout_toStartOf="@+id/text_item_star_fork"
             app:srcCompat="@drawable/ic_call_split_black_18dp" />
 
     </RelativeLayout>

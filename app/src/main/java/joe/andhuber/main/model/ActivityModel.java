@@ -14,14 +14,13 @@ import rx.schedulers.Schedulers;
 
 /**
  * Description
- * Created by chenqiao on 2016/7/6.
+ * Created by chenqiao on 2016/7/8.
  */
-public class RepositoryModel implements IRepository {
+public class ActivityModel implements IActivity {
     @Override
-    public Subscription getUsersRepositories(RepositoryParams param, IRepositoryCallBack callBack) {
-        HashMap<String, String> params = MapUtil.toMap(param);
-        return GitHubApi.getRepositoriesApi()
-                .getNowUsersRepositories(params)
+    public Subscription getNowUsersStars(StarParams params, IActivityCallBack callBack) {
+        HashMap<String, String> param = MapUtil.toMap(params);
+        return GitHubApi.getActivityApi().getNowUsersStars(param)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new HttpSubscriber<List<RepositoryInfo>>() {
@@ -36,8 +35,8 @@ public class RepositoryModel implements IRepository {
                     }
 
                     @Override
-                    public void onNext(List<RepositoryInfo> repositoryInfo) {
-                        callBack.onSuccessfully(repositoryInfo);
+                    public void onNext(List<RepositoryInfo> repositoryInfos) {
+                        callBack.onSuccessfully(repositoryInfos);
                     }
                 });
     }

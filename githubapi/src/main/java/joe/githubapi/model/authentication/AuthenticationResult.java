@@ -24,7 +24,7 @@ public class AuthenticationResult {
      * fingerprint : ssss
      */
 
-    private int id;
+    private String id;
     private String url;
     /**
      * name : AndHuber
@@ -37,17 +37,17 @@ public class AuthenticationResult {
     private String hashed_token;
     private String token_last_eight;
     private String note;
-    private Object note_url;
+    private String note_url;
     private String created_at;
     private String updated_at;
     private String fingerprint;
-    private List<?> scopes;
+    private List<String> scopes;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -99,11 +99,11 @@ public class AuthenticationResult {
         this.note = note;
     }
 
-    public Object getNote_url() {
+    public String getNote_url() {
         return note_url;
     }
 
-    public void setNote_url(Object note_url) {
+    public void setNote_url(String note_url) {
         this.note_url = note_url;
     }
 
@@ -135,7 +135,7 @@ public class AuthenticationResult {
         return scopes;
     }
 
-    public void setScopes(List<?> scopes) {
+    public void setScopes(List<String> scopes) {
         this.scopes = scopes;
     }
 

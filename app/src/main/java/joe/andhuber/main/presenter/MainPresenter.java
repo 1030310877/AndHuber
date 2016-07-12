@@ -25,7 +25,7 @@ public interface MainPresenter {
 
     void getUsersStars();
 
-    void getUsersEvents();
+    void getUsersEvents(String username);
 
     void refreshData(int nowIndex);
 }

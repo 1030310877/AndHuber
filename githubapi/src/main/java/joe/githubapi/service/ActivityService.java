@@ -7,7 +7,6 @@ import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -21,5 +20,5 @@ public interface ActivityService {
     Observable<List<RepositoryInfo>> getNowUsersStars(@QueryMap Map<String, String> params);
 
     @GET("/users/{user}/received_events")
-    Observable<List<EventInfo>> getUsersReceivedEvents(@Path("user") String userName, @Query("access_token") String token);
+    Observable<List<EventInfo>> getUsersReceivedEvents(@Path("user") String userName, @QueryMap Map<String, String> params);
 }

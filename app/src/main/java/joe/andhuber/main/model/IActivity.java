@@ -10,6 +10,8 @@ public interface IActivity {
 
     Subscription getNowUsersStars(StarParams params, IActivityCallBack callBack);
 
+    Subscription getUsersEvents(String username, EventParams params, IActivityCallBack callBack);
+
     interface IActivityCallBack {
         void onSuccessfully(Object result);
 

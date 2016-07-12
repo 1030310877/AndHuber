@@ -9,7 +9,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
 
@@ -38,6 +41,7 @@ public class MainActivity extends BaseActivity implements MainView {
     private EventsFragment eventsFragment;
     private ProgressDialog dialog;
     private FloatingActionButton refreshBtn;
+    private SearchView searchView;
     private int nowIndex = 0;
 
     @Override
@@ -50,10 +54,40 @@ public class MainActivity extends BaseActivity implements MainView {
         userPresenter.initInformation();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews() {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(null);
+        }
         headImg = (CircleImageView) findViewById(R.id.img_tool_head);
         viewPager = (ViewPager) findViewById(R.id.vp_main);
         ArrayList<Fragment> fragments = new ArrayList<>();

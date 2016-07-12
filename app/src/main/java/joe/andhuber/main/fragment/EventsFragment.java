@@ -42,6 +42,8 @@ public class EventsFragment extends BaseFragment implements EventView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         data = new ArrayList<>();
+        adapter = new EventsAdapter(mContext, data);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

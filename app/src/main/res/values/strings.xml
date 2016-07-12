@@ -12,4 +12,12 @@
     <string name="tab_2_starred">Starred</string>
     <string name="tab_3_messages">Messages</string>
     <string name="getting_information">正在获取数据</string>
+    <string name="starred">starred</string>
+    <string name="forked">forked</string>
+    <string name="download">download</string>
+    <string name="to">to</string>
+    <string name="menu_search">search</string>
+    <string name="org">Org</string>
+    <string name="blog">Blog</string>
+    <string name="email">Email</string>
 </resources>

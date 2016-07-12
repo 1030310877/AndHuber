@@ -4,6 +4,7 @@ import java.util.List;
 
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.main.model.ActivityModel;
+import joe.andhuber.main.model.EventParams;
 import joe.andhuber.main.model.IActivity;
 import joe.andhuber.main.model.IRepository;
 import joe.andhuber.main.model.RepositoryModel;
@@ -13,6 +14,7 @@ import joe.andhuber.main.view.EventView;
 import joe.andhuber.main.view.MainView;
 import joe.andhuber.main.view.RepositoryView;
 import joe.andhuber.main.view.StarView;
+import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.model.user.UserInfo;
 
@@ -56,6 +58,7 @@ public class MainPresenterImpl implements MainPresenter {
         initUserViews(UserConfig.nowUser);
         getUsersRepositories();
         getUsersStars();
+        getUsersEvents(UserConfig.nowUser.getLogin());
     }
 
     @Override
@@ -103,8 +106,22 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void getUsersEvents() {
+    public void getUsersEvents(String username) {
+        EventParams params = new EventParams();
+        params.setAccess_token(UserConfig.getInstance().getToken());
+        activityModel.getUsersEvents(username, params, new IActivity.IActivityCallBack() {
+            @Override
+            public void onSuccessfully(Object result) {
+                List<EventInfo> events = (List<EventInfo>) result;
+                eventView.showEvents(events);
+                view.dismissWaitDialog();
+            }
 
+            @Override
+            public void onFailed(String message) {
+
+            }
+        });
     }
 
     @Override
@@ -118,7 +135,7 @@ public class MainPresenterImpl implements MainPresenter {
                 getUsersStars();
                 break;
             case 2:
-                getUsersEvents();
+                getUsersEvents(UserConfig.nowUser.getLogin());
                 break;
         }
     }

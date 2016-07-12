@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/coordinator_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -15,21 +16,123 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_toolbarlayout_height"
             app:contentScrim="@color/white"
-            app:expandedTitleGravity="bottom|center_horizontal"
+            app:expandedTitleGravity="bottom"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.8">
+                app:layout_collapseMode="pin">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_tool_head"
                     android:layout_width="@dimen/main_headimg_width"
                     android:layout_height="@dimen/main_headimg_height"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@+id/img_tool_head"
+                    android:layout_alignTop="@+id/img_tool_head"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/img_tool_head"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_work_black_24dp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_main_user_org"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            tool:text="personal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_chrome_reader_mode_black_24dp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_main_user_blog"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            tool:text="personal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_email_black_24dp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_main_user_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:inputType="textWebEmailAddress"
+                            tool:text="xxxx@gmail.com" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_people_black_24dp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            tool:text="23" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            app:srcCompat="@drawable/ic_person_pin_circle_black_24dp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            tool:text="23" />
+                    </LinearLayout>
+                </LinearLayout>
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar

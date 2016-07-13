@@ -20,4 +20,6 @@
     <string name="org">Org</string>
     <string name="blog">Blog</string>
     <string name="email">Email</string>
+    <string name="menu_message">message</string>
+    <string name="setting">setting</string>
 </resources>

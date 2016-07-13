@@ -4,7 +4,6 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="2dp"
@@ -17,8 +16,8 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/img_item_star_logo"
             android:layout_width="24dp"
-            android:layout_marginTop="5dp"
             android:layout_height="24dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/ic_receipt_black_24dp" />
 
         <android.support.v7.widget.AppCompatTextView

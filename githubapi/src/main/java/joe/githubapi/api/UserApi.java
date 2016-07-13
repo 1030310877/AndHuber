@@ -18,4 +18,8 @@ public class UserApi {
     public Observable<UserInfo> getNowUserInfo(String token) {
         return GitHubApi.createService(UserService.class).getNowUserInfo(token);
     }
+
+    public Observable<UserInfo> getUserInfo(String username, String token) {
+        return GitHubApi.createService(UserService.class).getUserInfo(username, token);
+    }
 }

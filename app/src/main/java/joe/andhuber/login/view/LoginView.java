@@ -1,5 +1,7 @@
 package joe.andhuber.login.view;
 
+import joe.githubapi.model.user.UserInfo;
+
 /**
  * Description
  * Created by chenqiao on 2016/6/30.
@@ -14,7 +16,7 @@ public interface LoginView {
 
     void showTwoFactorDialog();
 
-    void startToMain();
+    void startToMain(UserInfo user);
 
     String getUserName();
 

@@ -14,13 +14,14 @@ import java.util.concurrent.TimeUnit;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
-import joe.andhuber.login.model.User;
+import joe.andhuber.model.user.User;
 import joe.andhuber.login.presenter.LoginPresenter;
 import joe.andhuber.login.presenter.LoginPresenterImpl;
 import joe.andhuber.login.view.LoginView;
-import joe.andhuber.main.MainActivity;
+import joe.andhuber.user.UserMainActivity;
 import joe.andhuber.utils.ToastUtil;
 import joe.andhuber.utils.rx.RxView;
+import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
@@ -110,9 +111,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void startToMain() {
+    public void startToMain(UserInfo user) {
         ToastUtil.show(this, "登录成功");
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, UserMainActivity.class);
+        intent.putExtra("user", user);
+        intent.putExtra("isHome", true);
         startActivity(intent);
         finish();
     }

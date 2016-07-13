@@ -1,6 +1,6 @@
 package joe.andhuber.login.presenter;
 
-import joe.andhuber.login.model.User;
+import joe.andhuber.model.user.User;
 
 /**
  * Description
@@ -11,7 +11,7 @@ public interface LoginPresenter {
 
     void login(User user, String code);
 
-    void getUserInfo(String token);
+    void getUserInfo(String username, String token);
 
     void rememberUser(boolean tf);
 

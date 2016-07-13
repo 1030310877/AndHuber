@@ -16,17 +16,22 @@ import rx.Subscriber;
 public abstract class HttpSubscriber<T> extends Subscriber<T> {
     @Override
     public void onError(Throwable e) {
-        HttpException httpException = (HttpException) e;
         ErrorInfo errorInfo;
-        try {
-            String errorBody = httpException.response().errorBody().string();
-            Gson gson = new Gson();
-            errorInfo = gson.fromJson(errorBody, ErrorInfo.class);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            errorInfo = new ErrorInfo();
-            errorInfo.setMessage(e.toString());
-        } catch (JsonSyntaxException e2) {
+        if (e instanceof HttpException) {
+            HttpException httpException = (HttpException) e;
+            try {
+                String errorBody = httpException.response().errorBody().string();
+                Gson gson = new Gson();
+                errorInfo = gson.fromJson(errorBody, ErrorInfo.class);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                errorInfo = new ErrorInfo();
+                errorInfo.setMessage(e.toString());
+            } catch (JsonSyntaxException e2) {
+                errorInfo = new ErrorInfo();
+                errorInfo.setMessage(e.toString());
+            }
+        } else {
             errorInfo = new ErrorInfo();
             errorInfo.setMessage(e.toString());
         }

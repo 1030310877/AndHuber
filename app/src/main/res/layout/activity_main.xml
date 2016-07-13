@@ -40,6 +40,7 @@
                     android:layout_alignTop="@+id/img_tool_head"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/img_tool_head"
+                    android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -54,7 +55,7 @@
                             app:srcCompat="@drawable/ic_work_black_24dp" />
 
                         <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/txt_main_user_org"
+                            android:id="@+id/txt_main_user_company"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
@@ -79,6 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
+                            android:autoLink="web"
                             tool:text="personal" />
                     </LinearLayout>
 
@@ -99,6 +101,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
+                            android:autoLink="email"
                             android:inputType="textWebEmailAddress"
                             tool:text="xxxx@gmail.com" />
                     </LinearLayout>
@@ -115,9 +118,11 @@
                             app:srcCompat="@drawable/ic_people_black_24dp" />
 
                         <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_main_user_follower"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
+                            android:inputType="number"
                             tool:text="23" />
 
                         <android.support.v7.widget.AppCompatImageView
@@ -127,9 +132,11 @@
                             app:srcCompat="@drawable/ic_person_pin_circle_black_24dp" />
 
                         <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_main_user_following"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
+                            android:inputType="number"
                             tool:text="23" />
                     </LinearLayout>
                 </LinearLayout>

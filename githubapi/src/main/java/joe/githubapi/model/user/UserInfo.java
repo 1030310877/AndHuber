@@ -1,10 +1,12 @@
 package joe.githubapi.model.user;
 
+import java.io.Serializable;
+
 /**
  * Description
  * Created by chenqiao on 2016/7/5.
  */
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     /**
      * login : mphantom
@@ -309,4 +311,6 @@ public class UserInfo {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
+
+
 }

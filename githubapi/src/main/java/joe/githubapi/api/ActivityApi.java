@@ -19,6 +19,10 @@ public class ActivityApi {
         return GitHubApi.createService(ActivityService.class).getNowUsersStars(params);
     }
 
+    public Observable<List<RepositoryInfo>> getUserStars(String username, Map<String, String> params) {
+        return GitHubApi.createService(ActivityService.class).getUserStars(username, params);
+    }
+
     public Observable<List<EventInfo>> getUsersEvents(String username, Map<String, String> params) {
         return GitHubApi.createService(ActivityService.class).getUsersReceivedEvents(username, params);
     }

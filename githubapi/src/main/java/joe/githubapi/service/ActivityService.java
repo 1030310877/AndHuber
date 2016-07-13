@@ -19,6 +19,9 @@ public interface ActivityService {
     @GET("/user/starred")
     Observable<List<RepositoryInfo>> getNowUsersStars(@QueryMap Map<String, String> params);
 
-    @GET("/users/{user}/received_events")
-    Observable<List<EventInfo>> getUsersReceivedEvents(@Path("user") String userName, @QueryMap Map<String, String> params);
+    @GET("/users/{username}/starred")
+    Observable<List<RepositoryInfo>> getUserStars(@Path("username") String username, @QueryMap Map<String, String> params);
+
+    @GET("/users/{username}/received_events")
+    Observable<List<EventInfo>> getUsersReceivedEvents(@Path("username") String username, @QueryMap Map<String, String> params);
 }

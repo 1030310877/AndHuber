@@ -18,9 +18,9 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".main.MainActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".user.UserMainActivity" />
+
+        <activity android:name=".function.FunctionActivity" />
 
         <meta-data
             android:name="client_id"

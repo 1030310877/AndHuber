@@ -5,6 +5,7 @@ import java.util.Map;
 
 import joe.githubapi.model.repositories.RepositoryInfo;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -16,4 +17,8 @@ public interface RepositoriesService {
 
     @GET("/user/repos")
     Observable<List<RepositoryInfo>> getNowUsersRepositories(@QueryMap Map<String, String> params);
+
+    @GET("/users/{username}/repos")
+    Observable<List<RepositoryInfo>> getUserRepositories(@Path("username") String username, @QueryMap Map<String, String> params);
+
 }

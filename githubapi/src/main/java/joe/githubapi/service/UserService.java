@@ -15,5 +15,5 @@ public interface UserService {
     Observable<UserInfo> getNowUserInfo(@Query("access_token") String token);
 
     @GET("/users/{username}")
-    Observable<UserInfo> queryUserInfo(@Path("username") String username, @Query("access_token") String token);
+    Observable<UserInfo> getUserInfo(@Path("username") String username, @Query("access_token") String token);
 }

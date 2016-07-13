@@ -1,9 +1,9 @@
 package joe.andhuber.login.presenter;
 
 import joe.andhuber.config.UserConfig;
-import joe.andhuber.login.model.IUser;
-import joe.andhuber.login.model.User;
-import joe.andhuber.login.model.UserModel;
+import joe.andhuber.model.user.IUser;
+import joe.andhuber.model.user.User;
+import joe.andhuber.model.user.UserModel;
 import joe.andhuber.login.view.LoginView;
 import joe.andhuber.utils.rx.RxView;
 import joe.githubapi.model.ErrorInfo;
@@ -42,7 +42,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                 } else {
                     UserConfig.getInstance().clearDefaultUser();
                 }
-                getUserInfo(UserConfig.getInstance().getToken());
+                getUserInfo(user.getUserName(), UserConfig.getInstance().getToken());
             }
 
             @Override
@@ -59,12 +59,12 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void getUserInfo(String token) {
-        userModel.getUserInfo(token, new IUser.GetUserInfoCallBack() {
+    public void getUserInfo(String username, String token) {
+        userModel.getUserInfo(username, token, new IUser.GetUserInfoCallBack() {
             @Override
             public void getSuccessfully() {
                 view.dismissWait();
-                view.startToMain();
+                view.startToMain(UserConfig.nowUser);
             }
 
             @Override

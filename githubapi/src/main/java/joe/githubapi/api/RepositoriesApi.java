@@ -17,4 +17,8 @@ public class RepositoriesApi {
     public Observable<List<RepositoryInfo>> getNowUsersRepositories(Map<String, String> params) {
         return GitHubApi.createService(RepositoriesService.class).getNowUsersRepositories(params);
     }
+
+    public Observable<List<RepositoryInfo>> getUserRepositories(String username, Map<String, String> params) {
+        return GitHubApi.createService(RepositoriesService.class).getUserRepositories(username, params);
+    }
 }

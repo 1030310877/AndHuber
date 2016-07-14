@@ -1,7 +1,5 @@
 package joe.andhuber.user.presenter;
 
-import joe.andhuber.user.view.RepositoryView;
-import joe.andhuber.user.view.StarView;
 import joe.githubapi.model.user.UserInfo;
 
 /**
@@ -10,17 +8,9 @@ import joe.githubapi.model.user.UserInfo;
  */
 public interface UserMainPresenter {
 
-    void setStarView(StarView view);
-
-    void setRepositoryView(RepositoryView view);
-
     void initInformation();
 
     void initUserViews(UserInfo userInfo);
-
-    void getUserRepositories(String username);
-
-    void getUserStars(String username);
 
     void refreshData(int nowIndex);
 }

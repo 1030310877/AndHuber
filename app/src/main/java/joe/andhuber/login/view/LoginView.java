@@ -1,5 +1,6 @@
 package joe.andhuber.login.view;
 
+import joe.andhuber.model.user.User;
 import joe.githubapi.model.user.UserInfo;
 
 /**

@@ -32,43 +32,44 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/img_item_event_logo"
                 android:layout_toRightOf="@+id/img_item_event_logo"
+                android:typeface="monospace"
                 tool:text="LoginName" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txt_item_event_action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/txt_item_event_actor_name"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_item_event_logo"
                 tool:text="@string/forked" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txt_item_event_action_receiver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_item_event_actor_name"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/img_item_event_logo"
+                android:layout_alignBaseline="@+id/txt_item_event_action"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/txt_item_event_action"
+                android:ellipsize="end"
                 tool:text="1030310877/LoadMoreRecyclerView" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txt_item_event_action_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_item_event_action_receiver"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/txt_item_event_action"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_item_event_logo"
                 tool:text="@string/to" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txt_item_event_action_receiver_2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txt_item_event_action_receiver"
-                android:layout_below="@+id/txt_item_event_action_receiver"
-                android:layout_marginTop="5dp"
+                android:layout_alignBaseline="@+id/txt_item_event_action_2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/txt_item_event_action_2"
                 tool:text="1232143215353/LoadMoreRecyclerView" />
         </RelativeLayout>
 

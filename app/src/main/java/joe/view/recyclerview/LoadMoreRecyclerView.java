@@ -9,7 +9,6 @@ import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +32,7 @@ public class LoadMoreRecyclerView extends LinearLayout implements NestedScrollin
     private boolean isBottom = false;
     private boolean changeBottom = false;
     private boolean enableLoad = true;
-    private boolean isLoading = false;
+    public boolean isLoading = false;
 
     //TODO footView的内容View
     private View footContentView;
@@ -67,7 +66,7 @@ public class LoadMoreRecyclerView extends LinearLayout implements NestedScrollin
     }
 
     //调用此方法滚动到目标位置
-    public void smoothScrollTo(int fx, int fy) {
+    private void smoothScrollTo(int fx, int fy) {
         int dx = fx - mScroller.getFinalX();
         int dy = fy - mScroller.getFinalY();
         smoothScrollBy(dx, dy);
@@ -268,6 +267,10 @@ public class LoadMoreRecyclerView extends LinearLayout implements NestedScrollin
     /*==============以下为开放部分的recyclerView方法 ================*/
     //TODO  如果还需要其他recyclerview的方法，可在下方进行开放。
 
+    public void smoothScrollToPosition(int position) {
+        recyclerView.smoothScrollToPosition(position);
+    }
+
     public void setAdapter(RecyclerView.Adapter adapter) {
         recyclerView.setAdapter(adapter);
     }
@@ -293,10 +296,14 @@ public class LoadMoreRecyclerView extends LinearLayout implements NestedScrollin
     }
 
 
+    public boolean isLoading() {
+        return isLoading;
+    }
+
     /**
      * 加载结束后调用该方法进行footview缩回
      */
-    public void loadFinished() {
+    public void loadFinished(String text) {
         isLoading = false;
         handler.postDelayed(new Runnable() {
             @Override
@@ -307,7 +314,7 @@ public class LoadMoreRecyclerView extends LinearLayout implements NestedScrollin
             }
         }, 1500);
         //TODO 加载完成后的处理，缩回以及视图变化
-        ((TextView) footContentView.findViewById(R.id.status_tv)).setText("加载成功");
+        ((TextView) footContentView.findViewById(R.id.status_tv)).setText(text);
     }
 
     public void setEnableLoad(boolean tf) {

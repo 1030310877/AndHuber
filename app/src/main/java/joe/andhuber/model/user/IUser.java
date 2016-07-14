@@ -9,6 +9,8 @@ import joe.githubapi.model.ErrorInfo;
 public interface IUser {
     void login(User user, String code, LoginCallBack callBack);
 
+    void logout();
+
     interface LoginCallBack {
         void loginSuccess();
 

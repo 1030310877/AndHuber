@@ -86,6 +86,9 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
                 startActivity(intent);
                 break;
             case R.id.menu_set:
+                Intent intent2 = new Intent(this, FunctionActivity.class);
+                intent2.putExtra("type", FunctionActivity.SETTING_FRAGMENT);
+                startActivity(intent2);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -111,12 +114,8 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
 
         viewPager = (ViewPager) findViewById(R.id.vp_main);
         ArrayList<Fragment> fragments = new ArrayList<>();
-        repositoryFragment = new RepositoryFragment();
-        userPresenter.setRepositoryView(repositoryFragment);
-        repositoryFragment.setPresenter(userPresenter);
-        starFragment = new StarFragment();
-        userPresenter.setStarView(starFragment);
-        starFragment.setPresenter(userPresenter);
+        repositoryFragment = RepositoryFragment.newInstance(user);
+        starFragment = StarFragment.newInstance(user);
 
         fragments.add(repositoryFragment);
         fragments.add(starFragment);
@@ -148,6 +147,14 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        repositoryFragment.moveToTop();
+                        break;
+                    case 1:
+                        starFragment.moveToTop();
+                        break;
+                }
             }
         });
     }

@@ -4,20 +4,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
-import android.widget.EditText;
 
 import java.util.concurrent.TimeUnit;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
-import joe.andhuber.model.user.User;
 import joe.andhuber.login.presenter.LoginPresenter;
 import joe.andhuber.login.presenter.LoginPresenterImpl;
 import joe.andhuber.login.view.LoginView;
+import joe.andhuber.model.user.User;
 import joe.andhuber.user.UserMainActivity;
 import joe.andhuber.utils.ToastUtil;
 import joe.andhuber.utils.rx.RxView;
@@ -97,12 +97,14 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void showTwoFactorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        EditText editText = new EditText(this);
-        editText.setPadding(20, 0, 20, 0);
+        TextInputLayout inputLayout = new TextInputLayout(this);
+        AppCompatEditText editText = new AppCompatEditText(this);
+        editText.setPadding(30, 30, 30, 30);
         editText.setHint(R.string.two_factor_hint);
+        inputLayout.addView(editText);
         builder.setCancelable(true)
-                .setTitle(R.string.authenticate)
-                .setView(editText)
+                .setTitle(" ")
+                .setView(inputLayout)
                 .setPositiveButton(R.string.confirm, (dialog1, which) -> {
                     dialog1.dismiss();
                     presenter.login(new User(getUserName(), getPassWord()), editText.getEditableText().toString());

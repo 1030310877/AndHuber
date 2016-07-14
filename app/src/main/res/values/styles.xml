@@ -6,8 +6,16 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/transparent</item>
         <item name="colorAccent">@color/gray</item>
-        <item name="colorButtonNormal">@color/black</item>
+        <item name="colorButtonNormal">@color/light_black</item>
         <item name="colorControlHighlight">@color/whitesmoke</item>
     </style>
 
+    <style name="PreferenceTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
+    <style name="SearchTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

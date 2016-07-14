@@ -25,7 +25,7 @@ public class MapUtil {
         HashMap<String, String> map = new HashMap<>();
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if (field.getType() == String.class) {
+            if (field.getType() == String.class || field.getType() == int.class || field.getType() == long.class) {
                 String key;
                 String value = null;
                 field.setAccessible(true);
@@ -36,7 +36,7 @@ public class MapUtil {
                     key = field.getName();
                 }
                 try {
-                    value = (String) field.get(object);
+                    value = String.valueOf(field.get(object));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }

@@ -80,4 +80,8 @@ public class UserConfig {
     public String getToken() {
         return (String) get(TOKEN, "");
     }
+
+    public void removeToken() {
+        remove(TOKEN);
+    }
 }

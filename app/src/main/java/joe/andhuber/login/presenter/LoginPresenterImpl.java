@@ -42,7 +42,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                 } else {
                     UserConfig.getInstance().clearDefaultUser();
                 }
-                getUserInfo(user.getUserName(), UserConfig.getInstance().getToken());
+                getUserInfo(user.getUserName());
             }
 
             @Override
@@ -59,8 +59,8 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void getUserInfo(String username, String token) {
-        userModel.getUserInfo(username, token, new IUser.GetUserInfoCallBack() {
+    public void getUserInfo(String username) {
+        userModel.getUserInfo(username, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
             @Override
             public void getSuccessfully() {
                 view.dismissWait();

@@ -296,4 +296,6 @@
     <color name="navy">#000080</color>
     <!-- 海军色 -->
     <color name="black">#000000</color>
+
+    <color name="light_black">#101010</color>
 </resources>

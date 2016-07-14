@@ -7,7 +7,7 @@ package joe.andhuber.model.activity;
 public class EventParams {
     private String access_token = "";
     private String page = "1";
-    private String per_page = "10";
+    private String per_page = "30";
 
     public String getAccess_token() {
         return access_token;

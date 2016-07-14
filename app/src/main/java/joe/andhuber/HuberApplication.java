@@ -1,6 +1,9 @@
 package joe.andhuber;
 
+import android.content.Intent;
+
 import joe.andhuber.application.BaseApplication;
+import joe.andhuber.search.service.SearchService;
 import joe.githubapi.core.GitHubApi;
 
 /**
@@ -15,6 +18,8 @@ public class HuberApplication extends BaseApplication {
         instance = this;
         setCrashHandlerEnable(false);
         GitHubApi.init(this, true);
+        Intent intent = new Intent(this, SearchService.class);
+        startService(intent);
     }
 
     public static HuberApplication getInstance() {

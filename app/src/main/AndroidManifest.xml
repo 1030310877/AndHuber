@@ -22,6 +22,30 @@
 
         <activity android:name=".function.FunctionActivity" />
 
+        <activity
+            android:name=".search.SearchActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/SearchTheme">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".search.SearchResultActivity" />
+        </activity>
+
+        <activity
+            android:name=".search.SearchResultActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <service android:name=".search.service.SearchService" />
+
         <meta-data
             android:name="client_id"
             android:value="f2f81a9ab54e23992bc3" />

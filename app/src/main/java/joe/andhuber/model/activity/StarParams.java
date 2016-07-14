@@ -9,22 +9,22 @@ public class StarParams {
     private String sort = "created";
     private String direction = "desc";
     private String access_token = "";
-    private String page = "1";
-    private String per_page = "10";
+    private int page = 1;
+    private int per_page = 10;
 
-    public String getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(String page) {
+    public void setPage(int page) {
         this.page = page;
     }
 
-    public String getPer_page() {
+    public int getPer_page() {
         return per_page;
     }
 
-    public void setPer_page(String paer_page) {
+    public void setPer_page(int paer_page) {
         this.per_page = paer_page;
     }
 

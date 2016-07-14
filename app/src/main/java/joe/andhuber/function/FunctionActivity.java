@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
 import joe.andhuber.function.event.fragment.EventsFragment;
+import joe.andhuber.function.set.fragment.SettingFragment;
 
 /**
  * Description
@@ -18,6 +19,7 @@ import joe.andhuber.function.event.fragment.EventsFragment;
 public class FunctionActivity extends BaseActivity {
 
     public static final int EVENT_FRAGMENT = 0x0a;
+    public static final int SETTING_FRAGMENT = 0x0b;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,10 @@ public class FunctionActivity extends BaseActivity {
         switch (type) {
             case EVENT_FRAGMENT:
                 replaceFragment(new EventsFragment(), "EventsFragment", false);
+                break;
+            case SETTING_FRAGMENT:
+                setTheme(R.style.PreferenceTheme);
+                replaceFragment(new SettingFragment(), "SettingFragment", false);
                 break;
         }
     }

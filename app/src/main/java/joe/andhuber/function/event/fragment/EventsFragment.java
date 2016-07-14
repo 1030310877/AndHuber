@@ -16,8 +16,8 @@ import joe.andhuber.base.BaseFragment;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.function.event.adapter.EventsAdapter;
 import joe.andhuber.function.event.presenter.EventPresenter;
-import joe.andhuber.function.event.presenter.EventPresenterImp;
-import joe.andhuber.user.view.EventView;
+import joe.andhuber.function.event.presenter.EventPresenterImpl;
+import joe.andhuber.function.event.view.EventView;
 import joe.githubapi.model.event.EventInfo;
 import joe.view.recyclerview.SpaceItemDecoration;
 
@@ -50,7 +50,7 @@ public class EventsFragment extends BaseFragment implements EventView {
         adapter = new EventsAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(UserConfig.nowUser.getName());
-        presenter = new EventPresenterImp(this);
+        presenter = new EventPresenterImpl(this);
         presenter.getUserEvents(UserConfig.nowUser.getLogin());
     }
 

@@ -1,1 +1,1 @@
-include ':app', 'githubapi'
+include ':app', 'githubapi', ':rxbus'

@@ -1,4 +1,4 @@
-package joe.andhuber.user.view;
+package joe.andhuber.function.event.view;
 
 import java.util.List;
 

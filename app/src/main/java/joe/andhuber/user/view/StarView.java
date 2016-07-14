@@ -9,7 +9,17 @@ import joe.githubapi.model.repositories.RepositoryInfo;
  * Created by chenqiao on 2016/7/8.
  */
 public interface StarView {
-    void showStars(List<RepositoryInfo> data);
+    void addStars(List<RepositoryInfo> data);
 
     void clearStars();
+
+    void setPage(int page);
+
+    void loadFinish(String text);
+
+    void showWaitDialog();
+
+    void dismissWaitDialog();
+
+    void moveToTop();
 }

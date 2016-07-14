@@ -62,6 +62,12 @@ public class UserModel implements IUser {
     }
 
     @Override
+    public void logout() {
+        UserConfig.nowUser = null;
+        UserConfig.getInstance().removeToken();
+    }
+
+    @Override
     public void getUserInfo(String username, String token, GetUserInfoCallBack callBack) {
         GitHubApi.getUserApi().getUserInfo(username, token)
                 .subscribeOn(Schedulers.newThread())

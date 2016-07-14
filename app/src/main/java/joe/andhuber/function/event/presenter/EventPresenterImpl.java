@@ -6,19 +6,19 @@ import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.activity.ActivityModel;
 import joe.andhuber.model.activity.EventParams;
 import joe.andhuber.model.activity.IActivity;
-import joe.andhuber.user.view.EventView;
+import joe.andhuber.function.event.view.EventView;
 import joe.githubapi.model.event.EventInfo;
 
 /**
  * Description
  * Created by chenqiao on 2016/7/13.
  */
-public class EventPresenterImp implements EventPresenter {
+public class EventPresenterImpl implements EventPresenter {
 
     private EventView eventView;
     private ActivityModel activityModel;
 
-    public EventPresenterImp(EventView view) {
+    public EventPresenterImpl(EventView view) {
         this.eventView = view;
         activityModel = new ActivityModel();
     }

@@ -11,7 +11,7 @@ public interface LoginPresenter {
 
     void login(User user, String code);
 
-    void getUserInfo(String username, String token);
+    void getUserInfo(String username);
 
     void rememberUser(boolean tf);
 

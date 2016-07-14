@@ -71,6 +71,15 @@ public class UserInfo implements Serializable {
     private int following;
     private String created_at;
     private String updated_at;
+    private double score;
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
 
     public String getLogin() {
         return login;

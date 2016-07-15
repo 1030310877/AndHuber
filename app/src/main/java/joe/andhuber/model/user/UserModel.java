@@ -40,18 +40,24 @@ public class UserModel implements IUser {
                             if (value.contains("required")) {
                                 ErrorInfo errorInfo = new ErrorInfo();
                                 errorInfo.setMessage("required");
-                                callBack.loginFailed(errorInfo);
+                                if (callBack != null) {
+                                    callBack.loginFailed(errorInfo);
+                                }
                             }
                         } else {
                             ErrorInfo errorInfo = new ErrorInfo();
                             errorInfo.setMessage(e.toString());
-                            callBack.loginFailed(errorInfo);
+                            if (callBack != null) {
+                                callBack.loginFailed(errorInfo);
+                            }
                         }
                     }
 
                     @Override
                     public void onCompleted() {
-                        callBack.loginSuccess();
+                        if (callBack != null) {
+                            callBack.loginSuccess();
+                        }
                     }
 
                     @Override
@@ -75,12 +81,16 @@ public class UserModel implements IUser {
                 .subscribe(new HttpSubscriber<UserInfo>() {
                     @Override
                     public void onCompleted() {
-                        callBack.getSuccessfully();
+                        if (callBack != null) {
+                            callBack.getSuccessfully();
+                        }
                     }
 
                     @Override
                     public void onHttpError(ErrorInfo info) {
-                        callBack.getFailed(info);
+                        if (callBack != null) {
+                            callBack.getFailed(info);
+                        }
                     }
 
                     @Override

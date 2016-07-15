@@ -20,6 +20,8 @@
 
         <activity android:name=".user.UserMainActivity" />
 
+        <activity android:name=".repository.RepoDetailActivity" />
+
         <activity android:name=".function.FunctionActivity" />
 
         <activity

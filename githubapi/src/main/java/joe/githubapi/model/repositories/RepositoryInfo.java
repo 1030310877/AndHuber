@@ -2,13 +2,15 @@ package joe.githubapi.model.repositories;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
  * Created by chenqiao on 2016/7/6.
  */
-public class RepositoryInfo {
+public class RepositoryInfo implements Serializable {
 
     /**
      * id : 62620893
@@ -758,7 +760,7 @@ public class RepositoryInfo {
         this.permissions = permissions;
     }
 
-    public static class PermissionsBean {
+    public static class PermissionsBean implements Serializable {
         private boolean admin;
         private boolean push;
         private boolean pull;

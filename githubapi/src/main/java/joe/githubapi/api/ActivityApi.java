@@ -15,16 +15,20 @@ import rx.Observable;
  */
 public class ActivityApi {
 
+    private ActivityService createService() {
+        return GitHubApi.createService(ActivityService.class);
+    }
+
     public Observable<List<RepositoryInfo>> getNowUsersStars(Map<String, String> params) {
-        return GitHubApi.createService(ActivityService.class).getNowUsersStars(params);
+        return createService().getNowUsersStars(params);
     }
 
     public Observable<List<RepositoryInfo>> getUserStars(String username, Map<String, String> params) {
-        return GitHubApi.createService(ActivityService.class).getUserStars(username, params);
+        return createService().getUserStars(username, params);
     }
 
     public Observable<List<EventInfo>> getUsersEvents(String username, Map<String, String> params) {
-        return GitHubApi.createService(ActivityService.class).getUsersReceivedEvents(username, params);
+        return createService().getUsersReceivedEvents(username, params);
     }
 
 }

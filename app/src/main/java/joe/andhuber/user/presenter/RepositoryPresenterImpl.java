@@ -3,7 +3,7 @@ package joe.andhuber.user.presenter;
 import java.util.List;
 
 import joe.andhuber.config.UserConfig;
-import joe.andhuber.model.repository.IRepository;
+import joe.andhuber.model.repository.IRepositoryCallBack;
 import joe.andhuber.model.repository.RepositoryModel;
 import joe.andhuber.model.repository.RepositoryParams;
 import joe.andhuber.user.view.RepositoryView;
@@ -28,7 +28,7 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         RepositoryParams params = new RepositoryParams();
         params.setPage(page);
         params.setAccess_token(UserConfig.getInstance().getToken());
-        repositoryModel.getUserRepositories(username, params, new IRepository.IRepositoryCallBack() {
+        repositoryModel.getUserRepositories(username, params, new IRepositoryCallBack() {
             @Override
             public void onSuccessfully(Object result) {
                 repositoryView.dismissWaitDialog();

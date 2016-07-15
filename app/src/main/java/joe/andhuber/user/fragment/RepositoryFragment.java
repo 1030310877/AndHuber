@@ -1,6 +1,7 @@
 package joe.andhuber.user.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseFragment;
+import joe.andhuber.repository.RepoDetailActivity;
 import joe.andhuber.user.adapter.RepositoryAdapter;
 import joe.andhuber.user.presenter.RepositoryPresenter;
 import joe.andhuber.user.presenter.RepositoryPresenterImpl;
@@ -68,10 +70,14 @@ public class RepositoryFragment extends BaseFragment implements RepositoryView {
         data = new ArrayList<>();
         adapter = new RepositoryAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnLoadingListener(new LoadMoreRecyclerView.onLoadingMoreListener() {
-            @Override
-            public void onLoading() {
-                presenter.getUserRepositories(user.getLogin(), page + 1);
+        recyclerView.setOnLoadingListener(() -> presenter.getUserRepositories(user.getLogin(), page + 1));
+        adapter.setOnItemClickListener(position -> {
+            if (position >= 0 && position < data.size()) {
+                Intent intent = new Intent(mContext, RepoDetailActivity.class);
+                intent.putExtra("repository", data.get(position));
+                startActivity(intent);
+            } else {
+                adapter.notifyDataSetChanged();
             }
         });
         initRepositories();

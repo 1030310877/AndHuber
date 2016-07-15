@@ -3,10 +3,10 @@ package joe.andhuber.function.event.presenter;
 import java.util.List;
 
 import joe.andhuber.config.UserConfig;
+import joe.andhuber.function.event.view.EventView;
 import joe.andhuber.model.activity.ActivityModel;
 import joe.andhuber.model.activity.EventParams;
-import joe.andhuber.model.activity.IActivity;
-import joe.andhuber.function.event.view.EventView;
+import joe.andhuber.model.activity.IActivityCallBack;
 import joe.githubapi.model.event.EventInfo;
 
 /**
@@ -27,7 +27,7 @@ public class EventPresenterImpl implements EventPresenter {
     public void getUserEvents(String username) {
         EventParams params = new EventParams();
         params.setAccess_token(UserConfig.getInstance().getToken());
-        activityModel.getUsersEvents(username, params, new IActivity.IActivityCallBack() {
+        activityModel.getUsersEvents(username, params, new IActivityCallBack() {
             @Override
             public void onSuccessfully(Object result) {
                 List<EventInfo> events = (List<EventInfo>) result;

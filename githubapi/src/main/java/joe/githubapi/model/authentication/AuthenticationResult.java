@@ -1,12 +1,13 @@
 package joe.githubapi.model.authentication;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Description
  * Created by chenqiao on 2016/7/5.
  */
-public class AuthenticationResult {
+public class AuthenticationResult implements Serializable {
 
 
     /**

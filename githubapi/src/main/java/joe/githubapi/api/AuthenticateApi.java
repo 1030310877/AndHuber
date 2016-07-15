@@ -14,14 +14,14 @@ import rx.Observable;
  */
 public class AuthenticateApi {
 
-    public AuthenticateApi() {
-
+    private AuthenticateService createService() {
+        return GitHubApi.createService(AuthenticateService.class);
     }
 
     public Observable<AuthenticationResult> login(String username, String password, String code, AuthorizationInfo info) {
         String credentials = username + ":" + password;
         String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.DEFAULT);
         basic = basic.trim();
-        return GitHubApi.createService(AuthenticateService.class).login(basic, code, info);
+        return createService().login(basic, code, info);
     }
 }

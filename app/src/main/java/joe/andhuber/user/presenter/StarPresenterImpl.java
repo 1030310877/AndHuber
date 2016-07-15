@@ -4,7 +4,7 @@ import java.util.List;
 
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.activity.ActivityModel;
-import joe.andhuber.model.activity.IActivity;
+import joe.andhuber.model.activity.IActivityCallBack;
 import joe.andhuber.model.activity.StarParams;
 import joe.andhuber.user.view.StarView;
 import joe.githubapi.model.repositories.RepositoryInfo;
@@ -28,7 +28,7 @@ public class StarPresenterImpl implements StarPresenter {
         StarParams params = new StarParams();
         params.setPage(page);
         params.setAccess_token(UserConfig.getInstance().getToken());
-        activityModel.getUsersStars(username, params, new IActivity.IActivityCallBack() {
+        activityModel.getUsersStars(username, params, new IActivityCallBack() {
             @Override
             public void onSuccessfully(Object result) {
                 starView.dismissWaitDialog();

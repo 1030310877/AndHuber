@@ -13,6 +13,7 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.githubapi.model.repositories.RepositoryInfo;
+import joe.view.recyclerview.OnItemClickListener;
 
 /**
  * Description
@@ -22,6 +23,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
     private List<RepositoryInfo> data;
     private Context mContext;
+    private OnItemClickListener listener;
 
     public RepositoryAdapter(Context mContext, List<RepositoryInfo> data) {
         this.mContext = mContext;
@@ -45,6 +47,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
             if (data.get(position).isFork()) {
                 holder.setLogo("fork");
             }
+            holder.itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(position);
+                }
+            });
         }
     }
 
@@ -59,6 +66,10 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
     public void setData(List<RepositoryInfo> data) {
         this.data = data;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     class RepositoryViewHolder extends RecyclerView.ViewHolder {

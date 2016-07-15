@@ -1,5 +1,6 @@
 package joe.githubapi.model.search;
 
+import java.io.Serializable;
 import java.util.List;
 
 import joe.githubapi.model.user.UserInfo;
@@ -8,7 +9,7 @@ import joe.githubapi.model.user.UserInfo;
  * Description
  * Created by chenqiao on 2016/7/14.
  */
-public class SearchUserResult {
+public class SearchUserResult implements Serializable {
 
     /**
      * total_count : 4880

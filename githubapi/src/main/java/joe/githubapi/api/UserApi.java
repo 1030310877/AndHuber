@@ -15,11 +15,15 @@ public class UserApi {
 
     }
 
+    private UserService createService() {
+        return GitHubApi.createService(UserService.class);
+    }
+
     public Observable<UserInfo> getNowUserInfo(String token) {
-        return GitHubApi.createService(UserService.class).getNowUserInfo(token);
+        return createService().getNowUserInfo(token);
     }
 
     public Observable<UserInfo> getUserInfo(String username, String token) {
-        return GitHubApi.createService(UserService.class).getUserInfo(username, token);
+        return createService().getUserInfo(username, token);
     }
 }

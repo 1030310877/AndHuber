@@ -12,6 +12,7 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.githubapi.model.repositories.RepositoryInfo;
+import joe.view.recyclerview.OnItemClickListener;
 
 /**
  * Description
@@ -21,6 +22,7 @@ public class StarsAdapter extends RecyclerView.Adapter<StarsAdapter.StarViewHold
 
     private List<RepositoryInfo> data;
     private Context mContext;
+    private OnItemClickListener listener;
 
     public StarsAdapter(Context mContext, List<RepositoryInfo> data) {
         this.mContext = mContext;
@@ -41,6 +43,11 @@ public class StarsAdapter extends RecyclerView.Adapter<StarsAdapter.StarViewHold
             holder.setDescriptionTv(info.getDescription());
             holder.setStarNum(info.getStargazers_count());
             holder.setForkNum(info.getForks_count());
+            holder.itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(position);
+                }
+            });
         }
     }
 
@@ -55,6 +62,10 @@ public class StarsAdapter extends RecyclerView.Adapter<StarsAdapter.StarViewHold
 
     public void setData(List<RepositoryInfo> data) {
         this.data = data;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     class StarViewHolder extends RecyclerView.ViewHolder {

@@ -1,10 +1,12 @@
 package joe.githubapi.model.authentication;
 
+import java.io.Serializable;
+
 /**
  * Description
  * Created by chenqiao on 2016/7/4.
  */
-public class AuthorizationInfo {
+public class AuthorizationInfo implements Serializable {
     private String client_id;
     private String client_secret;
     private String note;

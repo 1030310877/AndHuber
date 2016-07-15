@@ -2,11 +2,13 @@ package joe.githubapi.model.event;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Description
  * Created by chenqiao on 2016/7/11.
  */
-public class EventInfo {
+public class EventInfo implements Serializable {
     /**
      * id : 4147373748
      * type : ForkEvent

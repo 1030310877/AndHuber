@@ -17,8 +17,7 @@ import rx.schedulers.Schedulers;
  * Description
  * Created by chenqiao on 2016/7/8.
  */
-public class ActivityModel implements IActivity {
-    @Override
+public class ActivityModel {
     public Subscription getUsersStars(String username, StarParams params, IActivityCallBack callBack) {
         HashMap<String, String> param = MapUtil.toMap(params);
         return GitHubApi.getActivityApi().getUserStars(username, param)
@@ -27,7 +26,9 @@ public class ActivityModel implements IActivity {
                 .subscribe(new HttpSubscriber<List<RepositoryInfo>>() {
                     @Override
                     public void onHttpError(ErrorInfo info) {
-                        callBack.onFailed(info.getMessage());
+                        if (callBack != null) {
+                            callBack.onFailed(info.getMessage());
+                        }
                     }
 
                     @Override
@@ -37,12 +38,13 @@ public class ActivityModel implements IActivity {
 
                     @Override
                     public void onNext(List<RepositoryInfo> repositoryInfo) {
-                        callBack.onSuccessfully(repositoryInfo);
+                        if (callBack != null) {
+                            callBack.onSuccessfully(repositoryInfo);
+                        }
                     }
                 });
     }
 
-    @Override
     public Subscription getUsersEvents(String username, EventParams params, IActivityCallBack callBack) {
         HashMap<String, String> param = MapUtil.toMap(params);
         return GitHubApi.getActivityApi().getUsersEvents(username, param)
@@ -51,7 +53,9 @@ public class ActivityModel implements IActivity {
                 .subscribe(new HttpSubscriber<List<EventInfo>>() {
                     @Override
                     public void onHttpError(ErrorInfo info) {
-                        callBack.onFailed(info.getMessage());
+                        if (callBack != null) {
+                            callBack.onFailed(info.getMessage());
+                        }
                     }
 
                     @Override
@@ -61,7 +65,9 @@ public class ActivityModel implements IActivity {
 
                     @Override
                     public void onNext(List<EventInfo> eventInfo) {
-                        callBack.onSuccessfully(eventInfo);
+                        if (callBack != null) {
+                            callBack.onSuccessfully(eventInfo);
+                        }
                     }
                 });
     }

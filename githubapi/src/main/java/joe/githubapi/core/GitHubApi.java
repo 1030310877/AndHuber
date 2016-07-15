@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import joe.githubapi.api.ActivityApi;
 import joe.githubapi.api.AuthenticateApi;
 import joe.githubapi.api.RepositoriesApi;
+import joe.githubapi.api.SearchApi;
 import joe.githubapi.api.UserApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -71,5 +72,9 @@ public class GitHubApi {
 
     public static ActivityApi getActivityApi() {
         return new ActivityApi();
+    }
+
+    public static SearchApi getSearchApi() {
+        return new SearchApi();
     }
 }

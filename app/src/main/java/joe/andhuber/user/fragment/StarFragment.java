@@ -1,6 +1,7 @@
 package joe.andhuber.user.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseFragment;
+import joe.andhuber.repository.RepoDetailActivity;
 import joe.andhuber.user.adapter.StarsAdapter;
 import joe.andhuber.user.presenter.StarPresenter;
 import joe.andhuber.user.presenter.StarPresenterImpl;
@@ -67,10 +69,14 @@ public class StarFragment extends BaseFragment implements StarView {
         data = new ArrayList<>();
         adapter = new StarsAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnLoadingListener(new LoadMoreRecyclerView.onLoadingMoreListener() {
-            @Override
-            public void onLoading() {
-                presenter.getUserStars(user.getLogin(), page + 1);
+        recyclerView.setOnLoadingListener(() -> presenter.getUserStars(user.getLogin(), page + 1));
+        adapter.setOnItemClickListener(position -> {
+            if (position >= 0 && position < data.size()) {
+                Intent intent = new Intent(mContext, RepoDetailActivity.class);
+                intent.putExtra("repository", data.get(position));
+                startActivity(intent);
+            } else {
+                adapter.notifyDataSetChanged();
             }
         });
         initStars();

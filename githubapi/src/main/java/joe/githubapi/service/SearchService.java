@@ -19,5 +19,4 @@ public interface SearchService {
 
     @GET("/search/users")
     Observable<SearchUserResult> searchUsers(@QueryMap Map<String, String> params);
-
 }

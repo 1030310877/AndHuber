@@ -3,11 +3,14 @@ package joe.githubapi.core;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import java.io.File;
+
 import joe.githubapi.api.ActivityApi;
 import joe.githubapi.api.AuthenticateApi;
 import joe.githubapi.api.RepositoriesApi;
 import joe.githubapi.api.SearchApi;
 import joe.githubapi.api.UserApi;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,6 +28,8 @@ public class GitHubApi {
     public static String REDIRECT_URI;
     public static final String API_BASE_URL = "https://api.github.com";
     private static boolean isDebug;
+    private static File cachePath;
+    private static final long SIZE_OF_CACHE = 5 * 1024 * 1024;
 
     private static OkHttpClient httpClient;
     private static Retrofit.Builder builder =
@@ -46,14 +51,16 @@ public class GitHubApi {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        cachePath = context.getCacheDir();
     }
 
     public static <S> S createService(Class<S> serviceClass) {
+        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         if (isDebug) {
-            httpClient = new OkHttpClient.Builder().addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build();
-        } else {
-            httpClient = new OkHttpClient.Builder().build();
+            okBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build();
         }
+        okBuilder.cache(new Cache(cachePath, SIZE_OF_CACHE));
+        httpClient = okBuilder.build();
         Retrofit retrofit = builder.client(httpClient).build();
         return retrofit.create(serviceClass);
     }

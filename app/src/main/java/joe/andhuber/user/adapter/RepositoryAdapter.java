@@ -46,6 +46,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
             holder.setForkNum(info.getForks_count());
             if (data.get(position).isFork()) {
                 holder.setLogo("fork");
+            } else {
+                holder.setLogo("");
             }
             holder.itemView.setOnClickListener(v -> {
                 if (listener != null) {
@@ -112,6 +114,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
         public void setLogo(String logo) {
             if (logo.equals("fork")) {
                 logoImg.setImageResource(R.drawable.ic_call_split_black_18dp);
+            } else {
+                logoImg.setImageResource(R.drawable.ic_receipt_black_24dp);
             }
         }
     }

@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".wel.WelActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +18,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".login.LoginActivity" />
+
         <activity android:name=".user.UserMainActivity" />
 
         <activity android:name=".repository.RepoDetailActivity" />
+
+        <activity android:name=".repository.FileContentActivity" />
 
         <activity android:name=".function.FunctionActivity" />
 

@@ -52,6 +52,18 @@ public class UserConfig {
 
     private static final String DEFAULT_USER = "default_user";
     private static final String DEFAULT_USER_PASSWORD = "default_user_password";
+    private static final String DEFAULT_USER_INFO = "default_user_info";
+
+    public void setDefaultUserInfo(String jsonInfo) {
+        put(DEFAULT_USER_INFO, jsonInfo);
+    }
+
+    public String getDefaultUserInfo() {
+        if (!getLoginAuto()) {
+            return "";
+        }
+        return (String) get(DEFAULT_USER_INFO, "");
+    }
 
     public void setDefaultUser(String username, String password) {
         put(DEFAULT_USER, username);
@@ -83,5 +95,15 @@ public class UserConfig {
 
     public void removeToken() {
         remove(TOKEN);
+    }
+
+    private static final String LOGIN_AUTO = "login_auto";
+
+    public void setLoginAuto(boolean tf) {
+        put(LOGIN_AUTO, tf);
+    }
+
+    public boolean getLoginAuto() {
+        return (boolean) get(LOGIN_AUTO, false);
     }
 }

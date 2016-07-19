@@ -33,4 +33,7 @@
     <string name="search_service_summary">通知栏常驻快捷搜索</string>
     <string name="key_logout">logout</string>
     <string name="key_search_service">search_service</string>
+    <string name="ReadMe">ReadMe</string>
+    <string name="view_readMe">查看ReadMe</string>
+    <string name="ck_remember_password">记住密码</string>
 </resources>

@@ -1,5 +1,7 @@
 package joe.githubapi.model.user;
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 /**
@@ -320,6 +322,4 @@ public class UserInfo implements Serializable {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
-
-
 }

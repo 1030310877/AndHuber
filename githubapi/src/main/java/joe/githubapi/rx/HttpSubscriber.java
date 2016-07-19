@@ -23,6 +23,10 @@ public abstract class HttpSubscriber<T> extends Subscriber<T> {
                 String errorBody = httpException.response().errorBody().string();
                 Gson gson = new Gson();
                 errorInfo = gson.fromJson(errorBody, ErrorInfo.class);
+                if (errorInfo == null) {
+                    errorInfo = new ErrorInfo();
+                    errorInfo.setMessage("response is null");
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
                 errorInfo = new ErrorInfo();

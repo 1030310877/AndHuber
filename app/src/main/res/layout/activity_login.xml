@@ -49,13 +49,23 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/ck_login_auto"
+        android:id="@+id/ck_remember_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btn_login_login"
         android:layout_alignBottom="@+id/btn_login_login"
         android:layout_alignLeft="@+id/layout_login_password"
         android:layout_alignStart="@+id/layout_login_password"
+        android:text="@string/ck_remember_password" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/ck_login_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_login_login"
+        android:layout_alignBottom="@+id/btn_login_login"
+        android:layout_toEndOf="@+id/ck_remember_password"
+        android:layout_toRightOf="@+id/ck_remember_password"
         android:text="@string/ck_login_auto" />
 
     <android.support.v7.widget.AppCompatButton

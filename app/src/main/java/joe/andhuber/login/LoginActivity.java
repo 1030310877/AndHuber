@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private ProgressDialog dialog;
     private AppCompatEditText edt_userName, edt_passWord;
     private AppCompatButton btn_login;
-    private AppCompatCheckBox ck_auto;
+    private AppCompatCheckBox ck_auto, ck_remember;
     private LoginPresenter presenter;
 
     @Override
@@ -49,6 +49,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         edt_userName = (AppCompatEditText) findViewById(R.id.edt_login_username);
         edt_passWord = (AppCompatEditText) findViewById(R.id.edt_login_password);
         btn_login = (AppCompatButton) findViewById(R.id.btn_login_login);
+        ck_remember = (AppCompatCheckBox) findViewById(R.id.ck_remember_password);
         ck_auto = (AppCompatCheckBox) findViewById(R.id.ck_login_auto);
     }
 
@@ -56,8 +57,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
         RxView.add("Login", RxView.click(btn_login).throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(aVoid -> {
             presenter.login(new User(getUserName(), getPassWord()), null);
         }));
-        ck_auto.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        ck_remember.setOnCheckedChangeListener((buttonView, isChecked) -> {
             presenter.rememberUser(isChecked);
+        });
+        ck_auto.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            presenter.setLoginAuto(isChecked);
         });
     }
 
@@ -144,6 +148,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void setRememberChecked(boolean isChecked) {
-        ck_auto.setChecked(isChecked);
+        ck_remember.setChecked(isChecked);
     }
 }

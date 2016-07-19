@@ -81,6 +81,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    public void setLoginAuto(boolean tf) {
+        UserConfig.getInstance().setLoginAuto(tf);
+    }
+
+    @Override
     public void destroy() {
         RxView.release("Login");
     }

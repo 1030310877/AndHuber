@@ -7,4 +7,8 @@ package joe.andhuber.repository.presenter;
 public interface RepoDetailPresenter {
 
     void getReadMe(String owner, String repo);
+
+    void getFilesByPath(String owner, String repo, String path);
+
+    void getFileContentByPathForRaw(String owner, String repo, String path);
 }

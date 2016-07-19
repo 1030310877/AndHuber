@@ -1,8 +1,18 @@
 package joe.andhuber.repository.presenter;
 
+import android.text.TextUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import joe.andhuber.HuberApplication;
 import joe.andhuber.model.repository.IRepositoryCallBack;
 import joe.andhuber.model.repository.RepositoryModel;
 import joe.andhuber.repository.view.RepoDetailView;
+import joe.andhuber.utils.ToastUtil;
+import joe.githubapi.model.repositories.ContentInfo;
 
 /**
  * Description
@@ -25,14 +35,60 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
             @Override
             public void onSuccessfully(Object result) {
                 view.dismissWaitDialog();
-                if (result instanceof String) {
-                    view.loadReadMe((String) result);
+                view.startToContentView("ReadMe", (String) result, 0);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                view.dismissWaitDialog();
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void getFilesByPath(String owner, String repo, String path) {
+        view.showWaitDialog();
+        model.getRepoContent(owner, repo, path, new IRepositoryCallBack() {
+            @Override
+            public void onSuccessfully(Object result) {
+                view.dismissWaitDialog();
+                String[] temp = path.split(File.separator);
+                if (result instanceof List) {
+                    List<ContentInfo> data = (List<ContentInfo>) result;
+                    view.showFiles(data);
+                    List<String> temp2 = Arrays.asList(temp);
+                    ArrayList<String> nowPath = new ArrayList<>(temp2);
+                    if (nowPath.size() >= 1 && !TextUtils.isEmpty(nowPath.get(0))) {
+                        nowPath.add(0, "");
+                    }
+                    view.showPath(nowPath);
                 }
             }
 
             @Override
             public void onFailed(String message) {
                 view.dismissWaitDialog();
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void getFileContentByPathForRaw(String owner, String repo, String path) {
+        view.showWaitDialog();
+        model.getFileContentForRaw(owner, repo, path, new IRepositoryCallBack() {
+            @Override
+            public void onSuccessfully(Object result) {
+                view.dismissWaitDialog();
+                String[] temp = path.split(File.separator);
+                view.startToContentView(temp[temp.length - 1], (String) result, 1);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                view.dismissWaitDialog();
+                ToastUtil.show(HuberApplication.getInstance(), message);
             }
         });
     }

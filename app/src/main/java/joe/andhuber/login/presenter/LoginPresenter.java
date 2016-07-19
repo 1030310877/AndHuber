@@ -15,5 +15,7 @@ public interface LoginPresenter {
 
     void rememberUser(boolean tf);
 
+    void setLoginAuto(boolean tf);
+
     void destroy();
 }

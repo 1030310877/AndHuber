@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>All</item>
+        <item>JavaScript</item>
+        <item>Python</item>
+        <item>Ruby</item>
+        <item>Java</item>
+        <item>SHELL</item>
+        <item>CSS</item>
+        <item>PHP</item>
+        <item>C</item>
+        <item>C++</item>
+        <item>C#</item>
+    </string-array>
+    <string-array name="sort">
+        <item>Best match</item>
+        <item>Most followers</item>
+        <item>Fewest followers</item>
+        <item>Most recently joined</item>
+        <item>Least recently joined</item>
+        <item>Most repositories</item>
+        <item>Fewest repositories</item>
+    </string-array>
+</resources>

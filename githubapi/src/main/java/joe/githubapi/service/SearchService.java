@@ -5,6 +5,7 @@ import java.util.Map;
 import joe.githubapi.model.search.SearchRepoResult;
 import joe.githubapi.model.search.SearchUserResult;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -18,5 +19,8 @@ public interface SearchService {
     Observable<SearchRepoResult> searchRepositories(@QueryMap Map<String, String> params);
 
     @GET("/search/users")
+    @Headers({
+            "Accept:application/vnd.github.v3.text-match+json"
+    })
     Observable<SearchUserResult> searchUsers(@QueryMap Map<String, String> params);
 }

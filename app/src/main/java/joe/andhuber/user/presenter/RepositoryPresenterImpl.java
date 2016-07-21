@@ -2,6 +2,8 @@ package joe.andhuber.user.presenter;
 
 import java.util.List;
 
+import joe.andhuber.HuberApplication;
+import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.repository.IRepositoryCallBack;
 import joe.andhuber.model.repository.RepositoryModel;
@@ -28,24 +30,23 @@ public class RepositoryPresenterImpl implements RepositoryPresenter {
         RepositoryParams params = new RepositoryParams();
         params.setPage(page);
         params.setAccess_token(UserConfig.getInstance().getToken());
-        repositoryModel.getUserRepositories(username, params, new IRepositoryCallBack() {
+        repositoryModel.getUserRepositories(username, params, new IRepositoryCallBack<List<RepositoryInfo>>() {
             @Override
-            public void onSuccessfully(Object result) {
+            public void onSuccessfully(List<RepositoryInfo> result) {
                 repositoryView.dismissWaitDialog();
-                List<RepositoryInfo> repositories = (List<RepositoryInfo>) result;
-                repositoryView.addRepositories(repositories);
-                if (repositories != null && repositories.size() > 0) {
+                repositoryView.addRepositories(result);
+                if (result != null && result.size() > 0) {
                     repositoryView.setPage(page);
-                    repositoryView.loadFinish("加载成功");
+                    repositoryView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_success));
                 } else {
-                    repositoryView.loadFinish("已至最后一页");
+                    repositoryView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_to_bottom));
                 }
             }
 
             @Override
             public void onFailed(String message) {
                 repositoryView.dismissWaitDialog();
-                repositoryView.loadFinish("加载失败");
+                repositoryView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_failed));
             }
         });
     }

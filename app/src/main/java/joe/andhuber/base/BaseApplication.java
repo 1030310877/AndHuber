@@ -1,4 +1,4 @@
-package joe.andhuber.application;
+package joe.andhuber.base;
 
 import android.app.Application;
 import android.content.pm.ApplicationInfo;

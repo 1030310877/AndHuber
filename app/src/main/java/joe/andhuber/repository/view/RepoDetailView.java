@@ -2,17 +2,14 @@ package joe.andhuber.repository.view;
 
 import java.util.List;
 
+import joe.andhuber.base.BaseView;
 import joe.githubapi.model.repositories.ContentInfo;
 
 /**
  * Description
  * Created by chenqiao on 2016/7/15.
  */
-public interface RepoDetailView {
-
-    void showWaitDialog();
-
-    void dismissWaitDialog();
+public interface RepoDetailView extends BaseView{
 
     void showPath(List<String> paths);
 

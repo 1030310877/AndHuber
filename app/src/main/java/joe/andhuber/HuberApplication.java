@@ -2,7 +2,7 @@ package joe.andhuber;
 
 import android.content.Intent;
 
-import joe.andhuber.application.BaseApplication;
+import joe.andhuber.base.BaseApplication;
 import joe.andhuber.search.service.SearchService;
 import joe.githubapi.core.GitHubApi;
 

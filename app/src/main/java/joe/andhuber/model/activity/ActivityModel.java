@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
  * Created by chenqiao on 2016/7/8.
  */
 public class ActivityModel {
-    public Subscription getUsersStars(String username, StarParams params, IActivityCallBack callBack) {
+    public Subscription getUsersStars(String username, StarParams params, IActivityCallBack<List<RepositoryInfo>> callBack) {
         HashMap<String, String> param = MapUtil.toMap(params);
         return GitHubApi.getActivityApi().getUserStars(username, param)
                 .subscribeOn(Schedulers.newThread())
@@ -45,7 +45,7 @@ public class ActivityModel {
                 });
     }
 
-    public Subscription getUsersEvents(String username, EventParams params, IActivityCallBack callBack) {
+    public Subscription getUsersEvents(String username, EventParams params, IActivityCallBack<List<EventInfo>> callBack) {
         HashMap<String, String> param = MapUtil.toMap(params);
         return GitHubApi.getActivityApi().getUsersEvents(username, param)
                 .subscribeOn(Schedulers.newThread())

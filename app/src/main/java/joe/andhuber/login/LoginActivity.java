@@ -78,22 +78,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void showWait() {
-        dialog = new ProgressDialog(this);
-        dialog.setMessage(getString(R.string.wait_to_login));
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
-    @Override
-    public void dismissWait() {
-        if (dialog != null) {
-            dialog.dismiss();
-        }
-    }
-
-    @Override
     public void showError(String error) {
         ToastUtil.show(this, error);
     }
@@ -149,5 +133,21 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void setRememberChecked(boolean isChecked) {
         ck_remember.setChecked(isChecked);
+    }
+
+    @Override
+    public void showWaitDialog() {
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(getString(R.string.wait_to_login));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    @Override
+    public void dismissWaitDialog() {
+        if (dialog != null && !isFinishing()) {
+            dialog.dismiss();
+        }
     }
 }

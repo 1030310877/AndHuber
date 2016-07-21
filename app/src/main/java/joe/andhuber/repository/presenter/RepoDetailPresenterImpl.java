@@ -31,11 +31,11 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
     @Override
     public void getReadMe(String owner, String repo) {
         view.showWaitDialog();
-        model.getReadMeOfRepo(owner, repo, new IRepositoryCallBack() {
+        model.getReadMeOfRepo(owner, repo, new IRepositoryCallBack<String>() {
             @Override
-            public void onSuccessfully(Object result) {
+            public void onSuccessfully(String result) {
                 view.dismissWaitDialog();
-                view.startToContentView("ReadMe", (String) result, 0);
+                view.startToContentView("ReadMe", result, 0);
             }
 
             @Override
@@ -49,14 +49,13 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
     @Override
     public void getFilesByPath(String owner, String repo, String path) {
         view.showWaitDialog();
-        model.getRepoContent(owner, repo, path, new IRepositoryCallBack() {
+        model.getRepoContent(owner, repo, path, new IRepositoryCallBack<List<ContentInfo>>() {
             @Override
-            public void onSuccessfully(Object result) {
+            public void onSuccessfully(List<ContentInfo> result) {
                 view.dismissWaitDialog();
                 String[] temp = path.split(File.separator);
-                if (result instanceof List) {
-                    List<ContentInfo> data = (List<ContentInfo>) result;
-                    view.showFiles(data);
+                if (result != null) {
+                    view.showFiles(result);
                     List<String> temp2 = Arrays.asList(temp);
                     ArrayList<String> nowPath = new ArrayList<>(temp2);
                     if (nowPath.size() >= 1 && !TextUtils.isEmpty(nowPath.get(0))) {
@@ -77,12 +76,12 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
     @Override
     public void getFileContentByPathForRaw(String owner, String repo, String path) {
         view.showWaitDialog();
-        model.getFileContentForRaw(owner, repo, path, new IRepositoryCallBack() {
+        model.getFileContentForRaw(owner, repo, path, new IRepositoryCallBack<String>() {
             @Override
-            public void onSuccessfully(Object result) {
+            public void onSuccessfully(String result) {
                 view.dismissWaitDialog();
                 String[] temp = path.split(File.separator);
-                view.startToContentView(temp[temp.length - 1], (String) result, 1);
+                view.startToContentView(temp[temp.length - 1], result, 1);
             }
 
             @Override

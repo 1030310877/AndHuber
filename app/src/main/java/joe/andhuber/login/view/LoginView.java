@@ -1,17 +1,13 @@
 package joe.andhuber.login.view;
 
-import joe.andhuber.model.user.User;
+import joe.andhuber.base.BaseView;
 import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
  * Created by chenqiao on 2016/6/30.
  */
-public interface LoginView {
-
-    void showWait();
-
-    void dismissWait();
+public interface LoginView extends BaseView {
 
     void showError(String error);
 

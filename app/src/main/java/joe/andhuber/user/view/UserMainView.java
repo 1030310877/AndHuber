@@ -3,11 +3,13 @@ package joe.andhuber.user.view;
 import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
 
+import joe.andhuber.base.BaseView;
+
 /**
  * Description
  * Created by chenqiao on 2016/7/6.
  */
-public interface UserMainView {
+public interface UserMainView extends BaseView {
 
     void setHeadImg(Bitmap bitmap);
 
@@ -16,10 +18,6 @@ public interface UserMainView {
     void setHeadImg(String url);
 
     void setTitle(String title);
-
-    void showWaitDialog();
-
-    void dismissWaitDialog();
 
     void setBlog(String blogUrl);
 

@@ -33,7 +33,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void login(User user, String code) {
-        view.showWait();
+        view.showWaitDialog();
         userModel.login(user, code, new IUser.LoginCallBack() {
             @Override
             public void loginSuccess() {
@@ -48,10 +48,10 @@ public class LoginPresenterImpl implements LoginPresenter {
             @Override
             public void loginFailed(ErrorInfo errorInfo) {
                 if (errorInfo.getMessage().equals("required")) {
-                    view.dismissWait();
+                    view.dismissWaitDialog();
                     view.showTwoFactorDialog();
                 } else {
-                    view.dismissWait();
+                    view.dismissWaitDialog();
                     view.showError(errorInfo.getMessage());
                 }
             }
@@ -63,13 +63,13 @@ public class LoginPresenterImpl implements LoginPresenter {
         userModel.getUserInfo(username, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
             @Override
             public void getSuccessfully() {
-                view.dismissWait();
+                view.dismissWaitDialog();
                 view.startToMain(UserConfig.nowUser);
             }
 
             @Override
             public void getFailed(ErrorInfo info) {
-                view.dismissWait();
+                view.dismissWaitDialog();
                 view.showError(info.getMessage());
             }
         });

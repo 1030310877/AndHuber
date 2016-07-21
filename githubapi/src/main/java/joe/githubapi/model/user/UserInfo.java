@@ -1,8 +1,7 @@
 package joe.githubapi.model.user;
 
-import com.google.gson.Gson;
-
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description
@@ -74,6 +73,15 @@ public class UserInfo implements Serializable {
     private String created_at;
     private String updated_at;
     private double score;
+    /**
+     * object_url : https://api.github.com/users/joewalnes
+     * object_type : User
+     * property : login
+     * fragment : joewalnes
+     * matches : [{"text":"joewalnes","indices":[0,9]}]
+     */
+
+    private List<TextMatchesBean> text_matches;
 
     public double getScore() {
         return score;
@@ -321,5 +329,87 @@ public class UserInfo implements Serializable {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public List<TextMatchesBean> getText_matches() {
+        return text_matches;
+    }
+
+    public void setText_matches(List<TextMatchesBean> text_matches) {
+        this.text_matches = text_matches;
+    }
+
+    public static class TextMatchesBean {
+        private String object_url;
+        private String object_type;
+        private String property;
+        private String fragment;
+        /**
+         * text : joewalnes
+         * indices : [0,9]
+         */
+
+        private List<MatchesBean> matches;
+
+        public String getObject_url() {
+            return object_url;
+        }
+
+        public void setObject_url(String object_url) {
+            this.object_url = object_url;
+        }
+
+        public String getObject_type() {
+            return object_type;
+        }
+
+        public void setObject_type(String object_type) {
+            this.object_type = object_type;
+        }
+
+        public String getProperty() {
+            return property;
+        }
+
+        public void setProperty(String property) {
+            this.property = property;
+        }
+
+        public String getFragment() {
+            return fragment;
+        }
+
+        public void setFragment(String fragment) {
+            this.fragment = fragment;
+        }
+
+        public List<MatchesBean> getMatches() {
+            return matches;
+        }
+
+        public void setMatches(List<MatchesBean> matches) {
+            this.matches = matches;
+        }
+
+        public static class MatchesBean {
+            private String text;
+            private List<Integer> indices;
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
+            }
+
+            public List<Integer> getIndices() {
+                return indices;
+            }
+
+            public void setIndices(List<Integer> indices) {
+                this.indices = indices;
+            }
+        }
     }
 }

@@ -31,9 +31,13 @@
     <string name="setting_assist">辅助功能</string>
     <string name="search_service">搜索服务</string>
     <string name="search_service_summary">通知栏常驻快捷搜索</string>
+    <string name="searching">正在搜索</string>
     <string name="key_logout">logout</string>
     <string name="key_search_service">search_service</string>
     <string name="ReadMe">ReadMe</string>
     <string name="view_readMe">查看ReadMe</string>
     <string name="ck_remember_password">记住密码</string>
+    <string name="load_success">加载成功</string>
+    <string name="load_failed">加载失败</string>
+    <string name="load_to_bottom">已至最后一页</string>
 </resources>

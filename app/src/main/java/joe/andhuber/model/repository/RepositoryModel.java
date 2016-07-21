@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
  * Created by chenqiao on 2016/7/6.
  */
 public class RepositoryModel {
-    public Subscription getUserRepositories(String username, RepositoryParams param, IRepositoryCallBack callBack) {
+    public Subscription getUserRepositories(String username, RepositoryParams param, IRepositoryCallBack<List<RepositoryInfo>> callBack) {
         HashMap<String, String> params = MapUtil.toMap(param);
         return GitHubApi.getRepositoriesApi()
                 .getUserRepositories(username, params)
@@ -49,7 +49,7 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getReadMeOfRepo(String owner, String repo, IRepositoryCallBack callBack) {
+    public Subscription getReadMeOfRepo(String owner, String repo, IRepositoryCallBack<String> callBack) {
         return GitHubApi.getRepositoriesApi().getReadMeForHtml(owner, repo, UserConfig.getInstance().getToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,7 +79,7 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getRepoContent(String owner, String repo, String path, IRepositoryCallBack callBack) {
+    public Subscription getRepoContent(String owner, String repo, String path, IRepositoryCallBack<List<ContentInfo>> callBack) {
         return GitHubApi.getRepositoriesApi().getRepoContent(owner, repo, path, UserConfig.getInstance().getToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,7 +105,7 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getFileContentForRaw(String owner, String repo, String path, IRepositoryCallBack callBack) {
+    public Subscription getFileContentForRaw(String owner, String repo, String path, IRepositoryCallBack<String> callBack) {
         return GitHubApi.getRepositoriesApi().getRepoFileContentForHtml(owner, repo, path, UserConfig.getInstance().getToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

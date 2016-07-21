@@ -2,6 +2,8 @@ package joe.andhuber.user.presenter;
 
 import java.util.List;
 
+import joe.andhuber.HuberApplication;
+import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.activity.ActivityModel;
 import joe.andhuber.model.activity.IActivityCallBack;
@@ -28,24 +30,23 @@ public class StarPresenterImpl implements StarPresenter {
         StarParams params = new StarParams();
         params.setPage(page);
         params.setAccess_token(UserConfig.getInstance().getToken());
-        activityModel.getUsersStars(username, params, new IActivityCallBack() {
+        activityModel.getUsersStars(username, params, new IActivityCallBack<List<RepositoryInfo>>() {
             @Override
-            public void onSuccessfully(Object result) {
+            public void onSuccessfully(List<RepositoryInfo> result) {
                 starView.dismissWaitDialog();
-                List<RepositoryInfo> repositories = (List<RepositoryInfo>) result;
-                starView.addStars(repositories);
-                if (repositories != null && repositories.size() > 0) {
+                starView.addStars(result);
+                if (result != null && result.size() > 0) {
                     starView.setPage(page);
-                    starView.loadFinish("加载成功");
+                    starView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_success));
                 } else {
-                    starView.loadFinish("已至最后一页");
+                    starView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_to_bottom));
                 }
             }
 
             @Override
             public void onFailed(String message) {
                 starView.dismissWaitDialog();
-                starView.loadFinish("加载失败");
+                starView.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_failed));
             }
         });
     }

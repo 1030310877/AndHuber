@@ -27,11 +27,10 @@ public class EventPresenterImpl implements EventPresenter {
     public void getUserEvents(String username) {
         EventParams params = new EventParams();
         params.setAccess_token(UserConfig.getInstance().getToken());
-        activityModel.getUsersEvents(username, params, new IActivityCallBack() {
+        activityModel.getUsersEvents(username, params, new IActivityCallBack<List<EventInfo>>() {
             @Override
-            public void onSuccessfully(Object result) {
-                List<EventInfo> events = (List<EventInfo>) result;
-                eventView.showEvents(events);
+            public void onSuccessfully(List<EventInfo> result) {
+                eventView.showEvents(result);
             }
 
             @Override

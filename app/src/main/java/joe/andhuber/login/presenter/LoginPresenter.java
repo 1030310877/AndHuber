@@ -11,8 +11,6 @@ public interface LoginPresenter {
 
     void login(User user, String code);
 
-    void getUserInfo(String username);
-
     void rememberUser(boolean tf);
 
     void setLoginAuto(boolean tf);

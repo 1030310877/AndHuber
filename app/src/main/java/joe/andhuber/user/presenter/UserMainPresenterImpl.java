@@ -2,7 +2,11 @@ package joe.andhuber.user.presenter;
 
 import com.joe.rxbus.RxBus;
 
+import joe.andhuber.config.UserConfig;
+import joe.andhuber.model.user.IUser;
+import joe.andhuber.model.user.UserModel;
 import joe.andhuber.user.view.UserMainView;
+import joe.githubapi.model.ErrorInfo;
 import joe.githubapi.model.user.UserInfo;
 
 /**
@@ -12,19 +16,13 @@ import joe.githubapi.model.user.UserInfo;
 public class UserMainPresenterImpl implements UserMainPresenter {
 
     private UserMainView view;
-    private UserInfo user;
+    private UserModel model;
 
-    public UserMainPresenterImpl(UserMainView view, UserInfo user) {
+    public UserMainPresenterImpl(UserMainView view) {
         this.view = view;
-        this.user = user;
+        model = new UserModel();
     }
 
-    @Override
-    public void initInformation() {
-        initUserViews(user);
-    }
-
-    @Override
     public void initUserViews(UserInfo userInfo) {
         view.setTitle(userInfo.getName());
         view.setHeadImg(userInfo.getAvatar_url());
@@ -33,6 +31,28 @@ public class UserMainPresenterImpl implements UserMainPresenter {
         view.setEmail(userInfo.getEmail());
         view.setFollower(userInfo.getFollowers());
         view.setFollowing(userInfo.getFollowing());
+    }
+
+    @Override
+    public void getUserInfo(String loginName) {
+        view.showWaitDialog();
+        model.getUserInfo(loginName, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
+
+            @Override
+            public void getSuccessfully(UserInfo userInfo) {
+                if (view.isHome()) {
+                    UserConfig.nowUser = userInfo;
+                }
+                view.dismissWaitDialog();
+                initUserViews(userInfo);
+                view.initFragments(userInfo);
+            }
+
+            @Override
+            public void getFailed(ErrorInfo info) {
+                view.dismissWaitDialog();
+            }
+        });
     }
 
     @Override

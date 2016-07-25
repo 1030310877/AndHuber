@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_search_user_height"
-        android:padding="9dp">
+        android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_search_user_head"
@@ -20,7 +20,7 @@
             tool:src="@mipmap/ic_launcher" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txt_search_user_name"
+            android:id="@+id/txt_search_user_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -30,7 +30,20 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+            tool:text="Login" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/txt_search_user_login"
+            android:layout_toRightOf="@+id/txt_search_user_login"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             tool:text="Name" />
+
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/txt_search_user_email"

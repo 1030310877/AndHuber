@@ -62,7 +62,7 @@ public class RepoFileAdapter extends RecyclerView.Adapter<RepoFileAdapter.RepoFi
                         @Override
                         public void onClick(View v) {
                             if (listener != null) {
-                                listener.onItemClick(position);
+                                listener.onItemClick(holder.getAdapterPosition());
                             }
                         }
                     });

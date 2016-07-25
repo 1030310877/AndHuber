@@ -1,11 +1,11 @@
 package joe.andhuber.wel;
 
 import joe.andhuber.HuberApplication;
+import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.user.IUser;
 import joe.andhuber.model.user.UserModel;
 import joe.andhuber.utils.ToastUtil;
-import joe.githubapi.model.ErrorInfo;
 
 /**
  * Description
@@ -21,17 +21,17 @@ public class WelPresenterImpl implements WelPresenter {
     }
 
     @Override
-    public void getUserInfo(String username, String token) {
-        userModel.getUserInfo(username, token, new IUser.GetUserInfoCallBack() {
+    public void checkAuthorization() {
+        userModel.checkAuthorization(UserConfig.getInstance().getToken(), new IUser.CheckCallBack() {
             @Override
-            public void getSuccessfully() {
-                view.startToMain(UserConfig.nowUser);
+            public void checkSuccess() {
+                view.startToMain(UserConfig.getInstance().getDefaultUser());
             }
 
             @Override
-            public void getFailed(ErrorInfo info) {
+            public void checkFailed() {
+                ToastUtil.show(HuberApplication.getInstance(), R.string.authorization_failed);
                 view.startToLogin();
-                ToastUtil.show(HuberApplication.getInstance(), info.getMessage());
             }
         });
     }

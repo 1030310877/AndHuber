@@ -11,7 +11,6 @@ import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.login.LoginActivity;
 import joe.andhuber.user.UserMainActivity;
-import joe.githubapi.model.user.UserInfo;
 import rx.Observable;
 
 /**
@@ -28,7 +27,7 @@ public class WelActivity extends AppCompatActivity implements WelView {
         setContentView(R.layout.activity_wel);
         if (UserConfig.getInstance().getLoginAuto()) {
             presenter = new WelPresenterImpl(this);
-            presenter.getUserInfo(UserConfig.getInstance().getDefaultUser(), UserConfig.getInstance().getToken());
+            presenter.checkAuthorization();
         } else {
             Observable.timer(2, TimeUnit.SECONDS).subscribe(aLong -> {
                 startToLogin();
@@ -44,7 +43,7 @@ public class WelActivity extends AppCompatActivity implements WelView {
     }
 
     @Override
-    public void startToMain(UserInfo user) {
+    public void startToMain(String user) {
         Intent intent = new Intent(this, UserMainActivity.class);
         intent.putExtra("user", user);
         intent.putExtra("isHome", true);

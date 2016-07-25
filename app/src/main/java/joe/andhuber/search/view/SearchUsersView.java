@@ -15,5 +15,7 @@ public interface SearchUsersView extends BaseView {
 
     void loadFinished(String text);
 
+    void refreshFinish();
+
     void setPage(int page);
 }

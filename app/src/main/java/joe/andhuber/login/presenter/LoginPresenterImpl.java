@@ -1,10 +1,10 @@
 package joe.andhuber.login.presenter;
 
 import joe.andhuber.config.UserConfig;
+import joe.andhuber.login.view.LoginView;
 import joe.andhuber.model.user.IUser;
 import joe.andhuber.model.user.User;
 import joe.andhuber.model.user.UserModel;
-import joe.andhuber.login.view.LoginView;
 import joe.andhuber.utils.rx.RxView;
 import joe.githubapi.model.ErrorInfo;
 
@@ -42,7 +42,8 @@ public class LoginPresenterImpl implements LoginPresenter {
                 } else {
                     UserConfig.getInstance().clearDefaultUser();
                 }
-                getUserInfo(user.getUserName());
+                view.dismissWaitDialog();
+                view.startToMain(user.getUserName());
             }
 
             @Override
@@ -54,23 +55,6 @@ public class LoginPresenterImpl implements LoginPresenter {
                     view.dismissWaitDialog();
                     view.showError(errorInfo.getMessage());
                 }
-            }
-        });
-    }
-
-    @Override
-    public void getUserInfo(String username) {
-        userModel.getUserInfo(username, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
-            @Override
-            public void getSuccessfully() {
-                view.dismissWaitDialog();
-                view.startToMain(UserConfig.nowUser);
-            }
-
-            @Override
-            public void getFailed(ErrorInfo info) {
-                view.dismissWaitDialog();
-                view.showError(info.getMessage());
             }
         });
     }

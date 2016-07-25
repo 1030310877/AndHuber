@@ -6,5 +6,5 @@ package joe.andhuber.wel;
  */
 public interface WelPresenter {
 
-    void getUserInfo(String username, String token);
+    void checkAuthorization();
 }

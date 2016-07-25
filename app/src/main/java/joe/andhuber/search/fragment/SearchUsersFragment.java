@@ -1,6 +1,7 @@
 package joe.andhuber.search.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,8 +21,10 @@ import joe.andhuber.search.adapter.SearchUserAdapter;
 import joe.andhuber.search.presenter.SearchUsersPresenter;
 import joe.andhuber.search.presenter.SearchUsersPresenterImpl;
 import joe.andhuber.search.view.SearchUsersView;
+import joe.andhuber.user.UserMainActivity;
 import joe.githubapi.model.user.UserInfo;
 import joe.view.recyclerview.LoadMoreRecyclerView;
+import joe.view.recyclerview.OnItemClickListener;
 import joe.view.recyclerview.SpaceItemDecoration;
 
 /**
@@ -38,6 +41,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     private SearchUsersPresenter presenter;
     private int page = 1;
     private ProgressDialog dialog;
+    private String query;
 
     public static SearchUsersFragment newInstance(String q) {
         Bundle args = new Bundle();
@@ -50,7 +54,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search_users, container);
+        return inflater.inflate(R.layout.fragment_search_users, container, false);
     }
 
     @Override
@@ -65,8 +69,6 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        languagesSpinner.setOnItemSelectedListener(spinnerListener);
-        sortSpinner.setOnItemSelectedListener(spinnerListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new SpaceItemDecoration(16));
         users = new ArrayList<>();
@@ -74,12 +76,48 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
         recyclerView.setAdapter(adapter);
 
         presenter = new SearchUsersPresenterImpl(this);
+        query = getArguments().getString("query");
+        search(page);
+
+        initListeners();
+    }
+
+    private void initListeners() {
+        languagesSpinner.setOnItemSelectedListener(spinnerListener);
+        sortSpinner.setOnItemSelectedListener(spinnerListener);
+        recyclerView.setOnLoadingListener(new LoadMoreRecyclerView.onLoadingMoreListener() {
+            @Override
+            public void onLoading() {
+                search(page + 1);
+            }
+        });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                clearUser();
+                search(1);
+            }
+        });
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startToUserMain(users.get(position).getLogin());
+            }
+        });
+    }
+
+    private void startToUserMain(String loginName) {
+        Intent intent = new Intent(mContext, UserMainActivity.class);
+        intent.putExtra("user", loginName);
+        intent.putExtra("isHome", false);
+        startActivity(intent);
     }
 
     private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            clearUser();
+            search(1);
         }
 
         @Override
@@ -87,6 +125,18 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
 
         }
     };
+
+    private void search(int p) {
+        String language = (String) languagesSpinner.getSelectedItem();
+        String sort = (String) sortSpinner.getSelectedItem();
+        presenter.searchUsers(query, language, sort, p);
+    }
+
+    private void clearUser() {
+        int len = users.size();
+        users.clear();
+        adapter.notifyItemRangeRemoved(0, len);
+    }
 
     @Override
     public void showWaitDialog() {
@@ -114,6 +164,11 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     @Override
     public void loadFinished(String text) {
         recyclerView.loadFinished(text);
+    }
+
+    @Override
+    public void refreshFinish() {
+        refreshLayout.setRefreshing(false);
     }
 
     @Override

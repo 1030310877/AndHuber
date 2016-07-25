@@ -6,6 +6,7 @@ import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.authentication.AuthenticationResult;
 import joe.githubapi.model.authentication.AuthorizationInfo;
 import joe.githubapi.service.AuthenticateService;
+import okhttp3.ResponseBody;
 import rx.Observable;
 
 /**
@@ -20,8 +21,15 @@ public class AuthenticateApi {
 
     public Observable<AuthenticationResult> login(String username, String password, String code, AuthorizationInfo info) {
         String credentials = username + ":" + password;
-        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.DEFAULT);
+        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         basic = basic.trim();
         return createService().login(basic, code, info);
+    }
+
+    public Observable<ResponseBody> checkAuthorization(String client_id, String client_secret, String token) {
+        String credentials = client_id + ":" + client_secret;
+        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        basic = basic.trim();
+        return createService().checkAuthorization(basic, client_id, token);
     }
 }

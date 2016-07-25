@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
 
 import joe.andhuber.base.BaseView;
+import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
@@ -28,4 +29,8 @@ public interface UserMainView extends BaseView {
     void setFollower(int num);
 
     void setFollowing(int num);
+
+    void initFragments(UserInfo userInfo);
+
+    boolean isHome();
 }

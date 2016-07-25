@@ -1,5 +1,7 @@
 package joe.andhuber.model.user;
 
+import android.text.TextUtils;
+
 import java.util.Random;
 
 import joe.andhuber.config.UserConfig;
@@ -10,6 +12,7 @@ import joe.githubapi.model.authentication.AuthorizationInfo;
 import joe.githubapi.model.user.UserInfo;
 import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.Headers;
+import okhttp3.ResponseBody;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,6 +40,14 @@ public class UserModel implements IUser {
                         if (e instanceof HttpException) {
                             Headers headers = ((HttpException) e).response().headers();
                             String value = headers.get("X-GitHub-OTP");
+                            if (TextUtils.isEmpty(value)) {
+                                ErrorInfo errorInfo = new ErrorInfo();
+                                errorInfo.setMessage("value is null");
+                                if (callBack != null) {
+                                    callBack.loginFailed(errorInfo);
+                                    return;
+                                }
+                            }
                             if (value.contains("required")) {
                                 ErrorInfo errorInfo = new ErrorInfo();
                                 errorInfo.setMessage("required");
@@ -81,9 +92,6 @@ public class UserModel implements IUser {
                 .subscribe(new HttpSubscriber<UserInfo>() {
                     @Override
                     public void onCompleted() {
-                        if (callBack != null) {
-                            callBack.getSuccessfully();
-                        }
                     }
 
                     @Override
@@ -95,7 +103,36 @@ public class UserModel implements IUser {
 
                     @Override
                     public void onNext(UserInfo userInfo) {
-                        UserConfig.nowUser = userInfo;
+                        if (callBack != null) {
+                            callBack.getSuccessfully(userInfo);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void checkAuthorization(String token, CheckCallBack callBack) {
+        GitHubApi.getAuthenticateApi().checkAuthorization(GitHubApi.CLIENT_ID, GitHubApi.CLIENT_SECRET, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.checkFailed();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        if (callBack != null) {
+                            callBack.checkSuccess();
+                        }
                     }
                 });
     }

@@ -11,6 +11,7 @@ import joe.andhuber.model.search.SearchUsersParam;
 import joe.andhuber.search.view.SearchUsersView;
 import joe.githubapi.model.search.SearchUserResult;
 import joe.githubapi.model.user.UserInfo;
+import rx.Subscription;
 
 /**
  * Description
@@ -20,6 +21,7 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
 
     private SearchUsersView view;
     private SearchModel model;
+    private Subscription searchSubscription;
 
     public SearchUsersPresenterImpl(SearchUsersView view) {
         this.view = view;
@@ -28,7 +30,12 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
 
     @Override
     public void searchUsers(SearchUsersParam param) {
-        model.searchUsers(param, new ISearchCallBack<SearchUserResult>() {
+        param.setAccess_token(UserConfig.getInstance().getToken());
+        if (searchSubscription != null) {
+            searchSubscription.unsubscribe();
+            searchSubscription = null;
+        }
+        searchSubscription = model.searchUsers(param, new ISearchCallBack<SearchUserResult>() {
             @Override
             public void onSuccessfully(SearchUserResult result) {
                 List<UserInfo> users = result.getItems();
@@ -41,19 +48,21 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
                         view.loadFinished(HuberApplication.getInstance().getResources().getString(R.string.load_success));
                     }
                 }
+                view.refreshFinish();
             }
 
             @Override
             public void onFailed(String errorInfo) {
                 view.loadFinished(HuberApplication.getInstance().getResources().getString(R.string.load_failed));
+                view.refreshFinish();
             }
         });
     }
 
     @Override
-    public void searchUsers(String q, String language, String sort, int page, String access_token) {
+    public void searchUsers(String q, String language, String sort, int page) {
         SearchUsersParam param = new SearchUsersParam();
-        param.setQ(q + "+language:" + language);
+        param.setQ(q + " language:" + language);
         param.setPage(page);
         if (sort.contains("Fewest") || sort.contains("Least")) {
             param.setOrder("asc");
@@ -67,7 +76,6 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
         } else if (sort.contains("joined")) {
             param.setSort("joined");
         }
-        param.setAccess_token(UserConfig.getInstance().getToken());
         searchUsers(param);
     }
 }

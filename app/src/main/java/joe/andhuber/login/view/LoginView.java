@@ -1,7 +1,6 @@
 package joe.andhuber.login.view;
 
 import joe.andhuber.base.BaseView;
-import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
@@ -13,7 +12,7 @@ public interface LoginView extends BaseView {
 
     void showTwoFactorDialog();
 
-    void startToMain(UserInfo user);
+    void startToMain(String userLogin);
 
     String getUserName();
 

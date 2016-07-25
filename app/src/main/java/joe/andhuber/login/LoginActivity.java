@@ -21,7 +21,6 @@ import joe.andhuber.model.user.User;
 import joe.andhuber.user.UserMainActivity;
 import joe.andhuber.utils.ToastUtil;
 import joe.andhuber.utils.rx.RxView;
-import joe.githubapi.model.user.UserInfo;
 
 /**
  * Description
@@ -101,10 +100,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void startToMain(UserInfo user) {
+    public void startToMain(String userLogin) {
         ToastUtil.show(this, "登录成功");
         Intent intent = new Intent(this, UserMainActivity.class);
-        intent.putExtra("user", user);
+        intent.putExtra("user", userLogin);
         intent.putExtra("isHome", true);
         startActivity(intent);
         finish();

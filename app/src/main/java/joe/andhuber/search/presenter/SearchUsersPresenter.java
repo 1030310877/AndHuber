@@ -9,5 +9,5 @@ import joe.andhuber.model.search.SearchUsersParam;
 public interface SearchUsersPresenter {
     void searchUsers(SearchUsersParam param);
 
-    void searchUsers(String q, String language, String sort, int page, String access_token);
+    void searchUsers(String q, String language, String sort, int page);
 }

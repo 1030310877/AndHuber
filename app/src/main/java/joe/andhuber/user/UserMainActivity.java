@@ -45,19 +45,21 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     private FloatingActionButton refreshBtn;
     private AppCompatTextView blogTxt, companyTxt, emailTxt, followerTxt, followingTxt;
     private int nowIndex = 0;
-    private UserInfo user;
+    private String userLogin;
     private boolean isHome = false;
+    private ArrayList<Fragment> fragments;
+    private UserMainPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        user = (UserInfo) getIntent().getSerializableExtra("user");
+        userLogin = getIntent().getStringExtra("user");
         isHome = getIntent().getBooleanExtra("isHome", false);
-        userPresenter = new UserMainPresenterImpl(this, user);
+        userPresenter = new UserMainPresenterImpl(this);
         initViews();
         initListeners();
-        userPresenter.initInformation();
+        userPresenter.getUserInfo(userLogin);
     }
 
     @Override
@@ -111,20 +113,8 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         emailTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_email);
         followerTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_follower);
         followingTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_following);
-
         viewPager = (ViewPager) findViewById(R.id.vp_main);
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        repositoryFragment = RepositoryFragment.newInstance(user);
-        starFragment = StarFragment.newInstance(user);
-
-        fragments.add(repositoryFragment);
-        fragments.add(starFragment);
-        UserMainPagerAdapter adapter = new UserMainPagerAdapter(getSupportFragmentManager(), this, fragments);
-        viewPager.setAdapter(adapter);
         tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
-        if (tabLayout != null) {
-            tabLayout.setupWithViewPager(viewPager);
-        }
 
         refreshBtn = (FloatingActionButton) findViewById(R.id.fab_main);
         if (refreshBtn != null) {
@@ -182,7 +172,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     @Override
     public void showWaitDialog() {
         dialog = new ProgressDialog(this);
-        dialog.setMessage(getString(R.string.getting_information));
+        dialog.setMessage(getString(R.string.getting_user_info));
         dialog.setCanceledOnTouchOutside(true);
         dialog.setCancelable(true);
         dialog.show();
@@ -227,5 +217,24 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     @Override
     public void setFollowing(int num) {
         followingTxt.setText(String.valueOf(num));
+    }
+
+    @Override
+    public void initFragments(UserInfo user) {
+        fragments = new ArrayList<>();
+        repositoryFragment = RepositoryFragment.newInstance(user);
+        starFragment = StarFragment.newInstance(user);
+        fragments.add(repositoryFragment);
+        fragments.add(starFragment);
+        adapter = new UserMainPagerAdapter(getSupportFragmentManager(), this, fragments);
+        viewPager.setAdapter(adapter);
+        if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+        }
+    }
+
+    @Override
+    public boolean isHome() {
+        return isHome;
     }
 }

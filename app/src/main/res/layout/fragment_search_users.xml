@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sr_search_user"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <joe.view.recyclerview.LoadMoreRecyclerView
+            android:id="@+id/recycler_search_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_language_black_18dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_search_language"
@@ -15,8 +39,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:entries="@array/languages"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" />
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_sort_black_18dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_search_sort"
@@ -24,18 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:entries="@array/sort"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp" />
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sr_search_user"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <joe.view.recyclerview.LoadMoreRecyclerView
-            android:id="@+id/recycler_search_user"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

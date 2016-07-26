@@ -32,7 +32,7 @@
             android:name=".search.SearchActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:taskAffinity=""
+            android:taskAffinity="com.joe.search"
             android:theme="@style/SearchTheme">
             <meta-data
                 android:name="android.app.default_searchable"
@@ -41,7 +41,8 @@
 
         <activity
             android:name=".search.SearchResultActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTask"
+            android:taskAffinity="com.joe.search">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

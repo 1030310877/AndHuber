@@ -13,6 +13,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import joe.andhuber.R;
+import joe.githubapi.model.search.TextMatchesBean;
 import joe.githubapi.model.user.UserInfo;
 import joe.view.recyclerview.OnItemClickListener;
 
@@ -40,7 +41,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Se
         if (position >= 0 && position < users.size()) {
             holder.setHeadImg(users.get(position).getAvatar_url());
             holder.setLogin(users.get(position).getLogin());
-            for (UserInfo.TextMatchesBean bean : users.get(position).getText_matches()) {
+            for (TextMatchesBean bean : users.get(position).getText_matches()) {
                 if (bean.getProperty().equals("name")) {
                     holder.setName(bean.getFragment());
                 }

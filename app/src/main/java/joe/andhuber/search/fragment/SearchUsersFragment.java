@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.joe.rxbus.RxBus;
+import com.joe.rxbus.ThreadMode;
+import com.joe.rxbus.annotation.Subscriber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +30,7 @@ import joe.githubapi.model.user.UserInfo;
 import joe.view.recyclerview.LoadMoreRecyclerView;
 import joe.view.recyclerview.OnItemClickListener;
 import joe.view.recyclerview.SpaceItemDecoration;
+import rx.functions.Action1;
 
 /**
  * Description
@@ -33,7 +38,7 @@ import joe.view.recyclerview.SpaceItemDecoration;
  */
 public class SearchUsersFragment extends BaseFragment implements SearchUsersView {
 
-    private AppCompatSpinner languagesSpinner, sortSpinner;
+    private AppCompatSpinner languageSpinner, sortSpinner;
     private LoadMoreRecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private SearchUserAdapter adapter;
@@ -60,7 +65,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        languagesSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_search_language);
+        languageSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_search_language);
         sortSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_search_sort);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.sr_search_user);
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.recycler_search_user);
@@ -77,13 +82,20 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
 
         presenter = new SearchUsersPresenterImpl(this);
         query = getArguments().getString("query");
-        search(page);
 
         initListeners();
+
+        RxBus.getInstance().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unRegister(this);
     }
 
     private void initListeners() {
-        languagesSpinner.setOnItemSelectedListener(spinnerListener);
+        languageSpinner.setOnItemSelectedListener(spinnerListener);
         sortSpinner.setOnItemSelectedListener(spinnerListener);
         recyclerView.setOnLoadingListener(new LoadMoreRecyclerView.onLoadingMoreListener() {
             @Override
@@ -106,6 +118,16 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
         });
     }
 
+    @Subscriber(tag = "reSearch", mode = ThreadMode.MAIN)
+    private Action1 reSearch = new Action1() {
+        @Override
+        public void call(Object o) {
+            query = (String) o;
+            clearUser();
+            search(1);
+        }
+    };
+
     private void startToUserMain(String loginName) {
         Intent intent = new Intent(mContext, UserMainActivity.class);
         intent.putExtra("user", loginName);
@@ -127,7 +149,7 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     };
 
     private void search(int p) {
-        String language = (String) languagesSpinner.getSelectedItem();
+        String language = (String) languageSpinner.getSelectedItem();
         String sort = (String) sortSpinner.getSelectedItem();
         presenter.searchUsers(query, language, sort, p);
     }
@@ -140,6 +162,10 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
 
     @Override
     public void showWaitDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+            dialog = null;
+        }
         dialog = new ProgressDialog(mContext);
         dialog.setMessage(getString(R.string.searching));
         dialog.setCanceledOnTouchOutside(true);

@@ -16,15 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_toolbarlayout_height"
             app:contentScrim="@color/white"
-            app:expandedTitleGravity="bottom"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:expandedTitleGravity="bottom|center_horizontal"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="pin">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/img_tool_head"
                     android:layout_width="@dimen/main_headimg_width"
                     android:layout_height="@dimen/main_headimg_height"

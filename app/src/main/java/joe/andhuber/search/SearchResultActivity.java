@@ -10,12 +10,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 
+import com.joe.rxbus.RxBus;
+
 import java.util.ArrayList;
 
 import joe.andhuber.R;
 import joe.andhuber.search.adapter.SearchResultPagerAdapter;
 import joe.andhuber.search.fragment.SearchReposFragment;
 import joe.andhuber.search.fragment.SearchUsersFragment;
+import joe.andhuber.utils.KeyBoardUtil;
 
 /**
  * Description
@@ -76,6 +79,19 @@ public class SearchResultActivity extends AppCompatActivity {
                     case 1:
                         break;
                 }
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                RxBus.getInstance().post(query, "reSearch");
+                KeyBoardUtil.closeKeyboard(SearchResultActivity.this);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
     }

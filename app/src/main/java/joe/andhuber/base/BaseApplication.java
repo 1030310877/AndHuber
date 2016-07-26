@@ -1,8 +1,6 @@
 package joe.andhuber.base;
 
 import android.app.Application;
-import android.content.pm.ApplicationInfo;
-import android.os.StrictMode;
 
 import joe.andhuber.handler.CrashHandler;
 
@@ -18,17 +16,6 @@ public abstract class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         onBaseCreate();
-        ApplicationInfo appInfo = this.getApplicationInfo();
-        //调试模式下是使用严苛模式
-        int appFlags = appInfo.flags;
-        if ((appFlags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
-            // Do StrictMode setup here
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectLeakedSqlLiteObjects()
-                    .penaltyLog()
-                    .penaltyDeath()
-                    .build());
-        }
     }
 
     protected void setCrashHandlerEnable(boolean tf) {

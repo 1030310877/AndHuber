@@ -1,5 +1,7 @@
 package joe.andhuber.user.presenter;
 
+import android.text.TextUtils;
+
 import com.joe.rxbus.RxBus;
 
 import joe.andhuber.config.UserConfig;
@@ -24,7 +26,11 @@ public class UserMainPresenterImpl implements UserMainPresenter {
     }
 
     public void initUserViews(UserInfo userInfo) {
-        view.setTitle(userInfo.getName());
+        if (TextUtils.isEmpty(userInfo.getName())) {
+            view.setTitle(userInfo.getLogin());
+        } else {
+            view.setTitle(userInfo.getName());
+        }
         view.setHeadImg(userInfo.getAvatar_url());
         view.setBlog(userInfo.getBlog());
         view.setCompany(userInfo.getCompany());

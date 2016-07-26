@@ -13,7 +13,7 @@
         <item>C++</item>
         <item>C#</item>
     </string-array>
-    <string-array name="sort">
+    <string-array name="sort_user">
         <item>Best match</item>
         <item>Most followers</item>
         <item>Fewest followers</item>
@@ -21,5 +21,14 @@
         <item>Least recently joined</item>
         <item>Most repositories</item>
         <item>Fewest repositories</item>
+    </string-array>
+    <string-array name="sort_repos">
+        <item>Best match</item>
+        <item>Most stars</item>
+        <item>Fewest stars</item>
+        <item>Most forks</item>
+        <item>Fewest forks</item>
+        <item>Recently updated</item>
+        <item>Least recently updated</item>
     </string-array>
 </resources>

@@ -56,8 +56,8 @@ public class StarFragment extends BaseFragment implements StarView {
         recyclerView = new LoadMoreRecyclerView(mContext);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setPadding(20, 10, 20, 10);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(25));
+        recyclerView.setPadding(16, 8, 16, 8);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(16));
         return recyclerView;
     }
 
@@ -98,7 +98,7 @@ public class StarFragment extends BaseFragment implements StarView {
         presenter.getUserStars(user.getLogin(), 1);
     }
 
-    @Subscriber(tag = "refreshStars", mode = ThreadMode.NEW_THREAD)
+    @Subscriber(tag = "refreshStars", mode = ThreadMode.MAIN)
     public Action1 refresh = new Action1() {
         @Override
         public void call(Object o) {

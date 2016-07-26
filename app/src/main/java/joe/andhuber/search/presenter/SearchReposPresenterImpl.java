@@ -8,44 +8,44 @@ import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.search.ISearchCallBack;
 import joe.andhuber.model.search.SearchModel;
 import joe.andhuber.model.search.SearchParam;
-import joe.andhuber.search.view.SearchUsersView;
+import joe.andhuber.search.view.SearchReposView;
 import joe.andhuber.utils.ToastUtil;
-import joe.githubapi.model.search.SearchUserResult;
-import joe.githubapi.model.user.UserInfo;
+import joe.githubapi.model.repositories.RepositoryInfo;
+import joe.githubapi.model.search.SearchRepoResult;
 import rx.Subscription;
 
 /**
  * Description
- * Created by chenqiao on 2016/7/21.
+ * Created by chenqiao on 2016/7/26.
  */
-public class SearchUsersPresenterImpl implements SearchUsersPresenter {
+public class SearchReposPresenterImpl implements SearchReposPresenter {
 
-    private SearchUsersView view;
+    private SearchReposView view;
     private SearchModel model;
     private Subscription searchSubscription;
 
-    public SearchUsersPresenterImpl(SearchUsersView view) {
+    public SearchReposPresenterImpl(SearchReposView view) {
         this.view = view;
         model = new SearchModel();
     }
 
     @Override
-    public void searchUsers(SearchParam param) {
+    public void searchRepositories(SearchParam param) {
         param.setAccess_token(UserConfig.getInstance().getToken());
         if (searchSubscription != null) {
             searchSubscription.unsubscribe();
             searchSubscription = null;
         }
         view.showWaitDialog();
-        searchSubscription = model.searchUsers(param, new ISearchCallBack<SearchUserResult>() {
+        searchSubscription = model.searchRepositories(param, new ISearchCallBack<SearchRepoResult>() {
             @Override
-            public void onSuccessfully(SearchUserResult result) {
-                List<UserInfo> users = result.getItems();
-                if (users != null) {
-                    if (users.size() == 0) {
+            public void onSuccessfully(SearchRepoResult result) {
+                List<RepositoryInfo> repositories = result.getItems();
+                if (repositories != null) {
+                    if (repositories.size() == 0) {
                         view.loadFinished(HuberApplication.getInstance().getResources().getString(R.string.load_to_bottom));
                     } else {
-                        view.showUsers(users);
+                        view.showRepositories(repositories);
                         view.setPage(param.getPage());
                         view.loadFinished(HuberApplication.getInstance().getResources().getString(R.string.load_success));
                     }
@@ -65,7 +65,7 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
     }
 
     @Override
-    public void searchUsers(String q, String language, String sort, int page) {
+    public void searchRepositories(String q, String language, String sort, int page) {
         SearchParam param = new SearchParam();
         param.setQ(q + " language:" + language);
         param.setPage(page);
@@ -74,13 +74,13 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
         } else {
             param.setOrder("desc");
         }
-        if (sort.contains("followers")) {
-            param.setSort("followers");
-        } else if (sort.contains("repositories")) {
-            param.setSort("repositories");
-        } else if (sort.contains("joined")) {
-            param.setSort("joined");
+        if (sort.contains("stars")) {
+            param.setSort("stars");
+        } else if (sort.contains("forks")) {
+            param.setSort("forks");
+        } else if (sort.contains("updated")) {
+            param.setSort("updated");
         }
-        searchUsers(param);
+        searchRepositories(param);
     }
 }

@@ -57,8 +57,8 @@ public class RepositoryFragment extends BaseFragment implements RepositoryView {
         recyclerView = new LoadMoreRecyclerView(mContext);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setPadding(20, 10, 20, 10);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(25));
+        recyclerView.setPadding(16, 8, 16, 8);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(16));
         return recyclerView;
     }
 
@@ -95,7 +95,7 @@ public class RepositoryFragment extends BaseFragment implements RepositoryView {
         RxBus.getInstance().unRegister(this);
     }
 
-    @Subscriber(tag = "refreshRepository", mode = ThreadMode.NEW_THREAD)
+    @Subscriber(tag = "refreshRepository", mode = ThreadMode.MAIN)
     public Action1 refresh = new Action1() {
         @Override
         public void call(Object o) {

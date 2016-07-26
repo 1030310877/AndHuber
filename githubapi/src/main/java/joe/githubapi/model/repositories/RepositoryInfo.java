@@ -3,7 +3,9 @@ package joe.githubapi.model.repositories;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
+import joe.githubapi.model.search.TextMatchesBean;
 import joe.githubapi.model.user.UserInfo;
 
 /**
@@ -199,6 +201,8 @@ public class RepositoryInfo implements Serializable {
     private PermissionsBean permissions;
 
     private double score;
+
+    private List<TextMatchesBean> text_matches;
 
     public double getScore() {
         return score;
@@ -750,6 +754,14 @@ public class RepositoryInfo implements Serializable {
 
     public void setDefault_branch(String default_branch) {
         this.default_branch = default_branch;
+    }
+
+    public List<TextMatchesBean> getText_matches() {
+        return text_matches;
+    }
+
+    public void setText_matches(List<TextMatchesBean> text_matches) {
+        this.text_matches = text_matches;
     }
 
     public PermissionsBean getPermissions() {

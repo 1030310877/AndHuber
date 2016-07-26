@@ -4,7 +4,7 @@ package joe.andhuber.model.search;
  * Description
  * Created by chenqiao on 2016/7/21.
  */
-public class SearchUsersParam {
+public class SearchParam {
     private String q;
     private String sort = "";
     private String order = "desc";
@@ -60,6 +60,6 @@ public class SearchUsersParam {
         this.per_page = per_page;
     }
 
-    public SearchUsersParam() {
+    public SearchParam() {
     }
 }

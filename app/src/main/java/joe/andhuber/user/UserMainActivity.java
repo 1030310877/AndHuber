@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -20,7 +21,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
 import joe.andhuber.function.FunctionActivity;
@@ -36,7 +36,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
 
     private TabLayout tabLayout;
     private CollapsingToolbarLayout toolbarLayout;
-    private CircleImageView headImg;
+    private AppCompatImageView headImg;
     private UserMainPresenter userPresenter;
     private ViewPager viewPager;
     private RepositoryFragment repositoryFragment;
@@ -107,7 +107,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        headImg = (CircleImageView) findViewById(R.id.img_tool_head);
+        headImg = (AppCompatImageView) findViewById(R.id.img_tool_head);
         blogTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_blog);
         companyTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_company);
         emailTxt = (AppCompatTextView) findViewById(R.id.txt_main_user_email);

@@ -16,6 +16,9 @@ import rx.Observable;
 public interface SearchService {
 
     @GET("/search/repositories")
+    @Headers({
+            "Accept:application/vnd.github.v3.text-match+json"
+    })
     Observable<SearchRepoResult> searchRepositories(@QueryMap Map<String, String> params);
 
     @GET("/search/users")

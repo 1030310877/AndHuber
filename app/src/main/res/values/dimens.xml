@@ -25,4 +25,6 @@
     <dimen name="item_repository_detail_filename_textSize">20sp</dimen>
     <dimen name="item_search_user_height">96dp</dimen>
     <dimen name="head_img_search_user_width">64dp</dimen>
+    <dimen name="item_search_repos_height">80dp</dimen>
+    <dimen name="item_search_repos_number_width">40dp</dimen>
 </resources>

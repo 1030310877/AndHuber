@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_search_repos_height"
+        android:padding="8dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_repos_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxWidth="280dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tool:text="Owner/Retrofit" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_repos_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txt_search_repos_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            tool:text="Java" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_repos_update_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            tool:text="2016-07-26T02:21:52Z" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_repos_fork"
+            android:layout_width="@dimen/item_search_repos_number_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:inputType="number"
+            tool:text="20000" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_search_repos_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/txt_search_repos_fork"
+            android:layout_toStartOf="@+id/txt_search_repos_fork"
+            app:srcCompat="@drawable/ic_call_split_black_18dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_search_repos_star"
+            android:layout_width="@dimen/item_search_repos_number_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/img_search_repos_fork"
+            android:layout_toStartOf="@+id/img_search_repos_fork"
+            tool:text="19999" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_search_repos_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/txt_search_repos_star"
+            android:layout_toStartOf="@+id/txt_search_repos_star"
+            app:srcCompat="@drawable/ic_stars_black_18dp" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

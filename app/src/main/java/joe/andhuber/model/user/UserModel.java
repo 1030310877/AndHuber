@@ -2,6 +2,7 @@ package joe.andhuber.model.user;
 
 import android.text.TextUtils;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import joe.andhuber.config.UserConfig;
@@ -25,11 +26,17 @@ import rx.schedulers.Schedulers;
 public class UserModel implements IUser {
     @Override
     public void login(User user, String code, LoginCallBack callBack) {
+        ArrayList<String> scopes = new ArrayList<>();
+        scopes.add("user");
+        scopes.add("repo");
+        scopes.add("delete_repo");
+        scopes.add("public_repo");
         AuthorizationInfo info = new AuthorizationInfo();
         info.setClient_id(GitHubApi.CLIENT_ID);
         info.setClient_secret(GitHubApi.CLIENT_SECRET);
         info.setNote("AndHuber--Android Github Client");
         info.setFingerprint(generateRadonString(12));
+        info.setScopes(scopes);
         GitHubApi.getAuthenticateApi()
                 .login(user.getUserName(), user.getPassWord(), code, info)
                 .subscribeOn(Schedulers.newThread())

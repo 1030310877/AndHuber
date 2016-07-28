@@ -1,70 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_repodetail"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/shape_corner_bg"
-        android:padding="8dp" />
+        android:layout_height="@dimen/appbar_repodetail_height"
+        android:fitsSystemWindows="true">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray" />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout_repodetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbarlayout_repodetail_height"
+            app:expandedTitleGravity="bottom|center_horizontal"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <LinearLayout
-            android:id="@+id/layout_repodetail_star"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/img_repodetail_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star_border_black_18dp" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/txt_repodetail_star"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                tool:text="123" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txt_repodetail_fork"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/shape_corner_bg"
-            android:drawableLeft="@drawable/ic_call_split_black_18dp"
-            android:drawableStart="@drawable/ic_call_split_black_18dp"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            tool:text="123" />
-    </LinearLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txt_repodetail_watch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    tool:text="12345" />
 
-</LinearLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txt_repodetail_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    tool:text="12345" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txt_repodetail_fork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    tool:text="12345" />
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_repodetail"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout_repodetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_tablayout_height"
+            android:gravity="bottom"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_repodetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</android.support.design.widget.CoordinatorLayout>

@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_toolbarlayout_height"
             app:expandedTitleGravity="bottom|center_horizontal"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"

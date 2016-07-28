@@ -100,6 +100,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         if (toolbar != null) {
             toolbar.setNavigationIcon(null);
         }
@@ -123,7 +124,13 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     }
 
     private void initListeners() {
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                nowIndex = position;
+            }
+        });
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

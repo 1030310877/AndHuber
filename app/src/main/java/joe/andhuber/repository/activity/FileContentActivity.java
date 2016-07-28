@@ -121,7 +121,7 @@ public class FileContentActivity extends BaseActivity implements FileContentView
         WebView webView = new WebView(this);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         contentView.addView(webView, params);
-        CodeView.with(this).withCode(code).setStyle(Settings.WithStyle.DARKULA).into(webView);
+        CodeView.with(this).withCode(code).setStyle(Settings.WithStyle.GITHUB).into(webView);
     }
 
     @Override
@@ -130,6 +130,7 @@ public class FileContentActivity extends BaseActivity implements FileContentView
         WebView webView = new WebView(this);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         contentView.addView(webView, params);
-        webView.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
+        String text = String.format("<body style=\"word-wrap:break-word;\">%s</body>", content);
+        webView.loadDataWithBaseURL(null, text, "text/html", "UTF-8", null);
     }
 }

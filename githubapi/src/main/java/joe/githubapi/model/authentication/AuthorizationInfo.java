@@ -1,6 +1,7 @@
 package joe.githubapi.model.authentication;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description
@@ -12,6 +13,7 @@ public class AuthorizationInfo implements Serializable {
     private String note;
     private String fingerprint;
     private String note_url;
+    private List<String> scopes;
 
     public String getClient_id() {
         return client_id;
@@ -62,5 +64,13 @@ public class AuthorizationInfo implements Serializable {
         this.note_url = note_url;
         this.note = note;
         this.client_secret = client_secret;
+    }
+
+    public List<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(List<String> scopes) {
+        this.scopes = scopes;
     }
 }

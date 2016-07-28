@@ -6,7 +6,7 @@ package joe.view.webviewcode;
 class HtmlCode {
     static final String HTML_HEAD = "<html><head>";
     static final String HTML_META = "  <meta name=\"viewport\" content=\"width=device-width, height=device-height\">";
-    static final String HTML_HEAD_END = "</head><body>";
+    static final String HTML_HEAD_END = "</head><body style=\"word-wrap:break-word;\">";
 
     static final String HTML_BODY_END = "</body></html>";
 

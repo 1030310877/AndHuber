@@ -95,6 +95,7 @@ public class StarFragment extends BaseFragment implements StarView {
     }
 
     public void initStars() {
+        clearStars();
         presenter.getUserStars(user.getLogin(), 1);
     }
 

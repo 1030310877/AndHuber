@@ -9,9 +9,11 @@ import joe.githubapi.model.repositories.RepositoryInfo;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -35,6 +37,12 @@ public interface RepositoriesService {
     @GET("/repos/{owner}/{repo}/contents/{path}")
     Observable<List<ContentInfo>> getRepoContent(@Path("owner") String owner, @Path("repo") String repo, @Path("path") String path, @Query("access_token") String token);
 
+    @GET
+    Observable<ResponseBody> getRepoFileContent(@Url String url);
+
     @GET("/repos/{owner}/{repo}/contents/{path}")
     Observable<ResponseBody> getRepoFileContentWithHeader(@Header("Accept") String accept, @Path("owner") String owner, @Path("repo") String repo, @Path("path") String path, @Query("access_token") String token);
+
+    @POST("/repos/{owner}/{repo}/forks")
+    Observable<RepositoryInfo> forkRepository(@Path("owner") String owner, @Path("repo") String repo, @Query("organization") String organization, @Query("access_token") String token);
 }

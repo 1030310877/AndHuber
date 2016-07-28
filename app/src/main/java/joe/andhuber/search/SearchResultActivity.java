@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 
 import com.joe.rxbus.RxBus;
@@ -15,6 +14,7 @@ import com.joe.rxbus.RxBus;
 import java.util.ArrayList;
 
 import joe.andhuber.R;
+import joe.andhuber.base.BaseActivity;
 import joe.andhuber.search.adapter.SearchResultPagerAdapter;
 import joe.andhuber.search.fragment.SearchReposFragment;
 import joe.andhuber.search.fragment.SearchUsersFragment;
@@ -24,7 +24,7 @@ import joe.andhuber.utils.KeyBoardUtil;
  * Description
  * Created by chenqiao on 2016/7/14.
  */
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends BaseActivity {
 
     private SearchView searchView;
     private ViewPager viewPager;

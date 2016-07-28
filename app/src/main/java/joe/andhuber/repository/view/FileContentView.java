@@ -4,11 +4,13 @@ import joe.andhuber.base.BaseView;
 
 /**
  * Description
- * Created by chenqiao on 2016/7/19.
+ * Created by chenqiao on 2016/7/27.
  */
-public interface FileContentView extends BaseView{
+public interface FileContentView extends BaseView {
 
-    void showReadMe(String content);
+    void showPicture(String url);
 
     void showCode(String code);
+
+    void showText(String content);
 }

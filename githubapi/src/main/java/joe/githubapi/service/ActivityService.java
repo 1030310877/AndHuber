@@ -5,8 +5,13 @@ import java.util.Map;
 
 import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
+import okhttp3.ResponseBody;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -24,4 +29,16 @@ public interface ActivityService {
 
     @GET("/users/{username}/received_events")
     Observable<List<EventInfo>> getUsersReceivedEvents(@Path("username") String username, @QueryMap Map<String, String> params);
+
+    @GET("/user/starred/{owner}/{repo}")
+    Observable<ResponseBody> isStarringRepo(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @PUT("/user/starred/{owner}/{repo}")
+    @Headers({
+            "Content-Length: 0"
+    })
+    Observable<ResponseBody> starRepository(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @DELETE("/user/starred/{owner}/{repo}")
+    Observable<ResponseBody> unStarRepository(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
 }

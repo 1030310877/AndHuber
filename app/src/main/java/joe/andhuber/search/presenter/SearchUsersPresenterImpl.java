@@ -50,6 +50,7 @@ public class SearchUsersPresenterImpl implements SearchUsersPresenter {
                         view.loadFinished(HuberApplication.getInstance().getResources().getString(R.string.load_success));
                     }
                 }
+                view.setTotal(result.getTotal_count());
                 view.refreshFinish();
                 view.dismissWaitDialog();
             }

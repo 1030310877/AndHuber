@@ -22,9 +22,9 @@
 
         <activity android:name=".user.UserMainActivity" />
 
-        <activity android:name=".repository.RepoDetailActivity" />
+        <activity android:name=".repository.activity.RepoDetailActivity" />
 
-        <activity android:name=".repository.FileContentActivity" />
+        <activity android:name=".repository.activity.FileContentActivity" />
 
         <activity android:name=".function.FunctionActivity" />
 

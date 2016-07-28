@@ -18,4 +18,6 @@ public interface SearchUsersView extends BaseView {
     void refreshFinish();
 
     void setPage(int page);
+
+    void setTotal(int total);
 }

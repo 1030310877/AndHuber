@@ -201,4 +201,10 @@ public class SearchUsersFragment extends BaseFragment implements SearchUsersView
     public void setPage(int page) {
         this.page = page;
     }
+
+    @Override
+    public void setTotal(int total) {
+        adapter.setCount(total);
+        adapter.notifyDataSetChanged();
+    }
 }

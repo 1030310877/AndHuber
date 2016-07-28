@@ -10,5 +10,9 @@ public interface RepoDetailPresenter {
 
     void getFilesByPath(String owner, String repo, String path);
 
-    void getFileContentByPathForRaw(String owner, String repo, String path);
+    void checkIsStarred(String owner, String repo);
+
+    void starRepository(String owner, String repo);
+
+    void unStarRepository(String owner, String repo);
 }

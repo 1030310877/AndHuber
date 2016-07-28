@@ -79,8 +79,8 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getRepoContent(String owner, String repo, String path, IRepositoryCallBack<List<ContentInfo>> callBack) {
-        return GitHubApi.getRepositoriesApi().getRepoContent(owner, repo, path, UserConfig.getInstance().getToken())
+    public Subscription getRepoContent(String owner, String repo, String path, String token, IRepositoryCallBack<List<ContentInfo>> callBack) {
+        return GitHubApi.getRepositoriesApi().getRepoContent(owner, repo, path, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new HttpSubscriber<List<ContentInfo>>() {
@@ -105,8 +105,8 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getFileContentForRaw(String owner, String repo, String path, IRepositoryCallBack<String> callBack) {
-        return GitHubApi.getRepositoriesApi().getRepoFileContentForHtml(owner, repo, path, UserConfig.getInstance().getToken())
+    public Subscription getFileContentForRaw(String owner, String repo, String path, String token, IRepositoryCallBack<String> callBack) {
+        return GitHubApi.getRepositoriesApi().getRepoFileContentForRaw(owner, repo, path, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new HttpSubscriber<ResponseBody>() {
@@ -123,6 +123,62 @@ public class RepositoryModel {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                        }
+                    }
+
+                    @Override
+                    public void onHttpError(ErrorInfo info) {
+                        if (callBack != null) {
+                            callBack.onFailed(info.getMessage());
+                        }
+                    }
+                });
+    }
+
+    public Subscription getFileContentForHtml(String owner, String repo, String path, String token, IRepositoryCallBack<String> callBack) {
+        return GitHubApi.getRepositoriesApi().getRepoFileContentForHtml(owner, repo, path, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpSubscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        if (callBack != null) {
+                            try {
+                                callBack.onSuccessfully(responseBody.string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onHttpError(ErrorInfo info) {
+                        if (callBack != null) {
+                            callBack.onFailed(info.getMessage());
+                        }
+                    }
+                });
+    }
+
+    public Subscription getFileContent(String url, IRepositoryCallBack<ResponseBody> callBack) {
+        return GitHubApi.getRepositoriesApi().getRepoFileContent(url)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpSubscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody body) {
+                        if (callBack != null) {
+                            callBack.onSuccessfully(body);
                         }
                     }
 

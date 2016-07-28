@@ -17,4 +17,6 @@ public interface SearchReposView extends BaseView {
     void refreshFinish();
 
     void setPage(int page);
+
+    void setTotal(int total);
 }

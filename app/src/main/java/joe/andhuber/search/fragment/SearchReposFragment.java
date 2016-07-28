@@ -1,6 +1,7 @@
 package joe.andhuber.search.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,12 +21,14 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseFragment;
+import joe.andhuber.repository.activity.RepoDetailActivity;
 import joe.andhuber.search.adapter.SearchReposAdapter;
 import joe.andhuber.search.presenter.SearchReposPresenter;
 import joe.andhuber.search.presenter.SearchReposPresenterImpl;
 import joe.andhuber.search.view.SearchReposView;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.view.recyclerview.LoadMoreRecyclerView;
+import joe.view.recyclerview.OnItemClickListener;
 import joe.view.recyclerview.SpaceItemDecoration;
 import rx.functions.Action1;
 
@@ -106,11 +109,18 @@ public class SearchReposFragment extends BaseFragment implements SearchReposView
                 search(1);
             }
         });
-//        adapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//            }
-//        });
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startToRepositoryDetail(repositories.get(position));
+            }
+        });
+    }
+
+    private void startToRepositoryDetail(RepositoryInfo info) {
+        Intent intent = new Intent(mContext, RepoDetailActivity.class);
+        intent.putExtra("repository", info);
+        startActivity(intent);
     }
 
     @Subscriber(tag = "reSearch", mode = ThreadMode.MAIN)
@@ -168,6 +178,12 @@ public class SearchReposFragment extends BaseFragment implements SearchReposView
     @Override
     public void setPage(int page) {
         this.page = page;
+    }
+
+    @Override
+    public void setTotal(int total) {
+        adapter.setCount(total);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

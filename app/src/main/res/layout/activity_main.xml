@@ -15,7 +15,6 @@
             android:id="@+id/toolbar_layout_main"
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_toolbarlayout_height"
-            app:contentScrim="@color/white"
             app:expandedTitleGravity="bottom|center_horizontal"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="">
@@ -61,6 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
+                            android:textColor="@color/whitesmoke"
                             tool:text="personal" />
                     </LinearLayout>
 
@@ -81,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
-                            android:autoLink="web"
+                            android:textColor="@color/whitesmoke"
                             tool:text="personal" />
                     </LinearLayout>
 
@@ -102,8 +102,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_weight="1"
-                            android:autoLink="email"
                             android:inputType="textWebEmailAddress"
+                            android:textColor="@color/whitesmoke"
                             tool:text="xxxx@gmail.com" />
                     </LinearLayout>
 
@@ -124,6 +124,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:inputType="number"
+                            android:textColor="@color/whitesmoke"
                             tool:text="23" />
 
                         <android.support.v7.widget.AppCompatImageView
@@ -138,6 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:inputType="number"
+                            android:textColor="@color/whitesmoke"
                             tool:text="23" />
                     </LinearLayout>
                 </LinearLayout>

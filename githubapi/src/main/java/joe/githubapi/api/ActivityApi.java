@@ -7,6 +7,7 @@ import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.service.ActivityService;
+import okhttp3.ResponseBody;
 import rx.Observable;
 
 /**
@@ -31,4 +32,15 @@ public class ActivityApi {
         return createService().getUsersReceivedEvents(username, params);
     }
 
+    public Observable<ResponseBody> isStarringRepo(String owner, String repo, String access_token) {
+        return createService().isStarringRepo(owner, repo, access_token);
+    }
+
+    public Observable<ResponseBody> starRepository(String owner, String repo, String access_token) {
+        return createService().starRepository(owner, repo, access_token);
+    }
+
+    public Observable<ResponseBody> unStarRepository(String owner, String repo, String access_token) {
+        return createService().unStarRepository(owner, repo, access_token);
+    }
 }

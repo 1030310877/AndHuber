@@ -45,11 +45,19 @@ public class RepositoriesApi {
         return createService().getRepoContent(owner, repo, path, token);
     }
 
+    public Observable<ResponseBody> getRepoFileContent(String url) {
+        return createService().getRepoFileContent(url);
+    }
+
     public Observable<ResponseBody> getRepoFileContentForHtml(String owner, String repo, String path, String token) {
         return createService().getRepoFileContentWithHeader("application/vnd.github.VERSION.html", owner, repo, path, token);
     }
 
     public Observable<ResponseBody> getRepoFileContentForRaw(String owner, String repo, String path, String token) {
         return createService().getRepoFileContentWithHeader("application/vnd.github.VERSION.raw", owner, repo, path, token);
+    }
+
+    public Observable<RepositoryInfo> forkRepository(String owner, String repo, String organization, String access_token) {
+        return createService().forkRepository(owner, repo, organization, access_token);
     }
 }

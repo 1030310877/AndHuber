@@ -3,10 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">#3F51B5</item>
         <item name="colorPrimaryDark">@color/transparent</item>
-        <item name="colorAccent">@color/gray</item>
+        <item name="colorAccent">#FF4081</item>
         <item name="colorButtonNormal">@color/light_black</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="colorControlHighlight">@color/whitesmoke</item>
     </style>
 

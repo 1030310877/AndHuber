@@ -8,55 +8,13 @@
 
     <include layout="@layout/toolbar" />
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_repodetail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="5dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_repodetail"
-                android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:background="@drawable/shape_corner_bg"
-                android:padding="5dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_corner_bg"
-                android:padding="5dp">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:drawableLeft="@drawable/ic_chrome_reader_mode_black_24dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/ReadMe" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/txt_repodetail_readme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/view"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/view_readMe" />
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:background="@drawable/shape_corner_bg"
+        android:padding="8dp" />
 
     <View
         android:layout_width="match_parent"
@@ -68,29 +26,44 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="8dp">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/txt_repodetail_star"
-            android:layout_width="55dp"
+        <LinearLayout
+            android:id="@+id/layout_repodetail_star"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_corner_bg"
-            android:drawableLeft="@drawable/ic_stars_black_18dp"
-            android:gravity="center"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp"
-            tool:text="123" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatButton
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_repodetail_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_star_border_black_18dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txt_repodetail_star"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                tool:text="123" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/txt_repodetail_fork"
-            android:layout_width="55dp"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/shape_corner_bg"
             android:drawableLeft="@drawable/ic_call_split_black_18dp"
+            android:drawableStart="@drawable/ic_call_split_black_18dp"
             android:gravity="center"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             tool:text="123" />
     </LinearLayout>
 

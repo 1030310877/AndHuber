@@ -18,7 +18,7 @@ import java.util.List;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseFragment;
-import joe.andhuber.repository.RepoDetailActivity;
+import joe.andhuber.repository.activity.RepoDetailActivity;
 import joe.andhuber.user.adapter.StarsAdapter;
 import joe.andhuber.user.presenter.StarPresenter;
 import joe.andhuber.user.presenter.StarPresenterImpl;

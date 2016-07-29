@@ -84,6 +84,28 @@ public class UserInfo implements Serializable {
      */
 
     private List<TextMatchesBean> text_matches;
+    /**
+     * total_private_repos : 100
+     * owned_private_repos : 100
+     * private_gists : 81
+     * disk_usage : 10000
+     * collaborators : 8
+     * plan : {"name":"Medium","space":400,"private_repos":20,"collaborators":0}
+     */
+
+    private int total_private_repos;
+    private int owned_private_repos;
+    private int private_gists;
+    private int disk_usage;
+    private int collaborators;
+    /**
+     * name : Medium
+     * space : 400
+     * private_repos : 20
+     * collaborators : 0
+     */
+
+    private PlanBean plan;
 
     public double getScore() {
         return score;
@@ -339,5 +361,92 @@ public class UserInfo implements Serializable {
 
     public void setText_matches(List<TextMatchesBean> text_matches) {
         this.text_matches = text_matches;
+    }
+
+    public int getTotal_private_repos() {
+        return total_private_repos;
+    }
+
+    public void setTotal_private_repos(int total_private_repos) {
+        this.total_private_repos = total_private_repos;
+    }
+
+    public int getOwned_private_repos() {
+        return owned_private_repos;
+    }
+
+    public void setOwned_private_repos(int owned_private_repos) {
+        this.owned_private_repos = owned_private_repos;
+    }
+
+    public int getPrivate_gists() {
+        return private_gists;
+    }
+
+    public void setPrivate_gists(int private_gists) {
+        this.private_gists = private_gists;
+    }
+
+    public int getDisk_usage() {
+        return disk_usage;
+    }
+
+    public void setDisk_usage(int disk_usage) {
+        this.disk_usage = disk_usage;
+    }
+
+    public int getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(int collaborators) {
+        this.collaborators = collaborators;
+    }
+
+    public PlanBean getPlan() {
+        return plan;
+    }
+
+    public void setPlan(PlanBean plan) {
+        this.plan = plan;
+    }
+
+    public static class PlanBean {
+        private String name;
+        private int space;
+        private int private_repos;
+        private int collaborators;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getSpace() {
+            return space;
+        }
+
+        public void setSpace(int space) {
+            this.space = space;
+        }
+
+        public int getPrivate_repos() {
+            return private_repos;
+        }
+
+        public void setPrivate_repos(int private_repos) {
+            this.private_repos = private_repos;
+        }
+
+        public int getCollaborators() {
+            return collaborators;
+        }
+
+        public void setCollaborators(int collaborators) {
+            this.collaborators = collaborators;
+        }
     }
 }

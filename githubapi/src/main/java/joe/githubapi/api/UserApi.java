@@ -2,6 +2,7 @@ package joe.githubapi.api;
 
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.user.UserInfo;
+import joe.githubapi.model.user.UserParam;
 import joe.githubapi.service.UserService;
 import rx.Observable;
 
@@ -25,5 +26,9 @@ public class UserApi {
 
     public Observable<UserInfo> getUserInfo(String username, String token) {
         return createService().getUserInfo(username, token);
+    }
+
+    public Observable<UserInfo> updateUser(UserParam body, String token) {
+        return createService().updateUserInfo(body, token);
     }
 }

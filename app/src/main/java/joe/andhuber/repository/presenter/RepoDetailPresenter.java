@@ -6,11 +6,15 @@ package joe.andhuber.repository.presenter;
  */
 public interface RepoDetailPresenter {
 
-    void getReadMe(String owner, String repo);
-
     void checkIsStarred(String owner, String repo);
 
     void starRepository(String owner, String repo);
 
     void unStarRepository(String owner, String repo);
+
+    void watchRepository(String owner, String repo);
+
+    void unWatchRepository(String owner, String repo);
+
+    void checkIsWatched(String owner, String repo);
 }

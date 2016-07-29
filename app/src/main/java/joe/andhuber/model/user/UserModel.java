@@ -8,8 +8,8 @@ import java.util.Random;
 import joe.andhuber.config.UserConfig;
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
-import joe.githubapi.model.authentication.AuthenticationResult;
-import joe.githubapi.model.authentication.AuthorizationInfo;
+import joe.githubapi.model.authentication.AuthenticationInfo;
+import joe.githubapi.model.authentication.AuthorizationParam;
 import joe.githubapi.model.user.UserInfo;
 import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.Headers;
@@ -31,7 +31,7 @@ public class UserModel implements IUser {
         scopes.add("repo");
         scopes.add("delete_repo");
         scopes.add("public_repo");
-        AuthorizationInfo info = new AuthorizationInfo();
+        AuthorizationParam info = new AuthorizationParam();
         info.setClient_id(GitHubApi.CLIENT_ID);
         info.setClient_secret(GitHubApi.CLIENT_SECRET);
         info.setNote("AndHuber--Android Github Client");
@@ -41,7 +41,7 @@ public class UserModel implements IUser {
                 .login(user.getUserName(), user.getPassWord(), code, info)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AuthenticationResult>() {
+                .subscribe(new Subscriber<AuthenticationInfo>() {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException) {
@@ -79,7 +79,7 @@ public class UserModel implements IUser {
                     }
 
                     @Override
-                    public void onNext(AuthenticationResult authenticationResult) {
+                    public void onNext(AuthenticationInfo authenticationResult) {
                         UserConfig.getInstance().setToken(authenticationResult.getToken());
                     }
                 });

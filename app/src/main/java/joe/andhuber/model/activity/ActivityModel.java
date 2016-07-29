@@ -6,6 +6,8 @@ import java.util.List;
 import joe.andhuber.utils.MapUtil;
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
+import joe.githubapi.model.activity.SubscriptionInfo;
+import joe.githubapi.model.activity.SubscriptionParam;
 import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.rx.HttpSubscriber;
@@ -170,6 +172,96 @@ public class ActivityModel {
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
+                    }
+                });
+    }
+
+    public Subscription getASubscription(String owner, String repo, String access_token, IActivityCallBack<Boolean> callBack) {
+        return GitHubApi.getActivityApi().getASubscription(owner, repo, access_token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SubscriptionInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException) {
+                            if (((HttpException) e).code() == 404) {
+                                if (callBack != null) {
+                                    callBack.onSuccessfully(false);
+                                }
+                            }
+                        } else {
+                            if (callBack != null) {
+                                callBack.onFailed(e.toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(SubscriptionInfo subscriptionInfo) {
+                        if (subscriptionInfo != null) {
+                            if (callBack != null) {
+                                callBack.onSuccessfully(subscriptionInfo.isSubscribed());
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription setASubscription(String owner, String repo, SubscriptionParam body, String token, IActivityCallBack<Boolean> callBack) {
+        return GitHubApi.getActivityApi().setASubscription(owner, repo, body, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SubscriptionInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(SubscriptionInfo subscriptionInfo) {
+                        if (subscriptionInfo != null) {
+                            if (callBack != null) {
+                                callBack.onSuccessfully(subscriptionInfo.isSubscribed());
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription deleteASubscription(String owner, String repo, String access_token, IActivityCallBack<Boolean> callBack) {
+        return GitHubApi.getActivityApi().deleteASubscription(owner, repo, access_token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+                        if (callBack != null) {
+                            callBack.onSuccessfully(true);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+
                     }
                 });
     }

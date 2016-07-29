@@ -7,7 +7,7 @@ import java.util.List;
  * Description
  * Created by chenqiao on 2016/7/5.
  */
-public class AuthenticationResult implements Serializable {
+public class AuthenticationInfo implements Serializable {
 
 
     /**
@@ -173,6 +173,6 @@ public class AuthenticationResult implements Serializable {
         }
     }
 
-    public AuthenticationResult() {
+    public AuthenticationInfo() {
     }
 }

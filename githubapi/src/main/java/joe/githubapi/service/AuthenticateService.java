@@ -1,7 +1,7 @@
 package joe.githubapi.service;
 
-import joe.githubapi.model.authentication.AuthenticationResult;
-import joe.githubapi.model.authentication.AuthorizationInfo;
+import joe.githubapi.model.authentication.AuthenticationInfo;
+import joe.githubapi.model.authentication.AuthorizationParam;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -21,7 +21,7 @@ public interface AuthenticateService {
     @Headers({
             "Accept: application/vnd.github.v3.full+json"
     })
-    Observable<AuthenticationResult> login(@Header("Authorization") String authorization, @Header("X-GitHub-OTP") String code, @Body AuthorizationInfo info);
+    Observable<AuthenticationInfo> login(@Header("Authorization") String authorization, @Header("X-GitHub-OTP") String code, @Body AuthorizationParam info);
 
     @GET("/applications/{client_id}/tokens/{access_token}")
     Observable<ResponseBody> checkAuthorization(@Header("Authorization") String authorization, @Path("client_id") String client_id, @Path("access_token") String token);

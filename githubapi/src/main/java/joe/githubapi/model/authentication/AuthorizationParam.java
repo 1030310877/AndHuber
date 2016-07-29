@@ -7,7 +7,7 @@ import java.util.List;
  * Description
  * Created by chenqiao on 2016/7/4.
  */
-public class AuthorizationInfo implements Serializable {
+public class AuthorizationParam implements Serializable {
     private String client_id;
     private String client_secret;
     private String note;
@@ -55,10 +55,10 @@ public class AuthorizationInfo implements Serializable {
         this.note_url = note_url;
     }
 
-    public AuthorizationInfo() {
+    public AuthorizationParam() {
     }
 
-    public AuthorizationInfo(String client_id, String fingerprint, String note_url, String note, String client_secret) {
+    public AuthorizationParam(String client_id, String fingerprint, String note_url, String note, String client_secret) {
         this.client_id = client_id;
         this.fingerprint = fingerprint;
         this.note_url = note_url;

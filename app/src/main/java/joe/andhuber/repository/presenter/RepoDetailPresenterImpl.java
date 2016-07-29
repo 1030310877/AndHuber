@@ -1,8 +1,14 @@
 package joe.andhuber.repository.presenter;
 
+import joe.andhuber.HuberApplication;
+import joe.andhuber.R;
+import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.activity.ActivityModel;
-import joe.andhuber.model.repository.RepositoryModel;
+import joe.andhuber.model.activity.IActivityCallBack;
 import joe.andhuber.repository.view.RepoDetailView;
+import joe.andhuber.utils.ToastUtil;
+import joe.githubapi.model.activity.SubscriptionParam;
+import rx.Subscription;
 
 /**
  * Description
@@ -11,97 +17,130 @@ import joe.andhuber.repository.view.RepoDetailView;
 public class RepoDetailPresenterImpl implements RepoDetailPresenter {
 
     private RepoDetailView view;
-    private RepositoryModel model;
     private ActivityModel activityModel;
-    private boolean isLock = true;
+    private Subscription starSubscription;
+    private Subscription watchSubscription;
 
     public RepoDetailPresenterImpl(RepoDetailView view) {
         this.view = view;
-        model = new RepositoryModel();
         activityModel = new ActivityModel();
     }
 
     @Override
-    public void getReadMe(String owner, String repo) {
-//        view.showWaitDialog();
-//        model.getReadMeOfRepo(owner, repo, new IRepositoryCallBack<String>() {
-//            @Override
-//            public void onSuccessfully(String result) {
-//                view.dismissWaitDialog();
-//                view.startToContentView("ReadMe.md", "", result);
-//            }
-//
-//            @Override
-//            public void onFailed(String message) {
-//                view.dismissWaitDialog();
-//                ToastUtil.show(HuberApplication.getInstance(), message);
-//            }
-//        });
-    }
-
-    @Override
     public void checkIsStarred(String owner, String repo) {
-//        activityModel.isStarringRepo(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
-//            @Override
-//            public void onSuccessfully(Boolean result) {
-//                view.setStarred(result);
-//                isLock = false;
-//            }
-//
-//            @Override
-//            public void onFailed(String message) {
-//                ToastUtil.show(HuberApplication.getInstance(), message);
-//                isLock = true;
-//            }
-//        });
+        activityModel.isStarringRepo(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                view.setIsStarred(result);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
     }
 
     @Override
     public void starRepository(String owner, String repo) {
-//        if (isLock) {
-//            ToastUtil.show(HuberApplication.getInstance(), R.string.star_info_error);
-//            return;
-//        }
-//        ToastUtil.show(HuberApplication.getInstance(), R.string.doing_star);
-//        activityModel.starRepository(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
-//            @Override
-//            public void onSuccessfully(Boolean result) {
-//                if (result) {
-//                    view.setStarred(true);
-//                    ToastUtil.show(HuberApplication.getInstance(), R.string.star_success);
-//                } else {
-//                    ToastUtil.show(HuberApplication.getInstance(), R.string.star_failed);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailed(String message) {
-//                ToastUtil.show(HuberApplication.getInstance(), message);
-//            }
-//        });
+        if (starSubscription != null) {
+            starSubscription.unsubscribe();
+            starSubscription = null;
+        }
+        starSubscription = activityModel.starRepository(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                if (result) {
+                    view.setIsStarred(true);
+                    ToastUtil.show(HuberApplication.getInstance(), R.string.star_success);
+                } else {
+                    ToastUtil.show(HuberApplication.getInstance(), R.string.star_failed);
+                }
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
     }
 
     @Override
     public void unStarRepository(String owner, String repo) {
-//        if (isLock) {
-//            ToastUtil.show(HuberApplication.getInstance(), R.string.star_info_error);
-//            return;
-//        }
-//        ToastUtil.show(HuberApplication.getInstance(), R.string.undo_star);
-//        activityModel.unStarRepository(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
-//            @Override
-//            public void onSuccessfully(Boolean result) {
-//                if (result) {
-//                    view.setStarred(false);
-//                } else {
-//                    ToastUtil.show(HuberApplication.getInstance(), R.string.undo_star_failed);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailed(String message) {
-//                ToastUtil.show(HuberApplication.getInstance(), message);
-//            }
-//        });
+        if (starSubscription != null) {
+            starSubscription.unsubscribe();
+            starSubscription = null;
+        }
+        starSubscription = activityModel.unStarRepository(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                if (result) {
+                    view.setIsStarred(false);
+                } else {
+                    ToastUtil.show(HuberApplication.getInstance(), R.string.undo_star_failed);
+                }
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void watchRepository(String owner, String repo) {
+        if (watchSubscription != null) {
+            watchSubscription.unsubscribe();
+            watchSubscription = null;
+        }
+        SubscriptionParam param = new SubscriptionParam();
+        param.setSubscribed(true);
+        param.setIgnored(false);
+        watchSubscription = activityModel.setASubscription(owner, repo, param, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                view.setIsWatched(result);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void unWatchRepository(String owner, String repo) {
+        if (watchSubscription != null) {
+            watchSubscription.unsubscribe();
+            watchSubscription = null;
+        }
+        watchSubscription = activityModel.deleteASubscription(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                view.setIsWatched(false);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void checkIsWatched(String owner, String repo) {
+        activityModel.getASubscription(owner, repo, UserConfig.getInstance().getToken(), new IActivityCallBack<Boolean>() {
+            @Override
+            public void onSuccessfully(Boolean result) {
+                view.setIsWatched(result);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
     }
 }

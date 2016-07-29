@@ -24,34 +24,67 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/txt_repodetail_watch"
+                <LinearLayout
+                    android:id="@+id/layout_repodetail_watch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:paddingBottom="8dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:paddingTop="8dp"
-                    tool:text="12345" />
+                    android:paddingTop="8dp">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/txt_repodetail_star"
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_repodetail_watch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_remove_red_eye_white_36dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_repodetail_watch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        tool:text="12345" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_repodetail_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:paddingBottom="8dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:paddingTop="8dp"
-                    tool:text="12345" />
+                    android:paddingTop="8dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_repodetail_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_star_white_36dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_repodetail_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        tool:text="12345" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/txt_repodetail_fork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_call_split_black_36dp"
+                    android:gravity="center"
                     android:paddingBottom="8dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="8dp"
+                    android:textSize="18sp"
                     tool:text="12345" />
             </LinearLayout>
 

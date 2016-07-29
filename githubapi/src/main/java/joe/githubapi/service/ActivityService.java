@@ -3,9 +3,12 @@ package joe.githubapi.service;
 import java.util.List;
 import java.util.Map;
 
+import joe.githubapi.model.activity.SubscriptionInfo;
+import joe.githubapi.model.activity.SubscriptionParam;
 import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -41,4 +44,16 @@ public interface ActivityService {
 
     @DELETE("/user/starred/{owner}/{repo}")
     Observable<ResponseBody> unStarRepository(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @GET("/repos/{owner}/{repo}/subscription")
+    Observable<SubscriptionInfo> getASubscription(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @PUT("/repos/{owner}/{repo}/subscription")
+    Observable<SubscriptionInfo> setASubscription(@Path("owner") String owner, @Path("repo") String repo, @Body SubscriptionParam body, @Query("access_token") String token);
+
+    @DELETE("/repos/{owner}/{repo}/subscription")
+    @Headers({
+            "Content-Length: 0"
+    })
+    Observable<ResponseBody> deleteASubscription(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
 }

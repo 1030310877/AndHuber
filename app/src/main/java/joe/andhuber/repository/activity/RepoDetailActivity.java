@@ -8,7 +8,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,10 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
     private TabLayout tablayout;
     private CollapsingToolbarLayout toolbarLayout;
     private ViewPager viewPager;
+    private AppCompatTextView starTxt, watchTxt, forkTxt;
+    private AppCompatImageView starImg, watchImg;
+    private boolean isStarred = false;
+    private boolean isWatched = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,15 +49,19 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
         repository = (RepositoryInfo) getIntent().getSerializableExtra("repository");
         initViews();
         if (repository == null) {
-            return;
+            repository = new RepositoryInfo();
         }
+        presenter.checkIsStarred(repository.getOwner().getLogin(), repository.getName());
+        presenter.checkIsWatched(repository.getOwner().getLogin(), repository.getName());
     }
 
     private void initViews() {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout_repodetail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_repodetail);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         toolbarLayout.setTitle(repository.getName());
         tablayout = (TabLayout) findViewById(R.id.tablayout_repodetail);
         viewPager = (ViewPager) findViewById(R.id.vp_repodetail);
@@ -80,6 +91,41 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
         };
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
+
+        starTxt = (AppCompatTextView) findViewById(R.id.txt_repodetail_star);
+        starImg = (AppCompatImageView) findViewById(R.id.img_repodetail_star);
+        watchTxt = (AppCompatTextView) findViewById(R.id.txt_repodetail_watch);
+        watchImg = (AppCompatImageView) findViewById(R.id.img_repodetail_watch);
+        forkTxt = (AppCompatTextView) findViewById(R.id.txt_repodetail_fork);
+
+        showStars(repository.getStargazers_count());
+        showWatchers(repository.getWatchers_count());
+        showForks(repository.getForks_count());
+
+        View watchView = findViewById(R.id.layout_repodetail_watch);
+        if (watchView != null) {
+            watchView.setOnClickListener(v -> {
+                if (isWatched) {
+                    presenter.unWatchRepository(repository.getOwner().getLogin(), repository.getName());
+                    setIsWatched(false);
+                } else {
+                    presenter.watchRepository(repository.getOwner().getLogin(), repository.getName());
+                    setIsWatched(true);
+                }
+            });
+        }
+        View starView = findViewById(R.id.layout_repodetail_star);
+        if (starView != null) {
+            starView.setOnClickListener(v -> {
+                if (isStarred) {
+                    presenter.unStarRepository(repository.getOwner().getLogin(), repository.getName());
+                    setIsStarred(false);
+                } else {
+                    presenter.starRepository(repository.getOwner().getLogin(), repository.getName());
+                    setIsStarred(true);
+                }
+            });
+        }
     }
 
     @Override
@@ -98,4 +144,38 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
         }
     }
 
+    @Override
+    public void showStars(int count) {
+        starTxt.setText(String.valueOf(count));
+    }
+
+    @Override
+    public void setIsStarred(boolean isStarred) {
+        this.isStarred = isStarred;
+        if (isStarred) {
+            starImg.setImageResource(R.drawable.ic_stars_black_36dp);
+        } else {
+            starImg.setImageResource(R.drawable.ic_star_white_36dp);
+        }
+    }
+
+    @Override
+    public void showWatchers(int count) {
+        watchTxt.setText(String.valueOf(count));
+    }
+
+    @Override
+    public void setIsWatched(boolean isWatched) {
+        this.isWatched = isWatched;
+        if (isWatched) {
+            watchImg.setImageResource(R.drawable.ic_remove_red_eye_black_36dp);
+        } else {
+            watchImg.setImageResource(R.drawable.ic_remove_red_eye_white_36dp);
+        }
+    }
+
+    @Override
+    public void showForks(int count) {
+        forkTxt.setText(String.valueOf(count));
+    }
 }

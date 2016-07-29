@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import joe.githubapi.core.GitHubApi;
+import joe.githubapi.model.activity.SubscriptionInfo;
+import joe.githubapi.model.activity.SubscriptionParam;
 import joe.githubapi.model.event.EventInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.service.ActivityService;
@@ -42,5 +44,17 @@ public class ActivityApi {
 
     public Observable<ResponseBody> unStarRepository(String owner, String repo, String access_token) {
         return createService().unStarRepository(owner, repo, access_token);
+    }
+
+    public Observable<SubscriptionInfo> getASubscription(String owner, String repo, String access_token) {
+        return createService().getASubscription(owner, repo, access_token);
+    }
+
+    public Observable<SubscriptionInfo> setASubscription(String owner, String repo, SubscriptionParam body, String access_token) {
+        return createService().setASubscription(owner, repo, body, access_token);
+    }
+
+    public Observable<ResponseBody> deleteASubscription(String owner, String repo, String access_token) {
+        return createService().deleteASubscription(owner, repo, access_token);
     }
 }

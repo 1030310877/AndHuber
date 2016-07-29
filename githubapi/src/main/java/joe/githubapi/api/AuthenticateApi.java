@@ -3,8 +3,8 @@ package joe.githubapi.api;
 import android.util.Base64;
 
 import joe.githubapi.core.GitHubApi;
-import joe.githubapi.model.authentication.AuthenticationResult;
-import joe.githubapi.model.authentication.AuthorizationInfo;
+import joe.githubapi.model.authentication.AuthenticationInfo;
+import joe.githubapi.model.authentication.AuthorizationParam;
 import joe.githubapi.service.AuthenticateService;
 import okhttp3.ResponseBody;
 import rx.Observable;
@@ -19,7 +19,7 @@ public class AuthenticateApi {
         return GitHubApi.createService(AuthenticateService.class);
     }
 
-    public Observable<AuthenticationResult> login(String username, String password, String code, AuthorizationInfo info) {
+    public Observable<AuthenticationInfo> login(String username, String password, String code, AuthorizationParam info) {
         String credentials = username + ":" + password;
         String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         basic = basic.trim();

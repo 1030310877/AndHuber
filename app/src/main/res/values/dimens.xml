@@ -27,4 +27,7 @@
     <dimen name="head_img_search_user_width">64dp</dimen>
     <dimen name="item_search_repos_height">80dp</dimen>
     <dimen name="item_search_repos_number_width">40dp</dimen>
+    <dimen name="appbar_userdetail_height">300dp</dimen>
+    <dimen name="img_user_detail_head_width">90dp</dimen>
+    <dimen name="item_user_detail_height">40dp</dimen>
 </resources>

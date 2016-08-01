@@ -59,7 +59,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         userPresenter = new UserMainPresenterImpl(this);
         initViews();
         initListeners();
-        userPresenter.getUserInfo(userLogin);
+        userPresenter.getUserInfoFromServer(userLogin);
     }
 
     @Override
@@ -100,7 +100,9 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         if (toolbar != null) {
             toolbar.setNavigationIcon(null);
         }
@@ -117,6 +119,11 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         viewPager = (ViewPager) findViewById(R.id.vp_main);
         tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
 
+        headImg.setOnClickListener(v1 -> {
+            Intent intent = new Intent(this, UserDetailActivity.class);
+            intent.putExtra("user", userPresenter.getUserInfo());
+            startActivity(intent);
+        });
         refreshBtn = (FloatingActionButton) findViewById(R.id.fab_main);
         if (refreshBtn != null) {
             refreshBtn.setOnClickListener(v -> userPresenter.refreshData(nowIndex));
@@ -203,7 +210,7 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     @Override
     public void setCompany(String company) {
         if (TextUtils.isEmpty(company)) {
-            company = "null";
+            company = "nocompany";
         }
         companyTxt.setText(company);
     }

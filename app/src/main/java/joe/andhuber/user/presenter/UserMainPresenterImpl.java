@@ -19,6 +19,7 @@ public class UserMainPresenterImpl implements UserMainPresenter {
 
     private UserMainView view;
     private UserModel model;
+    private UserInfo userInfo;
 
     public UserMainPresenterImpl(UserMainView view) {
         this.view = view;
@@ -40,7 +41,12 @@ public class UserMainPresenterImpl implements UserMainPresenter {
     }
 
     @Override
-    public void getUserInfo(String loginName) {
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    @Override
+    public void getUserInfoFromServer(String loginName) {
         view.showWaitDialog();
         model.getUserInfo(loginName, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
 
@@ -49,6 +55,7 @@ public class UserMainPresenterImpl implements UserMainPresenter {
                 if (view.isHome()) {
                     UserConfig.nowUser = userInfo;
                 }
+                UserMainPresenterImpl.this.userInfo = userInfo;
                 view.dismissWaitDialog();
                 initUserViews(userInfo);
                 view.initFragments(userInfo);

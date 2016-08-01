@@ -66,7 +66,7 @@ public class UserInfo implements Serializable {
     private String blog;
     private String location;
     private String email;
-    private String hireable;
+    private boolean hireable;
     private String bio;
     private int public_repos;
     private int public_gists;
@@ -291,20 +291,20 @@ public class UserInfo implements Serializable {
         this.email = email;
     }
 
-    public String getHireable() {
-        return hireable;
-    }
-
-    public void setHireable(String hireable) {
-        this.hireable = hireable;
-    }
-
     public String getBio() {
         return bio;
     }
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public boolean isHireable() {
+        return hireable;
+    }
+
+    public void setHireable(boolean hireable) {
+        this.hireable = hireable;
     }
 
     public int getPublic_repos() {
@@ -411,7 +411,7 @@ public class UserInfo implements Serializable {
         this.plan = plan;
     }
 
-    public static class PlanBean {
+    public static class PlanBean implements Serializable {
         private String name;
         private int space;
         private int private_repos;

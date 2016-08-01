@@ -3,6 +3,8 @@
     package="joe.andhuber">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".HuberApplication"
         android:allowBackup="true"
@@ -21,6 +23,8 @@
         <activity android:name=".login.LoginActivity" />
 
         <activity android:name=".user.UserMainActivity" />
+
+        <activity android:name=".user.UserDetailActivity" />
 
         <activity android:name=".repository.activity.RepoDetailActivity" />
 

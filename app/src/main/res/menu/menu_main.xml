@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/menu_message"
-        android:icon="@drawable/ic_message_black_24dp"
+        android:icon="@drawable/ic_message_white_24dp"
         android:title="@string/menu_message"
         android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_set"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/ic_settings_white_24dp"
         android:title="@string/setting"
         android:visible="false"
         app:showAsAction="ifRoom" />

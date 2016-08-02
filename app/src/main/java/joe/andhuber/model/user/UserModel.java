@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import joe.andhuber.config.UserConfig;
+import joe.andhuber.model.activity.IUserCallBack;
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
 import joe.githubapi.model.authentication.AuthenticationInfo;
 import joe.githubapi.model.authentication.AuthorizationParam;
 import joe.githubapi.model.user.UserInfo;
+import joe.githubapi.model.user.UserParam;
 import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
@@ -25,7 +27,7 @@ import rx.schedulers.Schedulers;
  */
 public class UserModel implements IUser {
     @Override
-    public void login(User user, String code, LoginCallBack callBack) {
+    public void login(User user, String code, IUserCallBack<Void> callBack) {
         ArrayList<String> scopes = new ArrayList<>();
         scopes.add("user");
         scopes.add("repo");
@@ -51,7 +53,7 @@ public class UserModel implements IUser {
                                 ErrorInfo errorInfo = new ErrorInfo();
                                 errorInfo.setMessage("value is null");
                                 if (callBack != null) {
-                                    callBack.loginFailed(errorInfo);
+                                    callBack.onFailed(errorInfo.getMessage());
                                     return;
                                 }
                             }
@@ -59,14 +61,14 @@ public class UserModel implements IUser {
                                 ErrorInfo errorInfo = new ErrorInfo();
                                 errorInfo.setMessage("required");
                                 if (callBack != null) {
-                                    callBack.loginFailed(errorInfo);
+                                    callBack.onFailed(errorInfo.getMessage());
                                 }
                             }
                         } else {
                             ErrorInfo errorInfo = new ErrorInfo();
                             errorInfo.setMessage(e.toString());
                             if (callBack != null) {
-                                callBack.loginFailed(errorInfo);
+                                callBack.onFailed(errorInfo.getMessage());
                             }
                         }
                     }
@@ -74,7 +76,7 @@ public class UserModel implements IUser {
                     @Override
                     public void onCompleted() {
                         if (callBack != null) {
-                            callBack.loginSuccess();
+                            callBack.onSuccess(null);
                         }
                     }
 
@@ -92,7 +94,7 @@ public class UserModel implements IUser {
     }
 
     @Override
-    public void getUserInfo(String username, String token, GetUserInfoCallBack callBack) {
+    public void getUserInfo(String username, String token, IUserCallBack<UserInfo> callBack) {
         GitHubApi.getUserApi().getUserInfo(username, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -104,21 +106,21 @@ public class UserModel implements IUser {
                     @Override
                     public void onHttpError(ErrorInfo info) {
                         if (callBack != null) {
-                            callBack.getFailed(info);
+                            callBack.onFailed(info.getMessage());
                         }
                     }
 
                     @Override
                     public void onNext(UserInfo userInfo) {
                         if (callBack != null) {
-                            callBack.getSuccessfully(userInfo);
+                            callBack.onSuccess(userInfo);
                         }
                     }
                 });
     }
 
     @Override
-    public void checkAuthorization(String token, CheckCallBack callBack) {
+    public void checkAuthorization(String token, IUserCallBack<Void> callBack) {
         GitHubApi.getAuthenticateApi().checkAuthorization(GitHubApi.CLIENT_ID, GitHubApi.CLIENT_SECRET, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -131,14 +133,40 @@ public class UserModel implements IUser {
                     @Override
                     public void onError(Throwable e) {
                         if (callBack != null) {
-                            callBack.checkFailed();
+                            callBack.onFailed(e.toString());
                         }
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         if (callBack != null) {
-                            callBack.checkSuccess();
+                            callBack.onSuccess(null);
+                        }
+                    }
+                });
+    }
+
+    public void updateUserInfo(UserParam param, String token, IUserCallBack<UserInfo> callBack) {
+        GitHubApi.getUserApi().updateUser(param, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<UserInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(UserInfo userInfo) {
+                        if (callBack != null) {
+                            callBack.onSuccess(userInfo);
                         }
                     }
                 });

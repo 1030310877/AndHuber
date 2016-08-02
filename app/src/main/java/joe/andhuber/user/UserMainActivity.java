@@ -8,6 +8,8 @@ import android.support.annotation.DrawableRes;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
@@ -34,6 +36,8 @@ import joe.githubapi.model.user.UserInfo;
 
 public class UserMainActivity extends BaseActivity implements UserMainView {
 
+    private static final int NEED_REFRESH = 0XAA;
+
     private TabLayout tabLayout;
     private CollapsingToolbarLayout toolbarLayout;
     private AppCompatImageView headImg;
@@ -45,16 +49,13 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
     private FloatingActionButton refreshBtn;
     private AppCompatTextView blogTxt, companyTxt, emailTxt, followerTxt, followingTxt;
     private int nowIndex = 0;
-    private String userLogin;
     private boolean isHome = false;
-    private ArrayList<Fragment> fragments;
-    private UserMainPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userLogin = getIntent().getStringExtra("user");
+        String userLogin = getIntent().getStringExtra("user");
         isHome = getIntent().getBooleanExtra("isHome", false);
         userPresenter = new UserMainPresenterImpl(this);
         initViews();
@@ -96,6 +97,20 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case NEED_REFRESH:
+                if (resultCode == RESULT_OK) {
+                    UserInfo user = (UserInfo) data.getSerializableExtra("user");
+                    userPresenter.setUserInfo(user);
+                    userPresenter.initUserViews(user);
+                }
+                break;
+        }
+    }
+
     private void initViews() {
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
@@ -122,7 +137,10 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         headImg.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, UserDetailActivity.class);
             intent.putExtra("user", userPresenter.getUserInfo());
-            startActivity(intent);
+            ActivityOptionsCompat options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                            headImg, getString(R.string.transition_head));
+            ActivityCompat.startActivityForResult(this, intent, NEED_REFRESH, options.toBundle());
         });
         refreshBtn = (FloatingActionButton) findViewById(R.id.fab_main);
         if (refreshBtn != null) {
@@ -235,12 +253,12 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
 
     @Override
     public void initFragments(UserInfo user) {
-        fragments = new ArrayList<>();
+        ArrayList<Fragment> fragments = new ArrayList<>();
         repositoryFragment = RepositoryFragment.newInstance(user);
         starFragment = StarFragment.newInstance(user);
         fragments.add(repositoryFragment);
         fragments.add(starFragment);
-        adapter = new UserMainPagerAdapter(getSupportFragmentManager(), this, fragments);
+        UserMainPagerAdapter adapter = new UserMainPagerAdapter(getSupportFragmentManager(), this, fragments);
         viewPager.setAdapter(adapter);
         if (tabLayout != null) {
             tabLayout.setupWithViewPager(viewPager);

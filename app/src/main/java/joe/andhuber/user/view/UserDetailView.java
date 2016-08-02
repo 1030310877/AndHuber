@@ -8,6 +8,8 @@ import joe.andhuber.base.BaseView;
  */
 public interface UserDetailView extends BaseView {
 
+    void setChanged(boolean changed);
+
     void setEditable(boolean isEnable);
 
     void showFollowers(int num);
@@ -33,4 +35,8 @@ public interface UserDetailView extends BaseView {
     void showLocation(String location);
 
     void showHireable(boolean hireable);
+
+    void showBtns(boolean isShown);
+
+    void showEditImg(boolean isShown);
 }

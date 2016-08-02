@@ -1,6 +1,6 @@
 package joe.andhuber.model.user;
 
-import joe.githubapi.model.ErrorInfo;
+import joe.andhuber.model.activity.IUserCallBack;
 import joe.githubapi.model.user.UserInfo;
 
 /**
@@ -8,29 +8,11 @@ import joe.githubapi.model.user.UserInfo;
  * Created by chenqiao on 2016/6/30.
  */
 public interface IUser {
-    void login(User user, String code, LoginCallBack callBack);
+    void login(User user, String code, IUserCallBack<Void> callBack);
 
     void logout();
 
-    interface LoginCallBack {
-        void loginSuccess();
+    void getUserInfo(String username, String token, IUserCallBack<UserInfo> callBack);
 
-        void loginFailed(ErrorInfo errorInfo);
-    }
-
-    void getUserInfo(String username, String token, GetUserInfoCallBack callBack);
-
-    interface GetUserInfoCallBack {
-        void getSuccessfully(UserInfo userInfo);
-
-        void getFailed(ErrorInfo info);
-    }
-
-    void checkAuthorization(String token, CheckCallBack callBack);
-
-    interface CheckCallBack {
-        void checkSuccess();
-
-        void checkFailed();
-    }
+    void checkAuthorization(String token, IUserCallBack<Void> callBack);
 }

@@ -2,11 +2,10 @@ package joe.andhuber.login.presenter;
 
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.login.view.LoginView;
-import joe.andhuber.model.user.IUser;
+import joe.andhuber.model.activity.IUserCallBack;
 import joe.andhuber.model.user.User;
 import joe.andhuber.model.user.UserModel;
 import joe.andhuber.utils.rx.RxView;
-import joe.githubapi.model.ErrorInfo;
 
 /**
  * Description
@@ -34,9 +33,9 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void login(User user, String code) {
         view.showWaitDialog();
-        userModel.login(user, code, new IUser.LoginCallBack() {
+        userModel.login(user, code, new IUserCallBack<Void>() {
             @Override
-            public void loginSuccess() {
+            public void onSuccess(Void result) {
                 if (UserConfig.getInstance().isRememberUser()) {
                     UserConfig.getInstance().setDefaultUser(user.getUserName(), user.getPassWord());
                 } else {
@@ -47,13 +46,13 @@ public class LoginPresenterImpl implements LoginPresenter {
             }
 
             @Override
-            public void loginFailed(ErrorInfo errorInfo) {
-                if (errorInfo.getMessage().equals("required")) {
+            public void onFailed(String message) {
+                if (message.equals("required")) {
                     view.dismissWaitDialog();
                     view.showTwoFactorDialog();
                 } else {
                     view.dismissWaitDialog();
-                    view.showError(errorInfo.getMessage());
+                    view.showError(message);
                 }
             }
         });

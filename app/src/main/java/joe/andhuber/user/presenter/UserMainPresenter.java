@@ -9,7 +9,11 @@ import joe.githubapi.model.user.UserInfo;
 public interface UserMainPresenter {
     UserInfo getUserInfo();
 
+    void setUserInfo(UserInfo userInfo);
+
     void getUserInfoFromServer(String loginName);
 
     void refreshData(int nowIndex);
+
+    void initUserViews(UserInfo userInfo);
 }

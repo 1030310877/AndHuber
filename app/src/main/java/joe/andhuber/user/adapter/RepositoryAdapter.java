@@ -115,7 +115,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
             if (logo.equals("fork")) {
                 logoImg.setImageResource(R.drawable.ic_call_split_black_18dp);
             } else {
-                logoImg.setImageResource(R.drawable.ic_receipt_black_24dp);
+                logoImg.setImageResource(R.drawable.ic_code_black_24dp);
             }
         }
     }

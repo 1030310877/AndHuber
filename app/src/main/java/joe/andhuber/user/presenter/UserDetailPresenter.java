@@ -11,9 +11,13 @@ import joe.githubapi.model.user.UserParam;
  */
 public interface UserDetailPresenter {
 
+    UserInfo getUserInfo();
+
     void getUserInfo(Intent intent);
 
     void showInfo(UserInfo info);
 
     void saveUser(UserParam param);
+
+    void initInfo();
 }

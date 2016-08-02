@@ -5,10 +5,9 @@ import android.text.TextUtils;
 import com.joe.rxbus.RxBus;
 
 import joe.andhuber.config.UserConfig;
-import joe.andhuber.model.user.IUser;
+import joe.andhuber.model.activity.IUserCallBack;
 import joe.andhuber.model.user.UserModel;
 import joe.andhuber.user.view.UserMainView;
-import joe.githubapi.model.ErrorInfo;
 import joe.githubapi.model.user.UserInfo;
 
 /**
@@ -26,6 +25,7 @@ public class UserMainPresenterImpl implements UserMainPresenter {
         model = new UserModel();
     }
 
+    @Override
     public void initUserViews(UserInfo userInfo) {
         if (TextUtils.isEmpty(userInfo.getName())) {
             view.setTitle(userInfo.getLogin());
@@ -46,23 +46,27 @@ public class UserMainPresenterImpl implements UserMainPresenter {
     }
 
     @Override
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    @Override
     public void getUserInfoFromServer(String loginName) {
         view.showWaitDialog();
-        model.getUserInfo(loginName, UserConfig.getInstance().getToken(), new IUser.GetUserInfoCallBack() {
-
+        model.getUserInfo(loginName, UserConfig.getInstance().getToken(), new IUserCallBack<UserInfo>() {
             @Override
-            public void getSuccessfully(UserInfo userInfo) {
+            public void onSuccess(UserInfo result) {
+                UserMainPresenterImpl.this.userInfo = result;
                 if (view.isHome()) {
                     UserConfig.nowUser = userInfo;
                 }
-                UserMainPresenterImpl.this.userInfo = userInfo;
                 view.dismissWaitDialog();
                 initUserViews(userInfo);
                 view.initFragments(userInfo);
             }
 
             @Override
-            public void getFailed(ErrorInfo info) {
+            public void onFailed(String message) {
                 view.dismissWaitDialog();
             }
         });

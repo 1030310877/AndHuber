@@ -102,6 +102,7 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
         showWatchers(repository.getWatchers_count());
         showForks(repository.getForks_count());
 
+        forkTxt.setOnClickListener(v -> presenter.forkRepository(repository.getOwner().getLogin(), repository.getName(), null));
         View watchView = findViewById(R.id.layout_repodetail_watch);
         if (watchView != null) {
             watchView.setOnClickListener(v -> {

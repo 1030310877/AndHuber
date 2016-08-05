@@ -32,7 +32,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_language_black_18dp" />
+            app:srcCompat="@drawable/ic_language_white_18dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_search_language"
@@ -46,7 +46,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_sort_black_18dp" />
+            app:srcCompat="@drawable/ic_sort_white_18dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_search_sort"

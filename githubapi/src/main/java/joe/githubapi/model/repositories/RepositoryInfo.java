@@ -203,6 +203,35 @@ public class RepositoryInfo implements Serializable {
     private double score;
 
     private List<TextMatchesBean> text_matches;
+    /**
+     * parent : {"id":5152285,"name":"okhttp","full_name":"square/okhttp","owner":{"login":"square","id":82592,"avatar_url":"https://avatars.githubusercontent.com/u/82592?v=3","gravatar_id":"","url":"https://api.github.com/users/square","html_url":"https://github.com/square","followers_url":"https://api.github.com/users/square/followers","following_url":"https://api.github.com/users/square/following{/other_user}","gists_url":"https://api.github.com/users/square/gists{/gist_id}","starred_url":"https://api.github.com/users/square/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/square/subscriptions","organizations_url":"https://api.github.com/users/square/orgs","repos_url":"https://api.github.com/users/square/repos","events_url":"https://api.github.com/users/square/events{/privacy}","received_events_url":"https://api.github.com/users/square/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/square/okhttp","description":"An HTTP+HTTP/2 client for Android and Java applications.","fork":false,"url":"https://api.github.com/repos/square/okhttp","forks_url":"https://api.github.com/repos/square/okhttp/forks","keys_url":"https://api.github.com/repos/square/okhttp/keys{/key_id}","collaborators_url":"https://api.github.com/repos/square/okhttp/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/square/okhttp/teams","hooks_url":"https://api.github.com/repos/square/okhttp/hooks","issue_events_url":"https://api.github.com/repos/square/okhttp/issues/events{/number}","events_url":"https://api.github.com/repos/square/okhttp/events","assignees_url":"https://api.github.com/repos/square/okhttp/assignees{/user}","branches_url":"https://api.github.com/repos/square/okhttp/branches{/branch}","tags_url":"https://api.github.com/repos/square/okhttp/tags","blobs_url":"https://api.github.com/repos/square/okhttp/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/square/okhttp/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/square/okhttp/git/refs{/sha}","trees_url":"https://api.github.com/repos/square/okhttp/git/trees{/sha}","statuses_url":"https://api.github.com/repos/square/okhttp/statuses/{sha}","languages_url":"https://api.github.com/repos/square/okhttp/languages","stargazers_url":"https://api.github.com/repos/square/okhttp/stargazers","contributors_url":"https://api.github.com/repos/square/okhttp/contributors","subscribers_url":"https://api.github.com/repos/square/okhttp/subscribers","subscription_url":"https://api.github.com/repos/square/okhttp/subscription","commits_url":"https://api.github.com/repos/square/okhttp/commits{/sha}","git_commits_url":"https://api.github.com/repos/square/okhttp/git/commits{/sha}","comments_url":"https://api.github.com/repos/square/okhttp/comments{/number}","issue_comment_url":"https://api.github.com/repos/square/okhttp/issues/comments{/number}","contents_url":"https://api.github.com/repos/square/okhttp/contents/{+path}","compare_url":"https://api.github.com/repos/square/okhttp/compare/{base}...{head}","merges_url":"https://api.github.com/repos/square/okhttp/merges","archive_url":"https://api.github.com/repos/square/okhttp/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/square/okhttp/downloads","issues_url":"https://api.github.com/repos/square/okhttp/issues{/number}","pulls_url":"https://api.github.com/repos/square/okhttp/pulls{/number}","milestones_url":"https://api.github.com/repos/square/okhttp/milestones{/number}","notifications_url":"https://api.github.com/repos/square/okhttp/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/square/okhttp/labels{/name}","releases_url":"https://api.github.com/repos/square/okhttp/releases{/id}","deployments_url":"https://api.github.com/repos/square/okhttp/deployments","created_at":"2012-07-23T13:42:55Z","updated_at":"2016-08-05T08:06:19Z","pushed_at":"2016-08-04T02:38:41Z","git_url":"git://github.com/square/okhttp.git","ssh_url":"git@github.com:square/okhttp.git","clone_url":"https://github.com/square/okhttp.git","svn_url":"https://github.com/square/okhttp","homepage":"http://square.github.io/okhttp/","size":32662,"stargazers_count":13340,"watchers_count":13340,"language":"Java","has_issues":true,"has_downloads":true,"has_wiki":true,"has_pages":true,"forks_count":3475,"mirror_url":null,"open_issues_count":108,"forks":3475,"open_issues":108,"watchers":13340,"default_branch":"master"}
+     * source : {"id":5152285,"name":"okhttp","full_name":"square/okhttp","owner":{"login":"square","id":82592,"avatar_url":"https://avatars.githubusercontent.com/u/82592?v=3","gravatar_id":"","url":"https://api.github.com/users/square","html_url":"https://github.com/square","followers_url":"https://api.github.com/users/square/followers","following_url":"https://api.github.com/users/square/following{/other_user}","gists_url":"https://api.github.com/users/square/gists{/gist_id}","starred_url":"https://api.github.com/users/square/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/square/subscriptions","organizations_url":"https://api.github.com/users/square/orgs","repos_url":"https://api.github.com/users/square/repos","events_url":"https://api.github.com/users/square/events{/privacy}","received_events_url":"https://api.github.com/users/square/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/square/okhttp","description":"An HTTP+HTTP/2 client for Android and Java applications.","fork":false,"url":"https://api.github.com/repos/square/okhttp","forks_url":"https://api.github.com/repos/square/okhttp/forks","keys_url":"https://api.github.com/repos/square/okhttp/keys{/key_id}","collaborators_url":"https://api.github.com/repos/square/okhttp/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/square/okhttp/teams","hooks_url":"https://api.github.com/repos/square/okhttp/hooks","issue_events_url":"https://api.github.com/repos/square/okhttp/issues/events{/number}","events_url":"https://api.github.com/repos/square/okhttp/events","assignees_url":"https://api.github.com/repos/square/okhttp/assignees{/user}","branches_url":"https://api.github.com/repos/square/okhttp/branches{/branch}","tags_url":"https://api.github.com/repos/square/okhttp/tags","blobs_url":"https://api.github.com/repos/square/okhttp/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/square/okhttp/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/square/okhttp/git/refs{/sha}","trees_url":"https://api.github.com/repos/square/okhttp/git/trees{/sha}","statuses_url":"https://api.github.com/repos/square/okhttp/statuses/{sha}","languages_url":"https://api.github.com/repos/square/okhttp/languages","stargazers_url":"https://api.github.com/repos/square/okhttp/stargazers","contributors_url":"https://api.github.com/repos/square/okhttp/contributors","subscribers_url":"https://api.github.com/repos/square/okhttp/subscribers","subscription_url":"https://api.github.com/repos/square/okhttp/subscription","commits_url":"https://api.github.com/repos/square/okhttp/commits{/sha}","git_commits_url":"https://api.github.com/repos/square/okhttp/git/commits{/sha}","comments_url":"https://api.github.com/repos/square/okhttp/comments{/number}","issue_comment_url":"https://api.github.com/repos/square/okhttp/issues/comments{/number}","contents_url":"https://api.github.com/repos/square/okhttp/contents/{+path}","compare_url":"https://api.github.com/repos/square/okhttp/compare/{base}...{head}","merges_url":"https://api.github.com/repos/square/okhttp/merges","archive_url":"https://api.github.com/repos/square/okhttp/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/square/okhttp/downloads","issues_url":"https://api.github.com/repos/square/okhttp/issues{/number}","pulls_url":"https://api.github.com/repos/square/okhttp/pulls{/number}","milestones_url":"https://api.github.com/repos/square/okhttp/milestones{/number}","notifications_url":"https://api.github.com/repos/square/okhttp/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/square/okhttp/labels{/name}","releases_url":"https://api.github.com/repos/square/okhttp/releases{/id}","deployments_url":"https://api.github.com/repos/square/okhttp/deployments","created_at":"2012-07-23T13:42:55Z","updated_at":"2016-08-05T08:06:19Z","pushed_at":"2016-08-04T02:38:41Z","git_url":"git://github.com/square/okhttp.git","ssh_url":"git@github.com:square/okhttp.git","clone_url":"https://github.com/square/okhttp.git","svn_url":"https://github.com/square/okhttp","homepage":"http://square.github.io/okhttp/","size":32662,"stargazers_count":13340,"watchers_count":13340,"language":"Java","has_issues":true,"has_downloads":true,"has_wiki":true,"has_pages":true,"forks_count":3475,"mirror_url":null,"open_issues_count":108,"forks":3475,"open_issues":108,"watchers":13340,"default_branch":"master"}
+     * network_count : 3475
+     * subscribers_count : 1
+     */
+
+    private int network_count;
+    private int subscribers_count;
+
+    private RepositoryInfo parent;
+
+    private RepositoryInfo source;
+
+    public RepositoryInfo getParent() {
+        return parent;
+    }
+
+    public void setParent(RepositoryInfo parent) {
+        this.parent = parent;
+    }
+
+    public RepositoryInfo getSource() {
+        return source;
+    }
+
+    public void setSource(RepositoryInfo source) {
+        this.source = source;
+    }
 
     public double getScore() {
         return score;
@@ -770,6 +799,22 @@ public class RepositoryInfo implements Serializable {
 
     public void setPermissions(PermissionsBean permissions) {
         this.permissions = permissions;
+    }
+
+    public int getNetwork_count() {
+        return network_count;
+    }
+
+    public void setNetwork_count(int network_count) {
+        this.network_count = network_count;
+    }
+
+    public int getSubscribers_count() {
+        return subscribers_count;
+    }
+
+    public void setSubscribers_count(int subscribers_count) {
+        this.subscribers_count = subscribers_count;
     }
 
     public static class PermissionsBean implements Serializable {

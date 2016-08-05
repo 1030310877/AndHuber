@@ -3,6 +3,7 @@ package joe.githubapi.service;
 import java.util.List;
 import java.util.Map;
 
+import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.ReadMeInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
@@ -45,4 +46,10 @@ public interface RepositoriesService {
 
     @POST("/repos/{owner}/{repo}/forks")
     Observable<RepositoryInfo> forkRepository(@Path("owner") String owner, @Path("repo") String repo, @Query("organization") String organization, @Query("access_token") String token);
+
+    @GET("/repos/{owner}/{repo}/commits")
+    Observable<List<CommitInfo>> getRepoCommits(@Path("owner") String owner, @Path("repo") String repo, @QueryMap Map<String, String> params);
+
+    @GET("/repos/{owner}/{repo}/commits/{sha}")
+    Observable<CommitInfo> getRepoCommitBySHA(@Path("owner") String owner, @Path("repo") String repo, @Path("sha") String sha, @Query("access_token") String token);
 }

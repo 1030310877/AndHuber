@@ -16,5 +16,7 @@ public interface RepoDetailPresenter {
 
     void unWatchRepository(String owner, String repo);
 
+    void forkRepository(String owner, String repo, String organization);
+
     void checkIsWatched(String owner, String repo);
 }

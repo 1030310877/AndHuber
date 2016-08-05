@@ -12,6 +12,7 @@ import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.ResponseBody;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -186,6 +187,32 @@ public class RepositoryModel {
                     public void onHttpError(ErrorInfo info) {
                         if (callBack != null) {
                             callBack.onFailed(info.getMessage());
+                        }
+                    }
+                });
+    }
+
+    public Subscription forkRepository(String owner, String repo, String organization, String token, IRepositoryCallBack<RepositoryInfo> callBack) {
+        return GitHubApi.getRepositoriesApi().forkRepository(owner, repo, organization, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RepositoryInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(RepositoryInfo info) {
+                        if (callBack != null) {
+                            callBack.onSuccessfully(info);
                         }
                     }
                 });

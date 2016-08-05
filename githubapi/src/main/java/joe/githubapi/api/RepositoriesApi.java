@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import joe.githubapi.core.GitHubApi;
+import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.ReadMeInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
@@ -59,5 +60,13 @@ public class RepositoriesApi {
 
     public Observable<RepositoryInfo> forkRepository(String owner, String repo, String organization, String access_token) {
         return createService().forkRepository(owner, repo, organization, access_token);
+    }
+
+    public Observable<List<CommitInfo>> getRepoCommits(String owner, String repo, Map<String, String> params) {
+        return createService().getRepoCommits(owner, repo, params);
+    }
+
+    public Observable<CommitInfo> getRepoCommitBySHA(String owner, String repo, String sha, String access_token) {
+        return createService().getRepoCommitBySHA(owner, repo, sha, access_token);
     }
 }

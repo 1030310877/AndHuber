@@ -5,9 +5,12 @@ import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.model.activity.ActivityModel;
 import joe.andhuber.model.activity.IActivityCallBack;
+import joe.andhuber.model.repository.IRepositoryCallBack;
+import joe.andhuber.model.repository.RepositoryModel;
 import joe.andhuber.repository.view.RepoDetailView;
 import joe.andhuber.utils.ToastUtil;
 import joe.githubapi.model.activity.SubscriptionParam;
+import joe.githubapi.model.repositories.RepositoryInfo;
 import rx.Subscription;
 
 /**
@@ -18,12 +21,15 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
 
     private RepoDetailView view;
     private ActivityModel activityModel;
+    private RepositoryModel repositoryModel;
     private Subscription starSubscription;
     private Subscription watchSubscription;
+    private Subscription forkSubscription;
 
     public RepoDetailPresenterImpl(RepoDetailView view) {
         this.view = view;
         activityModel = new ActivityModel();
+        repositoryModel = new RepositoryModel();
     }
 
     @Override
@@ -120,6 +126,26 @@ public class RepoDetailPresenterImpl implements RepoDetailPresenter {
             @Override
             public void onSuccessfully(Boolean result) {
                 view.setIsWatched(false);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.show(HuberApplication.getInstance(), message);
+            }
+        });
+    }
+
+    @Override
+    public void forkRepository(String owner, String repo, String organization) {
+        if (forkSubscription != null) {
+            forkSubscription.unsubscribe();
+            forkSubscription = null;
+        }
+        forkSubscription = repositoryModel.forkRepository(owner, repo, organization, UserConfig.getInstance().getToken(), new IRepositoryCallBack<RepositoryInfo>() {
+            @Override
+            public void onSuccessfully(RepositoryInfo result) {
+                view.showForks(result.getParent().getForks_count());
+                ToastUtil.show(HuberApplication.getInstance(), R.string.fork_success);
             }
 
             @Override

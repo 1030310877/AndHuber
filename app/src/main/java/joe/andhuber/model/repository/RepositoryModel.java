@@ -3,11 +3,13 @@ package joe.andhuber.model.repository;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.utils.MapUtil;
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
+import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.rx.HttpSubscriber;
@@ -80,7 +82,7 @@ public class RepositoryModel {
                 });
     }
 
-    public Subscription getRepoContent(String owner, String repo, String path, String token, IRepositoryCallBack<List<ContentInfo>> callBack) {
+    public Subscription getContentOfRepo(String owner, String repo, String path, String token, IRepositoryCallBack<List<ContentInfo>> callBack) {
         return GitHubApi.getRepositoriesApi().getRepoContent(owner, repo, path, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -213,6 +215,32 @@ public class RepositoryModel {
                     public void onNext(RepositoryInfo info) {
                         if (callBack != null) {
                             callBack.onSuccessfully(info);
+                        }
+                    }
+                });
+    }
+
+    public Subscription getCommitsOfRepo(String owner, String repo, Map<String, String> params, IRepositoryCallBack<List<CommitInfo>> callBack) {
+        return GitHubApi.getRepositoriesApi().getRepoCommits(owner, repo, params)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<CommitInfo>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<CommitInfo> commitInfo) {
+                        if (callBack != null) {
+                            callBack.onSuccessfully(commitInfo);
                         }
                     }
                 });

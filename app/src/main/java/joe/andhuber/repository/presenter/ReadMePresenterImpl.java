@@ -22,17 +22,17 @@ public class ReadMePresenterImpl implements ReadMePresenter {
 
     @Override
     public void getReadMe(String owner, String repo) {
-        view.showWaitDialog();
+//        view.showWaitDialog();
         model.getReadMeOfRepo(owner, repo, new IRepositoryCallBack<String>() {
             @Override
             public void onSuccessfully(String result) {
-                view.dismissWaitDialog();
+//                view.dismissWaitDialog();
                 view.showReadMe(result);
             }
 
             @Override
             public void onFailed(String message) {
-                view.dismissWaitDialog();
+//                view.dismissWaitDialog();
                 ToastUtil.show(HuberApplication.getInstance(), message);
                 view.showReadMe("There is no ReadME.md found");
             }

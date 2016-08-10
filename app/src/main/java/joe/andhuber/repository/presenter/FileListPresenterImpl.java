@@ -31,11 +31,11 @@ public class FileListPresenterImpl implements FileListPresenter {
 
     @Override
     public void getFilesByPath(String owner, String repo, String path) {
-        view.showWaitDialog();
-        model.getRepoContent(owner, repo, path, UserConfig.getInstance().getToken(), new IRepositoryCallBack<List<ContentInfo>>() {
+//        view.showWaitDialog();
+        model.getContentOfRepo(owner, repo, path, UserConfig.getInstance().getToken(), new IRepositoryCallBack<List<ContentInfo>>() {
             @Override
             public void onSuccessfully(List<ContentInfo> result) {
-                view.dismissWaitDialog();
+//                view.dismissWaitDialog();
                 String[] temp = path.split(File.separator);
                 if (result != null) {
                     view.showFiles(result);
@@ -50,7 +50,7 @@ public class FileListPresenterImpl implements FileListPresenter {
 
             @Override
             public void onFailed(String message) {
-                view.dismissWaitDialog();
+//                view.dismissWaitDialog();
                 ToastUtil.show(HuberApplication.getInstance(), message);
             }
         });

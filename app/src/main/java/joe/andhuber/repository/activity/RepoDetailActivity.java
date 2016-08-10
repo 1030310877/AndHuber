@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import joe.andhuber.R;
 import joe.andhuber.base.BaseActivity;
+import joe.andhuber.repository.fragment.CommitsFragment;
 import joe.andhuber.repository.fragment.FileListFragment;
 import joe.andhuber.repository.fragment.ReadMeFragment;
 import joe.andhuber.repository.presenter.RepoDetailPresenter;
@@ -35,7 +36,6 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
     private RepositoryInfo repository;
     private TabLayout tablayout;
     private CollapsingToolbarLayout toolbarLayout;
-    private ViewPager viewPager;
     private AppCompatTextView starTxt, watchTxt, forkTxt;
     private AppCompatImageView starImg, watchImg;
     private boolean isStarred = false;
@@ -64,15 +64,17 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
         }
         toolbarLayout.setTitle(repository.getName());
         tablayout = (TabLayout) findViewById(R.id.tablayout_repodetail);
-        viewPager = (ViewPager) findViewById(R.id.vp_repodetail);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vp_repodetail);
         ArrayList<Fragment> fragments = new ArrayList<>();
         ReadMeFragment readMeFragment = ReadMeFragment.newInstance(repository);
         FileListFragment fileListFragment = FileListFragment.newInstance(repository);
+        CommitsFragment commitsFragment = CommitsFragment.newInstance(repository);
         fragments.add(readMeFragment);
         fragments.add(fileListFragment);
+        fragments.add(commitsFragment);
 
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            private String[] titles = new String[]{"ReadMe", "Code"};
+            private String[] titles = new String[]{"ReadMe", "Code", "Commit"};
 
             @Override
             public Fragment getItem(int position) {
@@ -89,7 +91,10 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
                 return titles[position];
             }
         };
-        viewPager.setAdapter(adapter);
+        if (viewPager != null) {
+            viewPager.setAdapter(adapter);
+            viewPager.setOffscreenPageLimit(2);
+        }
         tablayout.setupWithViewPager(viewPager);
 
         starTxt = (AppCompatTextView) findViewById(R.id.txt_repodetail_star);

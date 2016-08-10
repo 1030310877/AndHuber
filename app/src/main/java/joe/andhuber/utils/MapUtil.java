@@ -40,7 +40,7 @@ public class MapUtil {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                if (!TextUtils.isEmpty(key) && value != null) {
+                if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
                     map.put(key, value);
                 }
             }

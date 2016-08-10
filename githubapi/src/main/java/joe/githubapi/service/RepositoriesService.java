@@ -3,6 +3,7 @@ package joe.githubapi.service;
 import java.util.List;
 import java.util.Map;
 
+import joe.githubapi.model.repositories.CommentInfo;
 import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.ReadMeInfo;
@@ -10,6 +11,7 @@ import joe.githubapi.model.repositories.RepositoryInfo;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -52,4 +54,22 @@ public interface RepositoriesService {
 
     @GET("/repos/{owner}/{repo}/commits/{sha}")
     Observable<CommitInfo> getRepoCommitBySHA(@Path("owner") String owner, @Path("repo") String repo, @Path("sha") String sha, @Query("access_token") String token);
+
+    @GET("/repos/{owner}/{repo}/commits/{sha}")
+    Observable<ResponseBody> getRepoCommitBySHAWitHeader(@Header("Accept") String accept, @Path("repo") String repo, @Path("sha") String sha, @Query("access_token") String token);
+
+    @GET("/repo/{owner}/{repo}/comments")
+    @Headers({
+            "Accept : application/vnd.github-commitcomment.full+json"
+    })
+    Observable<List<CommentInfo>> getRepoComments(@Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @GET("/repo/{owner}/{repo}/comments")
+    Observable<List<CommentInfo>> getRepoComments(@Header("Accept") String media_type, @Path("owner") String owner, @Path("repo") String repo, @Query("access_token") String token);
+
+    @GET("/repo/{owner}/{repo}/commits/{sha}/comments")
+    @Headers({
+            "Accept : application/vnd.github-commitcomment.full+json"
+    })
+    Observable<List<CommentInfo>> getCommentsForACommit(@Path("owner") String owner, @Path("repo") String repo, @Path("sha") String ref, @Query("access_token") String token);
 }

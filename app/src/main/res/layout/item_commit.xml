@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="8dp">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_item_commit_head"
+        android:layout_width="@dimen/item_commit_head_width"
+        android:layout_height="@dimen/item_commit_head_width"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        tool:src="@mipmap/ic_launcher" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_item_commit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/img_item_commit_head"
+        android:layout_toRightOf="@+id/img_item_commit_head"
+        android:textStyle="bold"
+        tool:text="Name" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_item_commit_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:drawableEnd="@drawable/ic_message_light_grey_18dp"
+        android:drawableRight="@drawable/ic_message_light_grey_18dp"
+        android:gravity="center_vertical"
+        android:inputType="number"
+        tool:text="0" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_item_commit_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_item_commit_name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/img_item_commit_head"
+        android:layout_toRightOf="@+id/img_item_commit_head"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tool:text="this is the message" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_item_commit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txt_item_commit_message"
+        tool:text="2016-08-05T09:36:55Z" />
+</RelativeLayout>

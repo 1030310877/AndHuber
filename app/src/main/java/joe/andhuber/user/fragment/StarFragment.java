@@ -140,6 +140,9 @@ public class StarFragment extends BaseFragment implements StarView {
 
     @Override
     public void showWaitDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
         dialog = new ProgressDialog(mContext);
         dialog.setMessage(getString(R.string.getting_star));
         dialog.setCanceledOnTouchOutside(true);

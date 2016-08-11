@@ -30,9 +30,21 @@ public class UserModel implements IUser {
     public void login(User user, String code, IUserCallBack<Void> callBack) {
         ArrayList<String> scopes = new ArrayList<>();
         scopes.add("user");
+
         scopes.add("repo");
         scopes.add("delete_repo");
         scopes.add("public_repo");
+        scopes.add("repo:status");
+        scopes.add("delete_repo");
+        scopes.add("read:repo_hook");
+        scopes.add("write:repo_hook");
+        scopes.add("admin:repo_hook");
+
+        scopes.add("admin:org");
+        scopes.add("read:org");
+        scopes.add("write:org");
+        scopes.add("admin:org_hook");
+
         AuthorizationParam info = new AuthorizationParam();
         info.setClient_id(GitHubApi.CLIENT_ID);
         info.setClient_secret(GitHubApi.CLIENT_SECRET);

@@ -11,6 +11,7 @@ import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
 import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
+import joe.githubapi.model.repositories.ForkParam;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.githubapi.rx.HttpSubscriber;
 import okhttp3.ResponseBody;
@@ -195,7 +196,9 @@ public class RepositoryModel {
     }
 
     public Subscription forkRepository(String owner, String repo, String organization, String token, IRepositoryCallBack<RepositoryInfo> callBack) {
-        return GitHubApi.getRepositoriesApi().forkRepository(owner, repo, organization, token)
+        ForkParam param = new ForkParam();
+        param.setOrganization(organization);
+        return GitHubApi.getRepositoriesApi().forkRepository(owner, repo, param, token)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<RepositoryInfo>() {

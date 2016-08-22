@@ -213,6 +213,16 @@ public class RepositoryInfo implements Serializable {
     private int network_count;
     private int subscribers_count;
 
+    public UserInfo getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(UserInfo organization) {
+        this.organization = organization;
+    }
+
+    private UserInfo organization;
+
     private RepositoryInfo parent;
 
     private RepositoryInfo source;

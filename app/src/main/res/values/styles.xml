@@ -9,6 +9,13 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="colorControlHighlight">@color/whitesmoke</item>
     </style>
+    <!-- Base application theme. -->
+    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#00000000</item>
+        <item name="colorPrimaryDark">#00000000</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
 
     <style name="PreferenceTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>

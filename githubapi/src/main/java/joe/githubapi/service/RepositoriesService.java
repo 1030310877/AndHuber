@@ -54,6 +54,9 @@ public interface RepositoriesService {
     @POST("/repos/{owner}/{repo}/forks")
     Observable<RepositoryInfo> forkRepository(@Path("owner") String owner, @Path("repo") String repo, @Body ForkParam param, @Query("access_token") String token);
 
+    @POST("/repos/{owner}/{repo}/forks")
+    Observable<RepositoryInfo> forkRepositoryWithBasicAuth(@Header("Authorization") String authorization, @Path("owner") String owner, @Path("repo") String repo, @Body ForkParam param);
+
     @GET("/repos/{owner}/{repo}/commits")
     Observable<List<CommitInfo>> getRepoCommits(@Path("owner") String owner, @Path("repo") String repo, @QueryMap Map<String, String> params);
 

@@ -106,6 +106,33 @@ public class UserModel implements IUser {
     }
 
     @Override
+    public void getNowUserInfo(String token, IUserCallBack<UserInfo> callBack) {
+        GitHubApi.getUserApi().getNowUserInfo(token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpSubscriber<UserInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onNext(UserInfo userInfo) {
+                        if (callBack != null) {
+                            callBack.onSuccess(userInfo);
+                        }
+                    }
+
+                    @Override
+                    public void onHttpError(ErrorInfo info) {
+                        if (callBack != null) {
+                            callBack.onFailed(info.getMessage());
+                        }
+                    }
+                });
+    }
+
+    @Override
     public void getUserInfo(String username, String token, IUserCallBack<UserInfo> callBack) {
         GitHubApi.getUserApi().getUserInfo(username, token)
                 .subscribeOn(Schedulers.newThread())

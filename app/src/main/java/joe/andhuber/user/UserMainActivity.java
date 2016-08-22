@@ -60,7 +60,11 @@ public class UserMainActivity extends BaseActivity implements UserMainView {
         userPresenter = new UserMainPresenterImpl(this);
         initViews();
         initListeners();
-        userPresenter.getUserInfoFromServer(userLogin);
+        if (isHome) {
+            userPresenter.getNowUserInfo();
+        } else {
+            userPresenter.getUserInfoFromServer(userLogin);
+        }
     }
 
     @Override

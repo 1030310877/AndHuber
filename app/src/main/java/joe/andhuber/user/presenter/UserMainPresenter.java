@@ -11,6 +11,8 @@ public interface UserMainPresenter {
 
     void setUserInfo(UserInfo userInfo);
 
+    void getNowUserInfo();
+
     void getUserInfoFromServer(String loginName);
 
     void refreshData(int nowIndex);

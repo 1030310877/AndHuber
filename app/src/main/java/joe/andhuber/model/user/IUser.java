@@ -12,6 +12,8 @@ public interface IUser {
 
     void logout();
 
+    void getNowUserInfo(String token, IUserCallBack<UserInfo> callBack);
+
     void getUserInfo(String username, String token, IUserCallBack<UserInfo> callBack);
 
     void checkAuthorization(String token, IUserCallBack<Void> callBack);

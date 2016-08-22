@@ -1,5 +1,7 @@
 package joe.githubapi.api;
 
+import android.util.Base64;
+
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +65,13 @@ public class RepositoriesApi {
 
     public Observable<RepositoryInfo> forkRepository(String owner, String repo, ForkParam organization, String access_token) {
         return createService().forkRepository(owner, repo, organization, access_token);
+    }
+
+    public Observable<RepositoryInfo> forkRepositoryWithBasicAuth(String username, String password, String owner, String repo, ForkParam organization) {
+        String credentials = username + ":" + password;
+        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        basic = basic.trim();
+        return createService().forkRepositoryWithBasicAuth(basic, owner, repo, organization);
     }
 
     public Observable<List<CommitInfo>> getRepoCommits(String owner, String repo, Map<String, String> params) {

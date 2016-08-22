@@ -51,6 +51,28 @@ public class UserMainPresenterImpl implements UserMainPresenter {
     }
 
     @Override
+    public void getNowUserInfo() {
+        view.showWaitDialog();
+        model.getNowUserInfo(UserConfig.getInstance().getToken(), new IUserCallBack<UserInfo>() {
+            @Override
+            public void onSuccess(UserInfo result) {
+                UserMainPresenterImpl.this.userInfo = result;
+                if (view.isHome()) {
+                    UserConfig.nowUser = userInfo;
+                }
+                view.dismissWaitDialog();
+                initUserViews(userInfo);
+                view.initFragments(userInfo);
+            }
+
+            @Override
+            public void onFailed(String message) {
+                view.dismissWaitDialog();
+            }
+        });
+    }
+
+    @Override
     public void getUserInfoFromServer(String loginName) {
         view.showWaitDialog();
         model.getUserInfo(loginName, UserConfig.getInstance().getToken(), new IUserCallBack<UserInfo>() {

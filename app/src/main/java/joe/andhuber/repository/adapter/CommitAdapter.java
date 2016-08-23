@@ -51,6 +51,14 @@ public class CommitAdapter extends RecyclerView.Adapter<CommitAdapter.CommitView
             holder.setMessage(info.getCommit().getMessage());
             holder.setComment(info.getCommit().getComment_count());
             holder.setDate(info.getCommit().getCommitter().getDate());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(v, position);
+                    }
+                }
+            });
         }
     }
 

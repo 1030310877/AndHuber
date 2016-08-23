@@ -68,7 +68,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Se
                     @Override
                     public void onClick(View v) {
                         if (listener != null) {
-                            listener.onItemClick(holder.getAdapterPosition() - 1);
+                            listener.onItemClick(v, holder.getAdapterPosition() - 1);
                         }
                     }
                 });

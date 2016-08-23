@@ -59,7 +59,7 @@ public class FileListFragment extends BaseFragment implements FileListView {
             data = new ArrayList<>();
             adapter = new RepoFileAdapter(data);
             filesView.setAdapter(adapter);
-            adapter.setOnItemClickListener(position -> {
+            adapter.setOnItemClickListener((v, position) -> {
                 if (position - 1 < data.size()) {
                     ContentInfo info = data.get(position - 1);
                     String path = info.getPath();

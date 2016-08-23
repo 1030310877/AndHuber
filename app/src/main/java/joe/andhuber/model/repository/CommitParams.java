@@ -5,7 +5,7 @@ package joe.andhuber.model.repository;
  * Created by chenqiao on 2016/8/9.
  */
 public class CommitParams {
-    private String sha = "master";
+    private String sha = "";
     private String path = "";
     private String author = "";
     private String since = "";

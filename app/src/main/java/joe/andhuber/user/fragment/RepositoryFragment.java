@@ -71,7 +71,7 @@ public class RepositoryFragment extends BaseFragment implements RepositoryView {
         adapter = new RepositoryAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnLoadingListener(() -> presenter.getUserRepositories(user.getLogin(), page + 1));
-        adapter.setOnItemClickListener(position -> {
+        adapter.setOnItemClickListener((v, position) -> {
             if (position >= 0 && position < data.size()) {
                 Intent intent = new Intent(mContext, RepoDetailActivity.class);
                 intent.putExtra("repository", data.get(position));

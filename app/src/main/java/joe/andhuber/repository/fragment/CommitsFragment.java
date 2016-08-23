@@ -1,6 +1,7 @@
 package joe.andhuber.repository.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +16,7 @@ import java.util.List;
 import joe.andhuber.R;
 import joe.andhuber.base.BaseFragment;
 import joe.andhuber.model.repository.CommitParams;
+import joe.andhuber.repository.activity.CommitDetailActivity;
 import joe.andhuber.repository.adapter.CommitAdapter;
 import joe.andhuber.repository.presenter.CommitsPresenter;
 import joe.andhuber.repository.presenter.CommitsPresenterImpl;
@@ -22,6 +24,7 @@ import joe.andhuber.repository.view.CommitsView;
 import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.view.recyclerview.LoadMoreRecyclerView;
+import joe.view.recyclerview.OnItemClickListener;
 import joe.view.recyclerview.SpaceItemDecoration;
 
 /**
@@ -80,6 +83,15 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
             public void onRefresh() {
                 clearCommits();
                 initCommits();
+            }
+        });
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                CommitInfo commitInfo = data.get(position);
+                Intent intent = new Intent(mContext, CommitDetailActivity.class);
+                intent.putExtra("commitInfo", commitInfo);
+                startActivity(intent);
             }
         });
         initCommits();

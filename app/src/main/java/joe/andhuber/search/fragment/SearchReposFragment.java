@@ -111,7 +111,7 @@ public class SearchReposFragment extends BaseFragment implements SearchReposView
         });
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(View v, int position) {
                 startToRepositoryDetail(repositories.get(position));
             }
         });

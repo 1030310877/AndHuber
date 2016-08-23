@@ -51,7 +51,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
             }
             holder.itemView.setOnClickListener(v -> {
                 if (listener != null) {
-                    listener.onItemClick(holder.getAdapterPosition());
+                    listener.onItemClick(v, holder.getAdapterPosition());
                 }
             });
         }

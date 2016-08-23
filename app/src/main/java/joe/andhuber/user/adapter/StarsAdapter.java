@@ -45,7 +45,7 @@ public class StarsAdapter extends RecyclerView.Adapter<StarsAdapter.StarViewHold
             holder.setForkNum(info.getForks_count());
             holder.itemView.setOnClickListener(v -> {
                 if (listener != null) {
-                    listener.onItemClick(holder.getAdapterPosition());
+                    listener.onItemClick(v, holder.getAdapterPosition());
                 }
             });
         }

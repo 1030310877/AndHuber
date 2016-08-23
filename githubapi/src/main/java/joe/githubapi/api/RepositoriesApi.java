@@ -86,16 +86,16 @@ public class RepositoriesApi {
         return createService().getRepoCommitBySHAWitHeader(accept, owner, repo, sha, access_token);
     }
 
-    public Observable<List<CommentInfo>> getRepoComments(String owner, String repo, String access_token) {
-        return createService().getRepoComments(owner, repo, access_token);
+    public Observable<List<CommentInfo>> getRepoComments(String owner, String repo, Map<String, String> param) {
+        return createService().getRepoComments(owner, repo, param);
     }
 
-    public Observable<List<CommentInfo>> getRepoCommentsWithHeader(String accept, String owner, String repo, String access_token) {
-        return createService().getRepoCommentsWithHeader(accept, owner, repo, access_token);
+    public Observable<List<CommentInfo>> getRepoCommentsWithHeader(String accept, String owner, String repo, Map<String, String> param) {
+        return createService().getRepoCommentsWithHeader(accept, owner, repo, param);
     }
 
-    public Observable<List<CommentInfo>> getCommentsForACommit(String owner, String repo, String ref, String access_token) {
-        return createService().getCommentsForACommit(owner, repo, ref, access_token);
+    public Observable<List<CommentInfo>> getCommentsForACommit(String owner, String repo, String ref, Map<String, String> param) {
+        return createService().getCommentsForACommit(owner, repo, ref, param);
     }
 
     public Observable<CommentInfo> getAComment(String owner, String repo, String comment_id, String access_token) {

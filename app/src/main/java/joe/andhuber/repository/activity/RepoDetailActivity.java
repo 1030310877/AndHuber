@@ -44,7 +44,7 @@ public class RepoDetailActivity extends BaseActivity implements RepoDetailView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repodetail);
+        setContentView(R.layout.activity_repo_detail);
         presenter = new RepoDetailPresenterImpl(this);
         repository = (RepositoryInfo) getIntent().getSerializableExtra("repository");
         initViews();

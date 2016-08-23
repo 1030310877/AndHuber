@@ -69,4 +69,6 @@
     <string name="no_access_to_edit_other_profile">无权修改他人信息</string>
     <string name="fork_success">Fork成功</string>
     <string name="getting_commits">正在获取commit数据</string>
+    <string name="tab_1_diff">Diff</string>
+    <string name="tab_2_comment">Comment</string>
 </resources>

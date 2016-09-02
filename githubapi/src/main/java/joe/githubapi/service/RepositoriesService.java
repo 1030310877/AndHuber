@@ -73,13 +73,10 @@ public interface RepositoriesService {
     Observable<List<CommentInfo>> getRepoComments(@Path("owner") String owner, @Path("repo") String repo, @QueryMap Map<String, String> token);
 
     @GET("/repos/{owner}/{repo}/comments")
-    Observable<List<CommentInfo>> getRepoCommentsWithHeader(@Header("Accept") String media_type, @Path("owner") String owner, @Path("repo") String repo, @QueryMap Map<String, String> token);
+    Observable<List<CommentInfo>> getRepoCommentsWithHeader(@Header("Accept") String media_type, @Path("owner") String owner, @Path("repo") String repo, @QueryMap Map<String, String> param);
 
     @GET("/repos/{owner}/{repo}/commits/{ref}/comments")
-    @Headers({
-            "Accept : application/vnd.github-commitcomment.full+json"
-    })
-    Observable<List<CommentInfo>> getCommentsForACommit(@Path("owner") String owner, @Path("repo") String repo, @Path("ref") String ref, @QueryMap Map<String, String> token);
+    Observable<List<CommentInfo>> getCommentsForACommit(@Path("owner") String owner, @Path("repo") String repo, @Path("ref") String ref, @QueryMap Map<String, String> param);
 
     @GET("/repos/{owner}/{repo}/comments/{id}")
     @Headers({

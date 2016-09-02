@@ -7,6 +7,5 @@ import joe.andhuber.model.repository.CommitParams;
  * Created by chenqiao on 2016/8/9.
  */
 public interface CommitsPresenter {
-
     void getCommitsOfRepo(String owner, String repo, CommitParams params);
 }

@@ -61,7 +61,6 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.sr_commits);
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.recycler_commit);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.setPadding(0, 8, 0, 8);
         recyclerView.addItemDecoration(new SpaceItemDecoration(8));
     }
 
@@ -91,6 +90,7 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
                 CommitInfo commitInfo = data.get(position);
                 Intent intent = new Intent(mContext, CommitDetailActivity.class);
                 intent.putExtra("commitInfo", commitInfo);
+                intent.putExtra("repositoryInfo", repository);
                 startActivity(intent);
             }
         });

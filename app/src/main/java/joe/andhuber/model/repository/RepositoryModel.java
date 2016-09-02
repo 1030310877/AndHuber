@@ -9,6 +9,7 @@ import joe.andhuber.config.UserConfig;
 import joe.andhuber.utils.MapUtil;
 import joe.githubapi.core.GitHubApi;
 import joe.githubapi.model.ErrorInfo;
+import joe.githubapi.model.repositories.CommentInfo;
 import joe.githubapi.model.repositories.CommitInfo;
 import joe.githubapi.model.repositories.ContentInfo;
 import joe.githubapi.model.repositories.ForkParam;
@@ -244,6 +245,32 @@ public class RepositoryModel {
                     public void onNext(List<CommitInfo> commitInfo) {
                         if (callBack != null) {
                             callBack.onSuccessfully(commitInfo);
+                        }
+                    }
+                });
+    }
+
+    public Subscription getCommentsForACommit(String owner, String repo, String ref, Map<String, String> params, IRepositoryCallBack<List<CommentInfo>> callBack) {
+        return GitHubApi.getRepositoriesApi().getCommentsForACommit(owner, repo, ref, params)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<CommentInfo>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.onFailed(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<CommentInfo> commentInfo) {
+                        if (callBack != null) {
+                            callBack.onSuccessfully(commentInfo);
                         }
                     }
                 });

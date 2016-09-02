@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ import joe.andhuber.repository.fragment.CommentFragment;
 import joe.andhuber.repository.fragment.DiffFragment;
 import joe.andhuber.repository.view.CommitDetailView;
 import joe.githubapi.model.repositories.CommitInfo;
+import joe.githubapi.model.repositories.RepositoryInfo;
 
 /**
  * Description
@@ -35,14 +37,16 @@ public class CommitDetailActivity extends BaseActivity implements CommitDetailVi
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private CommitInfo commitInfo;
+    private RepositoryInfo repositoryInfo;
     private AppCompatImageView headImg;
-    private AppCompatTextView msgTv;
+    private AppCompatTextView msgTv, nameTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_commit_detal);
+        setContentView(R.layout.activity_commit_detail);
         commitInfo = (CommitInfo) getIntent().getSerializableExtra("commitInfo");
+        repositoryInfo = (RepositoryInfo) getIntent().getSerializableExtra("repositoryInfo");
         initViews();
         initFragments();
     }
@@ -67,26 +71,30 @@ public class CommitDetailActivity extends BaseActivity implements CommitDetailVi
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        if (toolbar != null) {
-            toolbar.setNavigationIcon(null);
-        }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         viewPager = (ViewPager) findViewById(R.id.vp_commit_detail);
         tabLayout = (TabLayout) findViewById(R.id.tablayout_commit_detail);
 
         headImg = (AppCompatImageView) findViewById(R.id.img_commit_head);
         msgTv = (AppCompatTextView) findViewById(R.id.txt_commit_msg);
+        nameTv = (AppCompatTextView) findViewById(R.id.txt_commit_name);
         if (commitInfo.getCommitter() != null) {
             setHead(commitInfo.getCommitter().getAvatar_url());
         }
         setCommitMsg(commitInfo.getCommit().getMessage());
+        if (!TextUtils.isEmpty(commitInfo.getCommitter().getName())) {
+            setName(commitInfo.getCommitter().getName());
+        } else {
+            setName(commitInfo.getCommitter().getLogin());
+        }
     }
 
     private void initFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         DiffFragment diffFragment = DiffFragment.newInstance(commitInfo);
-        CommentFragment commentFragment = CommentFragment.newInstance(commitInfo);
+        CommentFragment commentFragment = CommentFragment.newInstance(repositoryInfo, commitInfo);
         fragments.add(diffFragment);
         fragments.add(commentFragment);
         CommitDetailAdapter adapter = new CommitDetailAdapter(getSupportFragmentManager(), this, fragments);
@@ -119,6 +127,11 @@ public class CommitDetailActivity extends BaseActivity implements CommitDetailVi
                         headImg.setImageDrawable(circularBitmapDrawable);
                     }
                 });
+    }
+
+    @Override
+    public void setName(String name) {
+        nameTv.setText(name);
     }
 
     @Override

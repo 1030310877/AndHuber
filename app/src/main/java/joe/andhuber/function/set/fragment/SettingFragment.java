@@ -50,6 +50,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements Setting
     public void jumpToLoginActivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

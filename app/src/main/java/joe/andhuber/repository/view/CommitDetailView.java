@@ -10,5 +10,7 @@ public interface CommitDetailView extends BaseView {
 
     void setHead(String imgUrl);
 
+    void setName(String name);
+
     void setCommitMsg(String msg);
 }

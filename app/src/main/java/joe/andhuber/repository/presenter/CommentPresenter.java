@@ -8,4 +8,6 @@ import joe.andhuber.base.BaseParam;
  */
 public interface CommentPresenter {
     void getCommentsForACommit(String owner, String repo, String ref, BaseParam param);
+
+    void createACommentForACommit(String owner, String repo, String sha, String message);
 }

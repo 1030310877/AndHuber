@@ -1,5 +1,6 @@
 package joe.andhuber.repository.presenter;
 
+import java.util.Arrays;
 import java.util.List;
 
 import joe.andhuber.HuberApplication;
@@ -11,6 +12,7 @@ import joe.andhuber.model.repository.RepositoryModel;
 import joe.andhuber.repository.view.CommentView;
 import joe.andhuber.utils.MapUtil;
 import joe.githubapi.model.repositories.CommentInfo;
+import joe.githubapi.model.repositories.CommentParam;
 
 /**
  * Description
@@ -45,6 +47,24 @@ public class CommentPresenterImpl implements CommentPresenter {
             @Override
             public void onFailed(String message) {
                 view.loadFinish(HuberApplication.getInstance().getResources().getString(R.string.load_failed));
+            }
+        });
+    }
+
+    @Override
+    public void createACommentForACommit(String owner, String repo, String sha, String message) {
+        CommentParam param = new CommentParam();
+        param.setBody(message);
+        model.createACommentForCommit(owner, repo, sha, param, UserConfig.getInstance().getToken(), new IRepositoryCallBack<CommentInfo>() {
+            @Override
+            public void onSuccessfully(CommentInfo result) {
+                view.dismissWaitDialog();
+                view.addComments(Arrays.asList(result));
+            }
+
+            @Override
+            public void onFailed(String message) {
+                view.dismissWaitDialog();
             }
         });
     }

@@ -1,9 +1,14 @@
 package joe.andhuber.repository.fragment;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +44,7 @@ public class CommentFragment extends BaseFragment implements CommentView {
     private int page = 1;
     private CommitInfo commitInfo;
     private RepositoryInfo repositoryInfo;
+    private ProgressDialog dialog;
 
     public static CommentFragment newInstance(RepositoryInfo repositoryInfo, CommitInfo commitinfo) {
         Bundle args = new Bundle();
@@ -74,6 +80,25 @@ public class CommentFragment extends BaseFragment implements CommentView {
         adapter = new CommentAdapter(info);
         recyclerView.setAdapter(adapter);
         initComments();
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                TextInputLayout inputLayout = new TextInputLayout(getContext());
+                inputLayout.setPadding(16, 8, 16, 8);
+                TextInputEditText editText = new TextInputEditText(getContext());
+                inputLayout.addView(editText);
+                inputLayout.setHint(getString(R.string.input_comment));
+                builder.setView(inputLayout).setTitle("  ")
+                        .setCancelable(true).setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        presenter.createACommentForACommit(repositoryInfo.getOwner().getLogin(), repositoryInfo.getName(), commitInfo.getSha(), editText.getEditableText().toString());
+                    }
+                }).show();
+            }
+        });
     }
 
     private void initComments() {
@@ -85,12 +110,22 @@ public class CommentFragment extends BaseFragment implements CommentView {
 
     @Override
     public void showWaitDialog() {
-
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+            dialog = null;
+        }
+        dialog = new ProgressDialog(getContext());
+        dialog.setMessage(getString(R.string.submit_comment));
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        dialog.show();
     }
 
     @Override
     public void dismissWaitDialog() {
-
+        if (dialog != null && getActivity() != null && getActivity().isFinishing() && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     @Override

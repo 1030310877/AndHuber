@@ -22,5 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right|end"
         android:layout_margin="16dp"
+        android:src="@drawable/ic_insert_comment_white_24dp"
         app:fabSize="normal" />
 </FrameLayout>

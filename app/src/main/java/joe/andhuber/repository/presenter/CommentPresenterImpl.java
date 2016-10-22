@@ -1,5 +1,7 @@
 package joe.andhuber.repository.presenter;
 
+import com.joe.rxbus.RxBus;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class CommentPresenterImpl implements CommentPresenter {
             public void onSuccessfully(CommentInfo result) {
                 view.dismissWaitDialog();
                 view.addComments(Arrays.asList(result));
+                RxBus.getInstance().post("", "updateCommitInfo");
             }
 
             @Override

@@ -13,6 +13,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import java.util.ArrayList;
 
 import joe.andhuber.R;
+import joe.andhuber.config.UserConfig;
 import joe.andhuber.utils.GlideUtils;
 import joe.githubapi.model.repositories.CommentInfo;
 
@@ -43,6 +44,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 holder.setName(info.getUser().getName());
             } else {
                 holder.setName(info.getUser().getLogin());
+                if (info.getUser().getLogin().equals(UserConfig.nowUser.getLogin())) {
+                    holder.showEditImg(true);
+                } else {
+                    holder.showEditImg(false);
+                }
             }
             holder.setContent(info.getBody());
         }
@@ -61,13 +67,22 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         private AppCompatTextView nameTv;
         private ExpandableTextView contentTv;
-        private AppCompatImageView headImg;
+        private AppCompatImageView headImg, editImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
             headImg = (AppCompatImageView) itemView.findViewById(R.id.img_item_comment_head);
             nameTv = (AppCompatTextView) itemView.findViewById(R.id.tv_item_comment_name);
             contentTv = (ExpandableTextView) itemView.findViewById(R.id.tv_item_comment_content);
+            editImg = (AppCompatImageView) itemView.findViewById(R.id.img_item_comment_edit);
+        }
+
+        public void showEditImg(boolean isShow) {
+            if (isShow) {
+                editImg.setVisibility(View.VISIBLE);
+            } else {
+                editImg.setVisibility(View.GONE);
+            }
         }
 
         public void setHeadImg(String imgUrl) {

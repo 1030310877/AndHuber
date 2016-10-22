@@ -99,6 +99,14 @@ public class CommentFragment extends BaseFragment implements CommentView {
                 }).show();
             }
         });
+        recyclerView.setOnLoadingListener(new LoadMoreRecyclerView.onLoadingMoreListener() {
+            @Override
+            public void onLoading() {
+                BaseParam params = new BaseParam();
+                params.setPage(page + 1);
+                presenter.getCommentsForACommit(repositoryInfo.getOwner().getLogin(), repositoryInfo.getName(), commitInfo.getSha(), params);
+            }
+        });
     }
 
     private void initComments() {

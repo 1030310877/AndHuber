@@ -14,11 +14,24 @@
         android:layout_marginRight="8dp"
         tool:src="@drawable/github_mark" />
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_item_comment_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="8dp"
+        android:src="@drawable/ic_mode_edit_light_blue_900_18dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/img_item_comment_head"
+        android:layout_toLeftOf="@+id/img_item_comment_edit"
         android:layout_toRightOf="@+id/img_item_comment_head"
+        android:layout_toStartOf="@+id/img_item_comment_edit"
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatTextView

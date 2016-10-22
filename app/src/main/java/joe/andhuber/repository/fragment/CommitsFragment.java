@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.joe.rxbus.RxBus;
+import com.joe.rxbus.annotation.Subscriber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,7 @@ import joe.githubapi.model.repositories.RepositoryInfo;
 import joe.view.recyclerview.LoadMoreRecyclerView;
 import joe.view.recyclerview.OnItemClickListener;
 import joe.view.recyclerview.SpaceItemDecoration;
+import rx.functions.Action1;
 
 /**
  * Description
@@ -66,6 +70,7 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        RxBus.getInstance().register(this);
         super.onActivityCreated(savedInstanceState);
         this.repository = (RepositoryInfo) getArguments().getSerializable("repository");
         presenter = new CommitsPresenterImpl(this);
@@ -95,6 +100,12 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
             }
         });
         initCommits();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RxBus.getInstance().unRegister(this);
     }
 
     private void initCommits() {
@@ -160,4 +171,14 @@ public class CommitsFragment extends BaseFragment implements CommitsView {
             recyclerView.loadFinished(text);
         }
     }
+
+    @Subscriber(tag = "updateCommitInfo")
+    private Action1 updateAction = new Action1() {
+        @Override
+        public void call(Object o) {
+            if (presenter != null) {
+                initCommits();
+            }
+        }
+    };
 }

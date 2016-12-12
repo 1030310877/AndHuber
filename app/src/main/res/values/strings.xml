@@ -74,4 +74,6 @@
     <string name="input_comment">添加评论</string>
     <string name="submit">提交</string>
     <string name="submit_comment">正在提交评论</string>
+    <string name="comment_edit">编辑评论</string>
+    <string name="comment_delete">删除评论</string>
 </resources>

@@ -16,6 +16,7 @@ import joe.andhuber.R;
 import joe.andhuber.config.UserConfig;
 import joe.andhuber.utils.GlideUtils;
 import joe.githubapi.model.repositories.CommentInfo;
+import joe.view.recyclerview.OnItemClickListener;
 
 /**
  * Description
@@ -28,6 +29,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public CommentAdapter(ArrayList<CommentInfo> data) {
         this.data = data;
     }
+
+    public OnItemClickListener itemClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,6 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             holder.setHeadImg(info.getUser().getAvatar_url());
             if (!TextUtils.isEmpty(info.getUser().getName())) {
                 holder.setName(info.getUser().getName());
+                holder.itemView.setOnClickListener(null);
             } else {
                 holder.setName(info.getUser().getLogin());
                 if (info.getUser().getLogin().equals(UserConfig.nowUser.getLogin())) {
@@ -51,6 +55,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 }
             }
             holder.setContent(info.getBody());
+        } else {
+            holder.itemView.setOnClickListener(null);
         }
     }
 
@@ -61,6 +67,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public void setData(ArrayList<CommentInfo> data) {
         this.data = data;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -11,6 +11,7 @@
         android:id="@+id/img_item_comment_head"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         tool:src="@drawable/github_mark" />
 
@@ -22,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="8dp"
-        android:src="@drawable/ic_mode_edit_light_blue_900_18dp"
+        android:src="@drawable/ic_menu_black_24dp"
         android:visibility="gone" />
 
     <LinearLayout
